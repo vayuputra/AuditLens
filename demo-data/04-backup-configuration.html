@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Veeam Backup & Replication - Job Summary</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1b2838; color: #ddd; font-size: 13px; }
+  .header { background: #00b336; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .header .logo { font-size: 20px; font-weight: bold; color: #fff; }
+  .header .subtitle { font-size: 12px; color: rgba(255,255,255,.8); }
+  .nav { background: #243447; display: flex; border-bottom: 2px solid #00b336; }
+  .nav a { color: #aaa; padding: 10px 18px; text-decoration: none; font-size: 12px; }
+  .nav a.active { color: #fff; border-bottom: 2px solid #00b336; background: #1b2838; }
+  .container { padding: 16px; }
+  .stats-row { display: flex; gap: 16px; margin-bottom: 16px; }
+  .stat-card { background: #243447; border-radius: 6px; padding: 16px; flex: 1; text-align: center; border: 1px solid #344860; }
+  .stat-card .number { font-size: 32px; font-weight: bold; }
+  .stat-card .label { font-size: 11px; color: #888; margin-top: 4px; }
+  .stat-green .number { color: #00b336; }
+  .stat-yellow .number { color: #ffc107; }
+  .stat-red .number { color: #e74c3c; }
+  .stat-gray .number { color: #888; }
+  .section-title { font-size: 14px; font-weight: bold; color: #fff; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #344860; }
+  table { width: 100%; border-collapse: collapse; background: #243447; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  th { background: #344860; padding: 8px 12px; text-align: left; font-size: 11px; color: #aaa; text-transform: uppercase; }
+  td { padding: 8px 12px; border-bottom: 1px solid #1b2838; }
+  .status-success { color: #00b336; }
+  .status-warning { color: #ffc107; }
+  .status-failed { color: #e74c3c; font-weight: bold; }
+  .status-running { color: #2196f3; }
+  tr.row-failed { background: rgba(231,76,60,.1); }
+  tr.row-warning { background: rgba(255,193,7,.08); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; }
+  .tag-full { background: #00b336; color: #fff; }
+  .tag-incr { background: #2196f3; color: #fff; }
+  .tag-diff { background: #9c27b0; color: #fff; }
+  .tag-copy { background: #ff9800; color: #fff; }
+  .progress { width: 100px; height: 6px; background: #1b2838; border-radius: 3px; display: inline-block; vertical-align: middle; }
+  .progress-bar { height: 100%; border-radius: 3px; background: #2196f3; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="logo">Veeam Backup & Replication</div>
+    <div class="subtitle">Enterprise Manager — bkp-mgr-01.corp.acmefinancial.com</div>
+  </div>
+  <div style="text-align:right; font-size:11px;">
+    <div>Version: 12.1.1.56 (Build 12.1.1.56)</div>
+    <div>License: Enterprise Plus | Sockets: 12/20</div>
+  </div>
+</div>
+<div class="nav">
+  <a href="#">Dashboard</a>
+  <a class="active" href="#">Jobs</a>
+  <a href="#">Infrastructure</a>
+  <a href="#">Repositories</a>
+  <a href="#">Tape</a>
+  <a href="#">Reports</a>
+  <a href="#">Configuration</a>
+</div>
+<div class="container">
+  <div class="stats-row">
+    <div class="stat-card stat-green"><div class="number">8</div><div class="label">SUCCESSFUL</div></div>
+    <div class="stat-card stat-yellow"><div class="number">3</div><div class="label">WARNING</div></div>
+    <div class="stat-card stat-red"><div class="number">2</div><div class="label">FAILED</div></div>
+    <div class="stat-card stat-gray"><div class="number">1</div><div class="label">RUNNING</div></div>
+  </div>
+
+  <div class="section-title">Backup Jobs — Last 24 Hours</div>
+  <table>
+    <thead>
+      <tr><th>Job Name</th><th>Type</th><th>Status</th><th>Last Run</th><th>Duration</th><th>Data Size</th><th>Transferred</th><th>Target Repository</th><th>Next Run</th><th>Retention</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>DC-Backup-Daily</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-success">✓ Success</td>
+        <td>03/10/2026 22:00</td>
+        <td>0:42:18</td>
+        <td>890 GB</td>
+        <td>12.4 GB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 22:00</td>
+        <td>14 restore points</td>
+      </tr>
+      <tr class="row-failed">
+        <td>SQL-Production-Backup</td>
+        <td><span class="tag tag-full">Full</span></td>
+        <td class="status-failed">✗ Failed</td>
+        <td>03/10/2026 01:00</td>
+        <td>2:15:42</td>
+        <td>2.1 TB</td>
+        <td>0 B</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 01:00</td>
+        <td style="color:#e74c3c">7 restore points (last success: 03/07)</td>
+      </tr>
+      <tr>
+        <td>FileServer-Daily</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-success">✓ Success</td>
+        <td>03/10/2026 23:00</td>
+        <td>1:28:05</td>
+        <td>4.2 TB</td>
+        <td>45.8 GB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 23:00</td>
+        <td>14 restore points</td>
+      </tr>
+      <tr class="row-warning">
+        <td>Exchange-Backup</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-warning">⚠ Warning</td>
+        <td>03/10/2026 20:00</td>
+        <td>3:45:12</td>
+        <td>1.8 TB</td>
+        <td>89.2 GB</td>
+        <td>Repo-Secondary (84% used)</td>
+        <td>03/11/2026 20:00</td>
+        <td style="color:#ffc107">7 restore points — repo nearly full</td>
+      </tr>
+      <tr>
+        <td>Web-Servers-Backup</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-success">✓ Success</td>
+        <td>03/10/2026 02:00</td>
+        <td>0:18:45</td>
+        <td>120 GB</td>
+        <td>3.2 GB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 02:00</td>
+        <td>14 restore points</td>
+      </tr>
+      <tr class="row-failed">
+        <td>ERP-System-Backup</td>
+        <td><span class="tag tag-full">Full</span></td>
+        <td class="status-failed">✗ Failed</td>
+        <td>03/09/2026 03:00</td>
+        <td>0:05:23</td>
+        <td>3.4 TB</td>
+        <td>0 B</td>
+        <td>Repo-Secondary (84% used)</td>
+        <td style="color:#e74c3c">Disabled</td>
+        <td style="color:#e74c3c">3 restore points (last success: 03/02)</td>
+      </tr>
+      <tr class="row-warning">
+        <td>DR-Replication-Copy</td>
+        <td><span class="tag tag-copy">Backup Copy</span></td>
+        <td class="status-warning">⚠ Warning</td>
+        <td>03/10/2026 06:00</td>
+        <td>4:12:33</td>
+        <td>8.6 TB</td>
+        <td>124 GB</td>
+        <td>DR-Repo (71% used)</td>
+        <td>03/11/2026 06:00</td>
+        <td style="color:#ffc107">7 restore points — transfer slow (WAN saturation)</td>
+      </tr>
+      <tr>
+        <td>AD-Backup-Daily</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-success">✓ Success</td>
+        <td>03/10/2026 21:00</td>
+        <td>0:12:08</td>
+        <td>45 GB</td>
+        <td>1.1 GB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 21:00</td>
+        <td>30 restore points</td>
+      </tr>
+      <tr>
+        <td>Linux-Servers-Backup</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-success">✓ Success</td>
+        <td>03/10/2026 04:00</td>
+        <td>0:55:22</td>
+        <td>680 GB</td>
+        <td>18.4 GB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 04:00</td>
+        <td>14 restore points</td>
+      </tr>
+      <tr class="row-warning">
+        <td>Monthly-Full-Backup</td>
+        <td><span class="tag tag-full">Full</span></td>
+        <td class="status-warning">⚠ Warning</td>
+        <td>03/01/2026 00:00</td>
+        <td>18:42:11</td>
+        <td>14.2 TB</td>
+        <td>14.2 TB</td>
+        <td>Repo-Archive (89% used)</td>
+        <td>04/01/2026 00:00</td>
+        <td style="color:#ffc107">12 monthly — archive repo critically full</td>
+      </tr>
+      <tr>
+        <td>VDI-Backup-Nightly</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-success">✓ Success</td>
+        <td>03/10/2026 23:30</td>
+        <td>1:05:42</td>
+        <td>1.2 TB</td>
+        <td>22.1 GB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 23:30</td>
+        <td>7 restore points</td>
+      </tr>
+      <tr>
+        <td>Network-Config-Backup</td>
+        <td><span class="tag tag-full">Full</span></td>
+        <td class="status-success">✓ Success</td>
+        <td>03/10/2026 05:00</td>
+        <td>0:03:12</td>
+        <td>450 MB</td>
+        <td>450 MB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>03/11/2026 05:00</td>
+        <td>30 restore points</td>
+      </tr>
+      <tr>
+        <td>Endpoint-Backup-Exec</td>
+        <td><span class="tag tag-incr">Incremental</span></td>
+        <td class="status-running">⟳ Running (67%)</td>
+        <td>03/11/2026 00:00</td>
+        <td>1:12:00+</td>
+        <td>320 GB</td>
+        <td>8.1 GB</td>
+        <td>Repo-Primary (62% used)</td>
+        <td>—</td>
+        <td>14 restore points</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

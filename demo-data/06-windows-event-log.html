@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Event Viewer - Security Log</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f0f0; font-size: 12px; }
+  .window { background: #fff; border: 1px solid #999; margin: 8px; box-shadow: 2px 2px 8px rgba(0,0,0,.2); }
+  .title-bar { background: linear-gradient(180deg, #4a90d9 0%, #2d6db5 100%); color: #fff; padding: 4px 8px; display: flex; justify-content: space-between; font-size: 12px; }
+  .menu-bar { background: #f5f5f5; border-bottom: 1px solid #ccc; padding: 2px 6px; }
+  .menu-bar span { margin-right: 14px; color: #333; }
+  .layout { display: flex; min-height: 560px; }
+  .sidebar { width: 200px; border-right: 1px solid #ccc; background: #fff; padding: 4px; }
+  .sidebar .node { padding: 2px 4px 2px 16px; cursor: pointer; white-space: nowrap; font-size: 11px; }
+  .sidebar .node.selected { background: #316ac5; color: #fff; }
+  .sidebar .node::before { content: '📁 '; font-size: 10px; }
+  .main { flex: 1; display: flex; flex-direction: column; }
+  .filter-bar { background: #e8e8e8; padding: 4px 8px; border-bottom: 1px solid #ccc; font-size: 11px; }
+  .filter-bar select, .filter-bar input { font-size: 11px; padding: 2px 4px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #e8e8e8; padding: 4px 8px; text-align: left; font-size: 11px; border: 1px solid #ccc; position: sticky; top: 0; cursor: pointer; white-space: nowrap; }
+  td { padding: 3px 8px; border-bottom: 1px solid #eee; white-space: nowrap; font-size: 11px; }
+  tr:hover { background: #e8f0fe; }
+  .level-error { color: #d32f2f; }
+  .level-warn { color: #e65100; }
+  .level-info { color: #1565c0; }
+  .level-audit-fail { color: #d32f2f; font-weight: bold; }
+  .level-audit-success { color: #2e7d32; }
+  .icon-error::before { content: '🔴 '; }
+  .icon-warn::before { content: '🟡 '; }
+  .icon-info::before { content: '🔵 '; }
+  .icon-fail::before { content: '❌ '; }
+  .icon-success::before { content: '✅ '; }
+  tr.highlight { background: #fff3cd; }
+  tr.critical { background: #f8d7da; }
+  .detail-pane { border-top: 2px solid #ccc; padding: 8px; background: #fafafa; font-size: 11px; max-height: 140px; overflow-y: auto; }
+  .detail-pane b { color: #333; }
+  .status-bar { background: #f0f0f0; border-top: 1px solid #ccc; padding: 2px 8px; font-size: 11px; color: #555; }
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="title-bar">
+    <span>Event Viewer — DC-CORP-01.corp.acmefinancial.com — Security Log</span>
+    <div><span style="margin-left:4px; border:1px solid rgba(255,255,255,.4); padding:0 4px; font-size:10px;">—</span><span style="margin-left:2px; border:1px solid rgba(255,255,255,.4); padding:0 4px; font-size:10px;">☐</span><span style="margin-left:2px; border:1px solid rgba(255,255,255,.4); padding:0 4px; font-size:10px;">✕</span></div>
+  </div>
+  <div class="menu-bar">
+    <span><u>F</u>ile</span><span><u>A</u>ction</span><span><u>V</u>iew</span><span><u>H</u>elp</span>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="node">Event Viewer (Local)</div>
+      <div class="node" style="padding-left:24px">Custom Views</div>
+      <div class="node" style="padding-left:24px">Windows Logs</div>
+      <div class="node" style="padding-left:36px">Application</div>
+      <div class="node selected" style="padding-left:36px">Security</div>
+      <div class="node" style="padding-left:36px">Setup</div>
+      <div class="node" style="padding-left:36px">System</div>
+      <div class="node" style="padding-left:36px">Forwarded Events</div>
+    </div>
+    <div class="main">
+      <div class="filter-bar">
+        Filtered: Event IDs 4625, 4624, 4720, 4726, 4728, 4732, 4740, 4776 | Last 48 hours | <b>287 events shown</b>
+      </div>
+      <div style="overflow-y:auto; max-height:380px;">
+        <table>
+          <thead>
+            <tr><th>Level</th><th>Date and Time</th><th>Source</th><th>Event ID</th><th>Task Category</th><th>Account</th><th>Details</th></tr>
+          </thead>
+          <tbody>
+            <tr class="critical">
+              <td class="icon-fail level-audit-fail">Audit Failure</td>
+              <td>03/10/2026 23:47:12</td>
+              <td>Security</td>
+              <td>4625</td>
+              <td>Logon</td>
+              <td>Administrator</td>
+              <td>Failed logon attempt — Logon Type 10 (RDP) from 185.220.101.42 — Status: 0xC000006D (bad password)</td>
+            </tr>
+            <tr class="critical">
+              <td class="icon-fail level-audit-fail">Audit Failure</td>
+              <td>03/10/2026 23:47:08</td>
+              <td>Security</td>
+              <td>4625</td>
+              <td>Logon</td>
+              <td>Administrator</td>
+              <td>Failed logon attempt — Logon Type 10 (RDP) from 185.220.101.42 — Status: 0xC000006D (bad password)</td>
+            </tr>
+            <tr class="critical">
+              <td class="icon-fail level-audit-fail">Audit Failure</td>
+              <td>03/10/2026 23:47:03</td>
+              <td>Security</td>
+              <td>4625</td>
+              <td>Logon</td>
+              <td>Administrator</td>
+              <td>Failed logon attempt — Logon Type 10 (RDP) from 185.220.101.42 — Status: 0xC000006D (bad password)</td>
+            </tr>
+            <tr class="critical">
+              <td class="icon-fail level-audit-fail">Audit Failure</td>
+              <td>03/10/2026 23:46:58</td>
+              <td>Security</td>
+              <td>4625</td>
+              <td>Logon</td>
+              <td>admin</td>
+              <td>Failed logon attempt — Logon Type 10 (RDP) from 185.220.101.42 — Status: 0xC000006A (unknown user)</td>
+            </tr>
+            <tr class="critical">
+              <td class="icon-fail level-audit-fail">Audit Failure</td>
+              <td>03/10/2026 23:46:52</td>
+              <td>Security</td>
+              <td>4625</td>
+              <td>Logon</td>
+              <td>root</td>
+              <td>Failed logon attempt — Logon Type 10 (RDP) from 185.220.101.42 — Status: 0xC000006A (unknown user)</td>
+            </tr>
+            <tr class="highlight">
+              <td class="icon-warn level-warn">Audit Failure</td>
+              <td>03/10/2026 22:15:30</td>
+              <td>Security</td>
+              <td>4740</td>
+              <td>User Account Management</td>
+              <td>s.baker</td>
+              <td>Account locked out — Calling computer: WS-IT-042 — Lockout threshold: 5 attempts</td>
+            </tr>
+            <tr class="highlight">
+              <td class="icon-warn level-warn">Audit Success</td>
+              <td>03/10/2026 21:30:15</td>
+              <td>Security</td>
+              <td>4728</td>
+              <td>Security Group Management</td>
+              <td>r.garcia</td>
+              <td>Member added to Domain Admins: t.johnson (contractor account) — Added by: r.garcia</td>
+            </tr>
+            <tr>
+              <td class="icon-success level-audit-success">Audit Success</td>
+              <td>03/10/2026 18:05:44</td>
+              <td>Security</td>
+              <td>4624</td>
+              <td>Logon</td>
+              <td>p.hughes</td>
+              <td>Successful logon — Logon Type 3 (Network) from 10.30.2.105 — Kerberos authentication</td>
+            </tr>
+            <tr class="highlight">
+              <td class="icon-warn level-warn">Audit Success</td>
+              <td>03/10/2026 17:45:22</td>
+              <td>Security</td>
+              <td>4720</td>
+              <td>User Account Management</td>
+              <td>temp_audit_user</td>
+              <td>User account created — Created by: admin — Description: "Temporary account for Q4 audit"</td>
+            </tr>
+            <tr>
+              <td class="icon-success level-audit-success">Audit Success</td>
+              <td>03/10/2026 17:02:11</td>
+              <td>Security</td>
+              <td>4624</td>
+              <td>Logon</td>
+              <td>e.foster</td>
+              <td>Successful logon — Logon Type 2 (Interactive) from WS-FIN-012 — Kerberos authentication</td>
+            </tr>
+            <tr>
+              <td class="icon-success level-audit-success">Audit Success</td>
+              <td>03/10/2026 14:30:05</td>
+              <td>Security</td>
+              <td>4624</td>
+              <td>Logon</td>
+              <td>svc_sqlprod</td>
+              <td>Successful logon — Logon Type 5 (Service) from SQL-PROD-01 — NTLM authentication</td>
+            </tr>
+            <tr class="highlight">
+              <td class="icon-warn level-warn">Audit Success</td>
+              <td>03/10/2026 12:22:18</td>
+              <td>Security</td>
+              <td>4732</td>
+              <td>Security Group Management</td>
+              <td>admin</td>
+              <td>Member added to local Administrators group on DC-CORP-01: svc_monitor service account</td>
+            </tr>
+            <tr class="critical">
+              <td class="icon-fail level-audit-fail">Audit Failure</td>
+              <td>03/10/2026 09:15:33</td>
+              <td>Security</td>
+              <td>4625</td>
+              <td>Logon</td>
+              <td>m.davis</td>
+              <td>Failed logon — Logon Type 3 (Network) from 10.20.1.88 — Status: 0xC0000234 (account locked)</td>
+            </tr>
+            <tr>
+              <td class="icon-success level-audit-success">Audit Success</td>
+              <td>03/10/2026 08:45:02</td>
+              <td>Security</td>
+              <td>4624</td>
+              <td>Logon</td>
+              <td>j.anderson</td>
+              <td>Successful logon — Logon Type 2 (Interactive) from WS-FIN-008 — Kerberos authentication</td>
+            </tr>
+            <tr class="highlight">
+              <td class="icon-warn level-warn">Audit Success</td>
+              <td>03/10/2026 03:22:45</td>
+              <td>Security</td>
+              <td>4624</td>
+              <td>Logon</td>
+              <td>admin</td>
+              <td>Successful logon — Logon Type 10 (RDP) from 10.0.1.55 — at 03:22 AM (outside business hours)</td>
+            </tr>
+            <tr class="highlight">
+              <td class="icon-warn level-warn">Audit Success</td>
+              <td>03/09/2026 23:55:10</td>
+              <td>Security</td>
+              <td>4726</td>
+              <td>User Account Management</td>
+              <td>a.martinez</td>
+              <td>User account deleted — Deleted by: admin — Note: No offboarding ticket found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="detail-pane">
+        <b>Selected Event Details — Event ID 4625 (Audit Failure)</b><br><br>
+        An account failed to log on.<br><br>
+        <b>Subject:</b> Security ID: SYSTEM | Account Name: - | Account Domain: -<br>
+        <b>Logon Information:</b> Logon Type: 10 (RemoteInteractive/RDP)<br>
+        <b>Account For Which Logon Failed:</b> Account Name: Administrator | Account Domain: CORP<br>
+        <b>Failure Information:</b> Status: 0xC000006D | Sub Status: 0xC000006A (bad username or password)<br>
+        <b>Network Information:</b> Source Network Address: 185.220.101.42 | Source Port: 49821<br>
+        <b>Note:</b> <span style="color:#d32f2f; font-weight:bold;">5 rapid failed attempts from external IP — possible brute force attack</span>
+      </div>
+    </div>
+  </div>
+  <div class="status-bar">Security Log: 287 filtered events of 142,891 total | Log Size: 128 MB / 256 MB max</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cisco Switch Configuration - Core Switch</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Consolas', 'Courier New', monospace; background: #0c0c0c; color: #cccccc; font-size: 13px; padding: 10px; }
+  .terminal { background: #1a1a1a; border: 1px solid #333; border-radius: 4px; padding: 0; }
+  .terminal-header { background: #2d2d2d; padding: 6px 12px; display: flex; justify-content: space-between; border-bottom: 1px solid #444; font-size: 12px; }
+  .terminal-header .title { color: #fff; }
+  .terminal-header .controls { color: #888; }
+  .terminal-body { padding: 12px; line-height: 1.6; white-space: pre; overflow-x: auto; }
+  .prompt { color: #4fc3f7; }
+  .comment { color: #6a9955; }
+  .keyword { color: #569cd6; }
+  .value { color: #ce9178; }
+  .warning { color: #ffc107; font-weight: bold; }
+  .danger { color: #f44336; font-weight: bold; }
+  .interface { color: #dcdcaa; }
+  .ip { color: #b5cea8; }
+  .highlight-bad { background: rgba(244,67,54,.15); display: inline; }
+  .highlight-warn { background: rgba(255,193,7,.1); display: inline; }
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="terminal-header">
+    <span class="title">PuTTY — SW-CORE-01.corp.acmefinancial.com — 10.0.1.10</span>
+    <span class="controls">SSH-2 | Cisco IOS-XE 17.6.3</span>
+  </div>
+  <div class="terminal-body"><span class="prompt">SW-CORE-01#</span> <span class="keyword">show running-config</span>
+Building configuration...
+
+Current configuration : 4892 bytes
+!
+<span class="comment">! Last configuration change at 14:22:03 UTC Mon Mar 9 2026 by admin</span>
+<span class="comment">! NVRAM config last updated at 14:22:05 UTC Mon Mar 9 2026 by admin</span>
+!
+version 17.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+<span class="highlight-bad">no service password-encryption</span>                    <span class="danger">!! FINDING: Passwords stored in plaintext</span>
+!
+hostname SW-CORE-01
+!
+boot-start-marker
+boot-end-marker
+!
+<span class="highlight-bad">enable password <span class="value">Acme2024!</span></span>                         <span class="danger">!! FINDING: Plaintext enable password visible</span>
+<span class="highlight-bad">enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0</span>
+!
+<span class="keyword">aaa new-model</span>
+aaa authentication login default local
+aaa authorization exec default local
+!
+username <span class="value">admin</span> privilege 15 password 0 <span class="value">Admin@123</span>    <span class="danger">!! FINDING: Local admin with plaintext weak password</span>
+<span class="highlight-bad">username <span class="value">cisco</span> privilege 15 password 0 <span class="value">cisco</span></span>        <span class="danger">!! FINDING: Default vendor credentials active</span>
+username <span class="value">netops</span> privilege 7 secret 5 $1$abc$XYZ123hashedpassword
+!
+ip domain-name corp.acmefinancial.com
+ip name-server 10.10.1.10
+ip name-server 10.10.1.11
+!
+<span class="highlight-warn">ip ssh version 1</span>                                    <span class="warning">!! WARNING: SSHv1 enabled (deprecated, vulnerable)</span>
+ip ssh time-out 120
+ip ssh authentication-retries 5
+!
+<span class="comment">! --- VLAN Configuration ---</span>
+!
+vlan 10
+ name MANAGEMENT
+vlan 20
+ name SERVERS
+vlan 30
+ name WORKSTATIONS
+vlan 40
+ name GUEST
+vlan 50
+ name VOIP
+vlan 99
+ name NATIVE
+vlan 100
+ name DMZ
+!
+<span class="comment">! --- Interface Configuration ---</span>
+!
+<span class="interface">interface GigabitEthernet0/1</span>
+ description Uplink to FW-CORE-01
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,99,100
+ switchport trunk native vlan 99
+ no shutdown
+!
+<span class="interface">interface GigabitEthernet0/2</span>
+ description Server Farm - ESXi-01
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ no shutdown
+!
+<span class="highlight-warn"><span class="interface">interface GigabitEthernet0/10</span>
+ description UNUSED PORT
+ switchport access vlan 30
+ switchport mode access
+ no shutdown</span>                                          <span class="warning">!! WARNING: Unused port left enabled (should be shutdown)</span>
+!
+<span class="highlight-warn"><span class="interface">interface GigabitEthernet0/11</span>
+ description OLD-PRINTER
+ switchport access vlan 30
+ switchport mode access
+ no shutdown</span>                                          <span class="warning">!! WARNING: Decommissioned device port still active</span>
+!
+<span class="interface">interface GigabitEthernet0/24</span>
+ description GUEST-WIFI-AP
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast
+ no shutdown
+!
+<span class="interface">interface Vlan10</span>
+ description Management VLAN
+ ip address <span class="ip">10.0.1.10 255.255.255.0</span>
+ no shutdown
+!
+<span class="interface">interface Vlan20</span>
+ description Server VLAN
+ ip address <span class="ip">10.10.5.1 255.255.255.0</span>
+ no shutdown
+!
+<span class="comment">! --- SNMP Configuration ---</span>
+!
+<span class="highlight-bad">snmp-server community <span class="value">public</span> RO</span>                     <span class="danger">!! FINDING: Default SNMP community string 'public'</span>
+<span class="highlight-bad">snmp-server community <span class="value">private</span> RW</span>                    <span class="danger">!! FINDING: Default SNMP community string 'private' with write</span>
+snmp-server host 10.10.1.50 version 2c public
+!
+<span class="comment">! --- Logging ---</span>
+!
+logging buffered 16384
+logging host 10.10.1.50
+<span class="highlight-warn">no logging console</span>                                  <span class="warning">!! WARNING: Console logging disabled</span>
+!
+<span class="comment">! --- Access Control ---</span>
+!
+<span class="highlight-bad">line con 0
+ password <span class="value">console123</span>
+ login</span>                                              <span class="danger">!! FINDING: Weak console password in plaintext</span>
+!
+line vty 0 4
+ transport input ssh telnet                          <span class="warning">!! WARNING: Telnet enabled on VTY lines</span>
+ password <span class="value">Vty@2024</span>
+ login local
+line vty 5 15
+ transport input ssh
+ login local
+!
+<span class="comment">! --- NTP ---</span>
+!
+ntp server 10.10.1.10
+ntp server 10.10.1.11
+!
+<span class="comment">! --- Banner ---</span>
+!
+banner motd ^
+*************************************************************
+* AUTHORIZED ACCESS ONLY - ACME FINANCIAL CORP              *
+* All access is monitored and recorded.                     *
+* Unauthorized access will be prosecuted.                   *
+*************************************************************
+^
+!
+end
+
+<span class="prompt">SW-CORE-01#</span> _</div>
+</div>
+</body>
+</html>

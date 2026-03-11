@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Active Directory Users and Computers</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f0f0; font-size: 12px; }
+  .window { background: #fff; border: 1px solid #999; margin: 10px; box-shadow: 2px 2px 8px rgba(0,0,0,.2); }
+  .title-bar { background: linear-gradient(180deg, #4a90d9 0%, #2d6db5 100%); color: #fff; padding: 4px 8px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+  .title-bar .controls span { display: inline-block; width: 14px; height: 14px; border: 1px solid rgba(255,255,255,.4); text-align: center; line-height: 12px; margin-left: 2px; cursor: pointer; font-size: 10px; }
+  .menu-bar { background: #f5f5f5; border-bottom: 1px solid #ccc; padding: 2px 6px; }
+  .menu-bar span { margin-right: 14px; color: #333; }
+  .toolbar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 3px 6px; display: flex; gap: 4px; }
+  .toolbar button { background: #f0f0f0; border: 1px solid #aaa; padding: 2px 8px; font-size: 11px; cursor: pointer; }
+  .content { display: flex; min-height: 500px; }
+  .tree { width: 260px; border-right: 1px solid #ccc; padding: 6px; background: #fff; overflow-y: auto; }
+  .tree-item { padding: 2px 0 2px 16px; cursor: pointer; white-space: nowrap; }
+  .tree-item.selected { background: #316ac5; color: #fff; }
+  .tree-item::before { content: '📁 '; }
+  .tree-item.open::before { content: '📂 '; }
+  .tree-item.selected-folder::before { content: '📂 '; }
+  .list-pane { flex: 1; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: #e8e8e8; border: 1px solid #ccc; padding: 3px 8px; text-align: left; font-weight: normal; cursor: pointer; position: sticky; top: 0; white-space: nowrap; }
+  td { border-bottom: 1px solid #eee; padding: 3px 8px; white-space: nowrap; }
+  tr:hover { background: #e8f0fe; }
+  tr.highlight-risk { background: #fff3cd; }
+  tr.highlight-critical { background: #f8d7da; }
+  .status-bar { background: #f0f0f0; border-top: 1px solid #ccc; padding: 2px 8px; font-size: 11px; color: #555; }
+  .icon-user::before { content: '👤 '; }
+  .icon-admin::before { content: '🔑 '; }
+  .icon-disabled::before { content: '⛔ '; }
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="title-bar">
+    <span>Active Directory Users and Computers - corp.acmefinancial.com</span>
+    <div class="controls"><span>—</span><span>☐</span><span>✕</span></div>
+  </div>
+  <div class="menu-bar">
+    <span><u>F</u>ile</span><span><u>A</u>ction</span><span><u>V</u>iew</span><span><u>H</u>elp</span>
+  </div>
+  <div class="toolbar">
+    <button>🔄 Refresh</button>
+    <button>📋 Export List</button>
+    <button>🔍 Find</button>
+    <button>⚙ Properties</button>
+  </div>
+  <div class="content">
+    <div class="tree">
+      <div class="tree-item open">corp.acmefinancial.com</div>
+      <div class="tree-item" style="padding-left:32px">Builtin</div>
+      <div class="tree-item" style="padding-left:32px">Computers</div>
+      <div class="tree-item" style="padding-left:32px">Domain Controllers</div>
+      <div class="tree-item" style="padding-left:32px">ForeignSecurityPrincipals</div>
+      <div class="tree-item" style="padding-left:32px">Managed Service Accounts</div>
+      <div class="tree-item selected" style="padding-left:32px">Users</div>
+      <div class="tree-item" style="padding-left:32px">Service Accounts</div>
+      <div class="tree-item" style="padding-left:32px">IT Department</div>
+      <div class="tree-item" style="padding-left:32px">Finance</div>
+      <div class="tree-item" style="padding-left:32px">HR</div>
+      <div class="tree-item" style="padding-left:32px">Executives</div>
+      <div class="tree-item" style="padding-left:32px">Contractors</div>
+      <div class="tree-item" style="padding-left:32px">Disabled Accounts</div>
+    </div>
+    <div class="list-pane">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Logon Name</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Password Last Set</th>
+            <th>Pwd Never Expires</th>
+            <th>Last Logon</th>
+            <th>Member Of</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-critical">
+            <td class="icon-admin">Administrator</td>
+            <td>admin@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>06/15/2024</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>03/10/2026</td>
+            <td>Domain Admins; Enterprise Admins; Schema Admins</td>
+            <td>Built-in admin account</td>
+          </tr>
+          <tr>
+            <td class="icon-user">Anderson, James</td>
+            <td>j.anderson@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>01/22/2026</td>
+            <td>No</td>
+            <td>03/10/2026</td>
+            <td>Domain Users; Finance-RO</td>
+            <td>Finance Analyst</td>
+          </tr>
+          <tr class="highlight-critical">
+            <td class="icon-user">Baker, Sarah</td>
+            <td>s.baker@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>03/18/2024</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>03/09/2026</td>
+            <td>Domain Users; IT-Support</td>
+            <td>IT Help Desk</td>
+          </tr>
+          <tr>
+            <td class="icon-user">Chen, Lisa</td>
+            <td>l.chen@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>12/05/2025</td>
+            <td>No</td>
+            <td>03/10/2026</td>
+            <td>Domain Users; HR-Team</td>
+            <td>HR Coordinator</td>
+          </tr>
+          <tr class="highlight-risk">
+            <td class="icon-user">Davis, Mark</td>
+            <td>m.davis@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>08/11/2024</td>
+            <td>No</td>
+            <td>11/02/2025</td>
+            <td>Domain Users; IT-Admins; Server-Admins</td>
+            <td>Former IT Manager - Transferred</td>
+          </tr>
+          <tr class="highlight-critical">
+            <td class="icon-admin">svc_backup</td>
+            <td>svc_backup@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>01/10/2023</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>03/10/2026</td>
+            <td>Domain Users; Backup Operators</td>
+            <td>Backup service account</td>
+          </tr>
+          <tr class="highlight-critical">
+            <td class="icon-admin">svc_sqlprod</td>
+            <td>svc_sqlprod@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>09/22/2022</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>03/10/2026</td>
+            <td>Domain Admins; SQL-Admins</td>
+            <td>SQL Production service account</td>
+          </tr>
+          <tr>
+            <td class="icon-user">Foster, Emily</td>
+            <td>e.foster@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>02/14/2026</td>
+            <td>No</td>
+            <td>03/10/2026</td>
+            <td>Domain Users; Finance-RW</td>
+            <td>Senior Accountant</td>
+          </tr>
+          <tr class="highlight-risk">
+            <td class="icon-user">Garcia, Roberto</td>
+            <td>r.garcia@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>11/03/2025</td>
+            <td>No</td>
+            <td>03/08/2026</td>
+            <td>Domain Admins; Domain Users; IT-Admins</td>
+            <td>Network Engineer</td>
+          </tr>
+          <tr class="highlight-critical">
+            <td class="icon-admin">svc_monitor</td>
+            <td>svc_monitor@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>05/19/2023</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>03/10/2026</td>
+            <td>Domain Users; Server-Admins</td>
+            <td>Monitoring service account</td>
+          </tr>
+          <tr>
+            <td class="icon-user">Hughes, Patricia</td>
+            <td>p.hughes@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>01/30/2026</td>
+            <td>No</td>
+            <td>03/10/2026</td>
+            <td>Domain Users; Executives</td>
+            <td>VP of Operations</td>
+          </tr>
+          <tr class="highlight-critical">
+            <td class="icon-admin">svc_exchange</td>
+            <td>svc_exchange@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>11/08/2022</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>03/10/2026</td>
+            <td>Domain Admins; Exchange-Admins</td>
+            <td>Exchange service account</td>
+          </tr>
+          <tr class="highlight-risk">
+            <td class="icon-user">Johnson, Tyler</td>
+            <td>t.johnson@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>09/10/2024</td>
+            <td>No</td>
+            <td>08/15/2025</td>
+            <td>Domain Users; VPN-Users; Contractors</td>
+            <td>Contractor - Project Alpha (ended 07/2025)</td>
+          </tr>
+          <tr>
+            <td class="icon-user">Kim, David</td>
+            <td>d.kim@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>02/28/2026</td>
+            <td>No</td>
+            <td>03/10/2026</td>
+            <td>Domain Users; Dev-Team</td>
+            <td>Software Developer</td>
+          </tr>
+          <tr class="highlight-critical">
+            <td class="icon-admin">svc_legacy_app</td>
+            <td>svc_legacy@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>03/14/2021</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>03/10/2026</td>
+            <td>Domain Admins; SQL-Admins; Server-Admins</td>
+            <td>Legacy ERP system - DO NOT DISABLE</td>
+          </tr>
+          <tr>
+            <td class="icon-disabled">Martinez, Ana</td>
+            <td>a.martinez@corp</td>
+            <td>User</td>
+            <td><span style="color:red">Disabled</span></td>
+            <td>06/20/2025</td>
+            <td>No</td>
+            <td>07/01/2025</td>
+            <td>Domain Users</td>
+            <td>Former Employee - Terminated 07/2025</td>
+          </tr>
+          <tr class="highlight-risk">
+            <td class="icon-user">test_admin</td>
+            <td>test_admin@corp</td>
+            <td>User</td>
+            <td>Enabled</td>
+            <td>04/01/2024</td>
+            <td><b style="color:red">Yes</b></td>
+            <td>06/22/2024</td>
+            <td>Domain Admins; Enterprise Admins</td>
+            <td>Temporary test account</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="status-bar">17 object(s) | OU=Users,DC=corp,DC=acmefinancial,DC=com</div>
+</div>
+</body>
+</html>

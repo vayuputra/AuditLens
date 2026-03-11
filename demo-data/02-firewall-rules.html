@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FortiGate Firewall - Policy & Objects</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1a1a2e; color: #e0e0e0; font-size: 13px; }
+  .header { background: #16213e; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e94560; }
+  .header .logo { font-size: 18px; font-weight: bold; color: #e94560; }
+  .header .info { font-size: 11px; color: #999; }
+  .nav { display: flex; background: #0f3460; }
+  .nav a { color: #ccc; padding: 8px 16px; text-decoration: none; border-right: 1px solid #1a1a2e; font-size: 12px; }
+  .nav a.active { background: #e94560; color: #fff; }
+  .nav a:hover { background: #16213e; }
+  .breadcrumb { padding: 6px 16px; background: #16213e; font-size: 11px; color: #888; border-bottom: 1px solid #333; }
+  .toolbar { padding: 8px 16px; display: flex; gap: 8px; background: #1a1a2e; border-bottom: 1px solid #333; }
+  .toolbar button { background: #0f3460; color: #ddd; border: 1px solid #333; padding: 4px 12px; border-radius: 3px; cursor: pointer; font-size: 11px; }
+  .toolbar button:hover { background: #16213e; }
+  .content { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #16213e; padding: 8px 10px; text-align: left; font-size: 11px; text-transform: uppercase; color: #888; border-bottom: 2px solid #333; position: sticky; top: 0; }
+  td { padding: 6px 10px; border-bottom: 1px solid #2a2a3e; font-size: 12px; }
+  tr:hover { background: #16213e; }
+  .status-allow { color: #4caf50; font-weight: bold; }
+  .status-deny { color: #e94560; font-weight: bold; }
+  .enabled { color: #4caf50; }
+  .disabled { color: #999; }
+  .risk-high { background: rgba(233,69,96,0.15); }
+  .risk-medium { background: rgba(255,193,7,0.1); }
+  .tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; margin: 1px; }
+  .tag-zone { background: #0f3460; color: #4fc3f7; }
+  .tag-any { background: #5d0000; color: #ff6b6b; }
+  .footer { padding: 6px 16px; background: #16213e; border-top: 1px solid #333; font-size: 11px; color: #666; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">FortiGate 600E</div>
+  <div class="info">FW-CORE-01 | 10.0.1.1 | FortiOS v7.4.3 | HA: Active | Uptime: 142d 7h 23m</div>
+</div>
+<div class="nav">
+  <a href="#">Dashboard</a>
+  <a href="#">Network</a>
+  <a class="active" href="#">Policy & Objects</a>
+  <a href="#">Security Profiles</a>
+  <a href="#">VPN</a>
+  <a href="#">Log & Report</a>
+  <a href="#">System</a>
+</div>
+<div class="breadcrumb">Policy & Objects &gt; Firewall Policy &gt; IPv4 Policy</div>
+<div class="toolbar">
+  <button>+ Create New</button>
+  <button>📋 Clone</button>
+  <button>🗑 Delete</button>
+  <button>🔍 Search</button>
+  <button>📊 Policy Lookup</button>
+  <button>↕ Move</button>
+</div>
+<div class="content">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Service</th>
+        <th>Action</th>
+        <th>NAT</th>
+        <th>Security Profiles</th>
+        <th>Log</th>
+        <th>Status</th>
+        <th>Hits</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Allow-Internal-DNS</td>
+        <td><span class="tag tag-zone">LAN</span> all</td>
+        <td><span class="tag tag-zone">DMZ</span> DNS-Servers</td>
+        <td>DNS</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Disabled</td>
+        <td>AV, IPS</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>1,847,293</td>
+        <td>Internal DNS resolution</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Allow-Web-Outbound</td>
+        <td><span class="tag tag-zone">LAN</span> all</td>
+        <td><span class="tag tag-zone">WAN</span> all</td>
+        <td>HTTP, HTTPS</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td>AV, WebFilter, IPS, AppCtrl</td>
+        <td>UTM</td>
+        <td class="enabled">✓</td>
+        <td>24,891,037</td>
+        <td>Outbound web access</td>
+      </tr>
+      <tr class="risk-high">
+        <td>3</td>
+        <td>Legacy-Allow-All</td>
+        <td><span class="tag tag-any">ANY</span></td>
+        <td><span class="tag tag-any">ANY</span></td>
+        <td><b style="color:#ff6b6b">ALL</b></td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td style="color:#e94560">None</td>
+        <td style="color:#e94560">Disabled</td>
+        <td class="enabled">✓</td>
+        <td>8,472,119</td>
+        <td style="color:#ff6b6b">TEMP - migration - DO NOT REMOVE (added 2023-06-15)</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Allow-VPN-Internal</td>
+        <td><span class="tag tag-zone">VPN</span> SSL-VPN-Users</td>
+        <td><span class="tag tag-zone">LAN</span> Internal-Servers</td>
+        <td>HTTP, HTTPS, RDP, SSH</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Disabled</td>
+        <td>AV, IPS</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>342,891</td>
+        <td>VPN users to internal resources</td>
+      </tr>
+      <tr class="risk-high">
+        <td>5</td>
+        <td>Allow-RDP-External</td>
+        <td><span class="tag tag-any">ANY</span></td>
+        <td><span class="tag tag-zone">DMZ</span> TERM-SRV-01</td>
+        <td><b style="color:#ff6b6b">RDP (3389)</b></td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td style="color:#e94560">None</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>15,782</td>
+        <td style="color:#ff6b6b">External vendor access - needs review</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Allow-Mail-Flow</td>
+        <td><span class="tag tag-zone">WAN</span> all</td>
+        <td><span class="tag tag-zone">DMZ</span> Mail-GW</td>
+        <td>SMTP, SMTPS</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td>AV, AntiSpam</td>
+        <td>UTM</td>
+        <td class="enabled">✓</td>
+        <td>2,109,445</td>
+        <td>Inbound mail gateway</td>
+      </tr>
+      <tr class="risk-medium">
+        <td>7</td>
+        <td>Allow-DB-Access</td>
+        <td><span class="tag tag-zone">LAN</span> all</td>
+        <td><span class="tag tag-zone">DMZ</span> DB-Servers</td>
+        <td>MSSQL (1433), MySQL (3306), Oracle (1521)</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Disabled</td>
+        <td>IPS</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>5,821,002</td>
+        <td>Database access - should be restricted to app servers</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Allow-ICMP-Internal</td>
+        <td><span class="tag tag-zone">LAN</span> all</td>
+        <td><span class="tag tag-zone">LAN</span> all</td>
+        <td>PING</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Disabled</td>
+        <td>None</td>
+        <td>Disabled</td>
+        <td class="enabled">✓</td>
+        <td>9,201,445</td>
+        <td>Internal monitoring ICMP</td>
+      </tr>
+      <tr class="risk-high">
+        <td>9</td>
+        <td>Allow-FTP-Inbound</td>
+        <td><span class="tag tag-any">ANY</span></td>
+        <td><span class="tag tag-zone">DMZ</span> FTP-SRV-01</td>
+        <td><b style="color:#ff6b6b">FTP (21)</b></td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td style="color:#e94560">None</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>892</td>
+        <td style="color:#ff6b6b">Unencrypted FTP - migrate to SFTP</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Allow-NTP-Outbound</td>
+        <td><span class="tag tag-zone">LAN</span> DC-Servers</td>
+        <td><span class="tag tag-zone">WAN</span> NTP-Pool</td>
+        <td>NTP</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td>None</td>
+        <td>Disabled</td>
+        <td class="enabled">✓</td>
+        <td>498,201</td>
+        <td>Time sync for domain controllers</td>
+      </tr>
+      <tr class="risk-medium">
+        <td>11</td>
+        <td>Allow-SSH-External</td>
+        <td><span class="tag tag-zone">WAN</span> Vendor-IPs</td>
+        <td><span class="tag tag-zone">DMZ</span> Jump-Server</td>
+        <td>SSH (22)</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td>IPS</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>28,901</td>
+        <td>Vendor SSH access - IP restricted</td>
+      </tr>
+      <tr class="risk-medium">
+        <td>12</td>
+        <td>Disabled-Old-Rule</td>
+        <td><span class="tag tag-zone">LAN</span> Dept-Printers</td>
+        <td><span class="tag tag-zone">WAN</span> all</td>
+        <td>HTTP, HTTPS, SNMP</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td>None</td>
+        <td>Disabled</td>
+        <td class="disabled">✗</td>
+        <td>0</td>
+        <td>Disabled 2024-01 - printers calling home</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>Allow-Backup-Repl</td>
+        <td><span class="tag tag-zone">LAN</span> Backup-SRV</td>
+        <td><span class="tag tag-zone">DR</span> DR-Backup-SRV</td>
+        <td>Custom (9000-9005)</td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Enabled</td>
+        <td>None</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>1,204,887</td>
+        <td>Backup replication to DR site</td>
+      </tr>
+      <tr class="risk-high">
+        <td>14</td>
+        <td>Telnet-Mgmt-Access</td>
+        <td><span class="tag tag-zone">LAN</span> IT-Subnet</td>
+        <td><span class="tag tag-zone">LAN</span> Network-Devices</td>
+        <td><b style="color:#ff6b6b">TELNET (23)</b></td>
+        <td class="status-allow">ACCEPT</td>
+        <td>Disabled</td>
+        <td style="color:#e94560">None</td>
+        <td>Disabled</td>
+        <td class="enabled">✓</td>
+        <td>4,219</td>
+        <td style="color:#ff6b6b">Legacy device management - unencrypted</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td>Deny-All-Default</td>
+        <td><span class="tag tag-any">ANY</span></td>
+        <td><span class="tag tag-any">ANY</span></td>
+        <td>ALL</td>
+        <td class="status-deny">DENY</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>All</td>
+        <td class="enabled">✓</td>
+        <td>41,209,887</td>
+        <td>Default deny rule - implicit</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer">
+  <span>15 policies | 5 warnings detected</span>
+  <span>Last config backup: 03/08/2026 02:00 AM | Serial: FG6H0E5019902345</span>
+</div>
+</body>
+</html>

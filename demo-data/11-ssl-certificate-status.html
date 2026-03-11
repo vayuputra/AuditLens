@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SSL Certificate Inventory & Compliance</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f6f9; font-size: 13px; color: #333; }
+  .header { background: #2c3e50; padding: 12px 20px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 18px; }
+  .header .info { font-size: 11px; color: #bdc3c7; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .summary-cards { display: flex; gap: 16px; margin-bottom: 20px; }
+  .s-card { background: #fff; border-radius: 8px; padding: 20px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,.08); border-top: 4px solid; }
+  .s-card .num { font-size: 36px; font-weight: bold; }
+  .s-card .lbl { font-size: 11px; color: #666; margin-top: 4px; }
+  .s-card.expired { border-color: #e74c3c; }
+  .s-card.expired .num { color: #e74c3c; }
+  .s-card.expiring { border-color: #f39c12; }
+  .s-card.expiring .num { color: #f39c12; }
+  .s-card.valid { border-color: #27ae60; }
+  .s-card.valid .num { color: #27ae60; }
+  .s-card.weak { border-color: #8e44ad; }
+  .s-card.weak .num { color: #8e44ad; }
+  .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.08); margin-bottom: 20px; overflow: hidden; }
+  .card-header { padding: 14px 20px; border-bottom: 1px solid #eee; font-size: 16px; font-weight: bold; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #f8f9fa; padding: 8px 12px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; border-bottom: 2px solid #eee; }
+  td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; font-size: 12px; }
+  tr:hover { background: #f8f9fa; }
+  .expired-row { background: #fdf2f2; }
+  .expiring-row { background: #fef9f0; }
+  .weak-row { background: #faf0fc; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
+  .status-expired { background: #e74c3c; color: #fff; }
+  .status-expiring { background: #f39c12; color: #fff; }
+  .status-valid { background: #27ae60; color: #fff; }
+  .status-revoked { background: #95a5a6; color: #fff; }
+  .cipher-weak { color: #e74c3c; font-weight: bold; }
+  .cipher-ok { color: #27ae60; }
+  .days-danger { color: #e74c3c; font-weight: bold; }
+  .days-warn { color: #f39c12; font-weight: bold; }
+  .days-ok { color: #27ae60; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>SSL/TLS Certificate Inventory — Acme Financial Corp</h1>
+  <div class="info">Scan Date: March 10, 2026 | Scanner: Qualys SSL Labs API | Scope: All external & internal endpoints</div>
+</div>
+<div class="container">
+  <div class="summary-cards">
+    <div class="s-card expired"><div class="num">3</div><div class="lbl">EXPIRED</div></div>
+    <div class="s-card expiring"><div class="num">4</div><div class="lbl">EXPIRING &lt;30 DAYS</div></div>
+    <div class="s-card valid"><div class="num">9</div><div class="lbl">VALID</div></div>
+    <div class="s-card weak"><div class="num">2</div><div class="lbl">WEAK CIPHER</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Certificate Inventory</div>
+    <table>
+      <thead>
+        <tr><th>Common Name / SAN</th><th>Issuer</th><th>Serial</th><th>Key Size</th><th>Signature</th><th>Issued</th><th>Expires</th><th>Days Left</th><th>Status</th><th>Grade</th><th>Finding</th></tr>
+      </thead>
+      <tbody>
+        <tr class="expired-row">
+          <td>vpn.acmefinancial.com</td>
+          <td>DigiCert SHA2 EV</td>
+          <td>0A:3B:7C:...</td>
+          <td>RSA 2048</td>
+          <td>SHA256</td>
+          <td>01/15/2025</td>
+          <td>01/15/2026</td>
+          <td class="days-danger">-55 days</td>
+          <td><span class="status status-expired">EXPIRED</span></td>
+          <td style="color:#e74c3c; font-weight:bold;">T</td>
+          <td style="color:#e74c3c; font-weight:bold;">VPN portal cert expired 55 days ago</td>
+        </tr>
+        <tr class="expired-row">
+          <td>legacy-erp.acmefinancial.com</td>
+          <td>Self-Signed</td>
+          <td>FF:01:AB:...</td>
+          <td class="cipher-weak">RSA 1024</td>
+          <td class="cipher-weak">SHA1</td>
+          <td>03/14/2021</td>
+          <td>03/14/2024</td>
+          <td class="days-danger">-727 days</td>
+          <td><span class="status status-expired">EXPIRED</span></td>
+          <td style="color:#e74c3c; font-weight:bold;">F</td>
+          <td style="color:#e74c3c; font-weight:bold;">Self-signed, SHA1, 1024-bit, expired 2 years</td>
+        </tr>
+        <tr class="expired-row">
+          <td>internal-api.corp.local</td>
+          <td>ACME Internal CA</td>
+          <td>12:CD:EF:...</td>
+          <td>RSA 2048</td>
+          <td>SHA256</td>
+          <td>06/01/2024</td>
+          <td>12/01/2025</td>
+          <td class="days-danger">-100 days</td>
+          <td><span class="status status-expired">EXPIRED</span></td>
+          <td style="color:#e74c3c; font-weight:bold;">T</td>
+          <td style="color:#e74c3c;">Internal API cert expired — services may fail</td>
+        </tr>
+        <tr class="expiring-row">
+          <td>mail.acmefinancial.com</td>
+          <td>Let's Encrypt R3</td>
+          <td>04:A1:B2:...</td>
+          <td>EC P-256</td>
+          <td>SHA256</td>
+          <td>12/15/2025</td>
+          <td>03/15/2026</td>
+          <td class="days-warn">4 days</td>
+          <td><span class="status status-expiring">EXPIRING</span></td>
+          <td style="color:#f39c12; font-weight:bold;">A</td>
+          <td style="color:#f39c12;">Mail server cert expires in 4 days — renew immediately</td>
+        </tr>
+        <tr class="expiring-row">
+          <td>portal.acmefinancial.com</td>
+          <td>Sectigo RSA OV</td>
+          <td>5E:3F:91:...</td>
+          <td>RSA 2048</td>
+          <td>SHA256</td>
+          <td>04/01/2025</td>
+          <td>04/01/2026</td>
+          <td class="days-warn">21 days</td>
+          <td><span class="status status-expiring">EXPIRING</span></td>
+          <td>A-</td>
+          <td style="color:#f39c12;">Customer portal cert expiring soon</td>
+        </tr>
+        <tr class="expiring-row">
+          <td>ftp.acmefinancial.com</td>
+          <td>ACME Internal CA</td>
+          <td>88:AA:CC:...</td>
+          <td class="cipher-weak">RSA 1024</td>
+          <td class="cipher-weak">SHA1</td>
+          <td>04/10/2025</td>
+          <td>04/10/2026</td>
+          <td class="days-warn">30 days</td>
+          <td><span class="status status-expiring">EXPIRING</span></td>
+          <td style="color:#e74c3c; font-weight:bold;">F</td>
+          <td style="color:#e74c3c;">Weak key + SHA1 + expiring + FTP (unencrypted)</td>
+        </tr>
+        <tr>
+          <td>www.acmefinancial.com</td>
+          <td>DigiCert SHA2 EV</td>
+          <td>7B:2D:4E:...</td>
+          <td>RSA 4096</td>
+          <td class="cipher-ok">SHA384</td>
+          <td>09/01/2025</td>
+          <td>09/01/2027</td>
+          <td class="days-ok">539 days</td>
+          <td><span class="status status-valid">VALID</span></td>
+          <td style="color:#27ae60; font-weight:bold;">A+</td>
+          <td style="color:#27ae60;">EV certificate, strong configuration</td>
+        </tr>
+        <tr>
+          <td>api.acmefinancial.com</td>
+          <td>DigiCert SHA2 OV</td>
+          <td>A9:C1:82:...</td>
+          <td>EC P-384</td>
+          <td class="cipher-ok">SHA384</td>
+          <td>11/15/2025</td>
+          <td>11/15/2027</td>
+          <td class="days-ok">614 days</td>
+          <td><span class="status status-valid">VALID</span></td>
+          <td style="color:#27ae60; font-weight:bold;">A+</td>
+          <td style="color:#27ae60;">Strong ECC configuration</td>
+        </tr>
+        <tr class="expiring-row">
+          <td>reports.acmefinancial.com</td>
+          <td>Sectigo RSA DV</td>
+          <td>2C:D4:F6:...</td>
+          <td>RSA 2048</td>
+          <td>SHA256</td>
+          <td>03/20/2025</td>
+          <td>03/20/2026</td>
+          <td class="days-warn">9 days</td>
+          <td><span class="status status-expiring">EXPIRING</span></td>
+          <td>B</td>
+          <td style="color:#f39c12;">DV cert (should be OV for financial); expiring in 9 days</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

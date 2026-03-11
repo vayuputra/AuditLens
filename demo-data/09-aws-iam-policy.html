@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AWS IAM - Users & Access</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Amazon Ember', 'Segoe UI', sans-serif; background: #f2f3f3; font-size: 13px; color: #16191f; }
+  .topbar { background: #232f3e; padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .topbar .logo { color: #ff9900; font-size: 18px; font-weight: bold; }
+  .topbar .info { color: #d5dbdb; font-size: 12px; }
+  .breadcrumb { padding: 10px 20px; font-size: 12px; color: #545b64; border-bottom: 1px solid #d5dbdb; background: #fff; }
+  .breadcrumb a { color: #0073bb; text-decoration: none; }
+  .page-header { padding: 16px 20px; background: #fff; border-bottom: 1px solid #d5dbdb; }
+  .page-header h1 { font-size: 22px; font-weight: bold; color: #16191f; }
+  .page-header p { font-size: 13px; color: #545b64; margin-top: 4px; }
+  .alert { margin: 16px 20px; padding: 12px 16px; border-radius: 4px; font-size: 12px; display: flex; align-items: center; gap: 8px; }
+  .alert-danger { background: #fdf3f1; border: 1px solid #d13212; color: #d13212; }
+  .alert-warning { background: #fef8f0; border: 1px solid #ff9900; color: #8a6d3b; }
+  .container { margin: 0 20px 20px; }
+  .card { background: #fff; border: 1px solid #d5dbdb; border-radius: 4px; margin-top: 16px; }
+  .card-header { padding: 12px 16px; border-bottom: 1px solid #d5dbdb; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+  .card-header .count { font-size: 13px; color: #545b64; font-weight: normal; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #fafafa; padding: 8px 12px; text-align: left; font-size: 12px; color: #545b64; border-bottom: 2px solid #d5dbdb; }
+  td { padding: 8px 12px; border-bottom: 1px solid #eaeded; font-size: 13px; }
+  tr:hover { background: #f2f3f3; }
+  .risk-row { background: #fdf3f1; }
+  .warn-row { background: #fef8f0; }
+  .link { color: #0073bb; text-decoration: none; cursor: pointer; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: bold; }
+  .badge-red { background: #d13212; color: #fff; }
+  .badge-yellow { background: #ff9900; color: #fff; }
+  .badge-green { background: #1d8102; color: #fff; }
+  .badge-gray { background: #687078; color: #fff; }
+  .mfa-no { color: #d13212; font-weight: bold; }
+  .mfa-yes { color: #1d8102; }
+  .key-active { color: #1d8102; }
+  .key-inactive { color: #687078; }
+  .key-old { color: #d13212; font-weight: bold; }
+  .tag { display: inline-block; padding: 1px 6px; background: #e9ebeb; border-radius: 3px; font-size: 10px; margin: 1px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">aws</div>
+  <div class="info">Account: 123456789012 (acme-financial-prod) | Region: us-east-1 | IAM User: admin.ops</div>
+</div>
+<div class="breadcrumb">
+  <a href="#">IAM</a> &gt; <a href="#">Users</a> &gt; User List &amp; Access Report
+</div>
+<div class="page-header">
+  <h1>IAM Users — Access Audit Report</h1>
+  <p>Credential report generated: March 10, 2026 14:00 UTC | 14 IAM users found</p>
+</div>
+
+<div class="alert alert-danger">
+  <b>Security Alert:</b> Root account has been used in the last 24 hours. Root account access keys are active. MFA is not enabled on root.
+</div>
+<div class="alert alert-warning">
+  <b>Best Practice:</b> 5 users have access keys older than 90 days. 3 users do not have MFA enabled.
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      IAM Users <span class="count">(14 users)</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>User</th><th>Groups</th><th>MFA</th><th>Console Access</th><th>Access Key 1</th><th>Key 1 Age</th><th>Access Key 2</th><th>Key 2 Last Used</th><th>Last Console Login</th><th>Finding</th></tr>
+      </thead>
+      <tbody>
+        <tr class="risk-row">
+          <td><span class="link">&lt;root account&gt;</span></td>
+          <td>—</td>
+          <td class="mfa-no">Not enabled</td>
+          <td>Enabled</td>
+          <td class="key-old">Active</td>
+          <td class="key-old">842 days</td>
+          <td class="key-inactive">Inactive</td>
+          <td>—</td>
+          <td>03/10/2026</td>
+          <td><span class="badge badge-red">CRITICAL</span> Root with no MFA, active keys, recent use</td>
+        </tr>
+        <tr class="risk-row">
+          <td><span class="link">admin.ops</span></td>
+          <td><span class="tag">Administrators</span></td>
+          <td class="mfa-yes">Virtual MFA</td>
+          <td>Enabled</td>
+          <td class="key-active">Active</td>
+          <td class="key-old">215 days</td>
+          <td class="key-active">Active</td>
+          <td>03/09/2026</td>
+          <td>03/10/2026</td>
+          <td><span class="badge badge-yellow">WARNING</span> Two active keys; Key 1 over 90 days</td>
+        </tr>
+        <tr>
+          <td><span class="link">sarah.baker</span></td>
+          <td><span class="tag">DevOps</span><span class="tag">EC2-Admin</span></td>
+          <td class="mfa-yes">Virtual MFA</td>
+          <td>Enabled</td>
+          <td class="key-active">Active</td>
+          <td>45 days</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>03/10/2026</td>
+          <td><span class="badge badge-green">OK</span></td>
+        </tr>
+        <tr class="risk-row">
+          <td><span class="link">deploy-bot</span></td>
+          <td><span class="tag">Administrators</span></td>
+          <td class="mfa-no">Not enabled</td>
+          <td>Disabled</td>
+          <td class="key-active">Active</td>
+          <td class="key-old">548 days</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-red">CRITICAL</span> Service account in Admins group; old key</td>
+        </tr>
+        <tr class="warn-row">
+          <td><span class="link">ci-pipeline</span></td>
+          <td><span class="tag">PowerUserAccess</span></td>
+          <td class="mfa-no">Not enabled</td>
+          <td>Disabled</td>
+          <td class="key-active">Active</td>
+          <td class="key-old">189 days</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-yellow">WARNING</span> PowerUser is overly broad for CI/CD</td>
+        </tr>
+        <tr>
+          <td><span class="link">david.kim</span></td>
+          <td><span class="tag">Developers</span></td>
+          <td class="mfa-yes">Virtual MFA</td>
+          <td>Enabled</td>
+          <td class="key-active">Active</td>
+          <td>22 days</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>03/10/2026</td>
+          <td><span class="badge badge-green">OK</span></td>
+        </tr>
+        <tr class="risk-row">
+          <td><span class="link">legacy-integration</span></td>
+          <td><span class="tag">Administrators</span></td>
+          <td class="mfa-no">Not enabled</td>
+          <td>Enabled</td>
+          <td class="key-active">Active</td>
+          <td class="key-old">1,024 days</td>
+          <td class="key-active">Active</td>
+          <td>02/15/2024</td>
+          <td>01/10/2024</td>
+          <td><span class="badge badge-red">CRITICAL</span> Admin user, no MFA, 1000+ day keys, dormant</td>
+        </tr>
+        <tr>
+          <td><span class="link">emily.foster</span></td>
+          <td><span class="tag">Finance-RO</span></td>
+          <td class="mfa-yes">Virtual MFA</td>
+          <td>Enabled</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>03/09/2026</td>
+          <td><span class="badge badge-green">OK</span> Console only, appropriate access</td>
+        </tr>
+        <tr class="warn-row">
+          <td><span class="link">roberto.garcia</span></td>
+          <td><span class="tag">NetworkAdmin</span><span class="tag">Administrators</span></td>
+          <td class="mfa-yes">Hardware MFA</td>
+          <td>Enabled</td>
+          <td class="key-active">Active</td>
+          <td class="key-old">120 days</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>03/08/2026</td>
+          <td><span class="badge badge-yellow">WARNING</span> Key over 90 days; dual admin roles</td>
+        </tr>
+        <tr class="risk-row">
+          <td><span class="link">tyler.johnson</span></td>
+          <td><span class="tag">Contractors</span><span class="tag">S3-FullAccess</span></td>
+          <td class="mfa-no">Not enabled</td>
+          <td>Enabled</td>
+          <td class="key-active">Active</td>
+          <td class="key-old">230 days</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>08/15/2025</td>
+          <td><span class="badge badge-red">CRITICAL</span> Inactive contractor, no MFA, S3 full access</td>
+        </tr>
+        <tr>
+          <td><span class="link">lisa.chen</span></td>
+          <td><span class="tag">HR-Access</span></td>
+          <td class="mfa-yes">Virtual MFA</td>
+          <td>Enabled</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td class="key-inactive">Not created</td>
+          <td>—</td>
+          <td>03/10/2026</td>
+          <td><span class="badge badge-green">OK</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

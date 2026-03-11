@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CrowdStrike Falcon - Endpoint Protection Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0d1117; color: #c9d1d9; font-size: 13px; }
+  .header { background: #161b22; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e74c3c; }
+  .header .logo { font-size: 20px; font-weight: bold; color: #e74c3c; }
+  .header .info { font-size: 11px; color: #8b949e; }
+  .nav { background: #161b22; display: flex; border-bottom: 1px solid #30363d; padding: 0 20px; }
+  .nav a { color: #8b949e; padding: 10px 16px; text-decoration: none; font-size: 12px; }
+  .nav a.active { color: #fff; border-bottom: 2px solid #e74c3c; }
+  .container { padding: 20px; }
+  .stats { display: flex; gap: 16px; margin-bottom: 20px; }
+  .stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; flex: 1; text-align: center; }
+  .stat .number { font-size: 36px; font-weight: bold; }
+  .stat .label { font-size: 11px; color: #8b949e; margin-top: 4px; }
+  .stat-green .number { color: #3fb950; }
+  .stat-yellow .number { color: #d29922; }
+  .stat-red .number { color: #f85149; }
+  .stat-blue .number { color: #58a6ff; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; margin-bottom: 20px; }
+  .card-title { padding: 12px 16px; border-bottom: 1px solid #30363d; font-size: 14px; font-weight: bold; color: #fff; display: flex; justify-content: space-between; }
+  table { width: 100%; border-collapse: collapse; }
+  th { padding: 8px 12px; text-align: left; font-size: 11px; color: #8b949e; text-transform: uppercase; border-bottom: 1px solid #30363d; }
+  td { padding: 8px 12px; border-bottom: 1px solid #21262d; font-size: 12px; }
+  tr:hover { background: #1c2128; }
+  .risk-row { background: rgba(248,81,73,.08); }
+  .warn-row { background: rgba(210,153,34,.06); }
+  .status-protected { color: #3fb950; }
+  .status-warning { color: #d29922; }
+  .status-critical { color: #f85149; font-weight: bold; }
+  .status-offline { color: #8b949e; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; }
+  .badge-ok { background: #238636; color: #fff; }
+  .badge-warn { background: #9e6a03; color: #fff; }
+  .badge-critical { background: #da3633; color: #fff; }
+  .badge-info { background: #1f6feb; color: #fff; }
+  .progress { width: 80px; height: 6px; background: #21262d; border-radius: 3px; display: inline-block; vertical-align: middle; }
+  .progress-bar { height: 100%; border-radius: 3px; }
+  .os-icon { font-size: 10px; margin-right: 4px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">CrowdStrike Falcon</div>
+  <div class="info">Tenant: ACME Financial Corp | CID: 8a4f2c1d9e3b | Sensor Version: 7.10.17706</div>
+</div>
+<div class="nav">
+  <a href="#">Activity</a>
+  <a href="#">Detections</a>
+  <a class="active" href="#">Hosts</a>
+  <a href="#">Investigate</a>
+  <a href="#">Response</a>
+  <a href="#">Configuration</a>
+</div>
+<div class="container">
+  <div class="stats">
+    <div class="stat stat-green"><div class="number">142</div><div class="label">PROTECTED</div></div>
+    <div class="stat stat-yellow"><div class="number">8</div><div class="label">SENSOR WARNINGS</div></div>
+    <div class="stat stat-red"><div class="number">5</div><div class="label">UNPROTECTED</div></div>
+    <div class="stat stat-blue"><div class="number">12</div><div class="label">OFFLINE &gt;7 DAYS</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span>Host Protection Status — Exceptions & Issues</span>
+      <span style="font-size:11px; color:#8b949e;">Showing 18 of 167 endpoints</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Hostname</th><th>OS</th><th>IP Address</th><th>Sensor Status</th><th>Policy</th><th>Prevention</th><th>Last Seen</th><th>Detections (30d)</th><th>Finding</th></tr>
+      </thead>
+      <tbody>
+        <tr class="risk-row">
+          <td>SQL-PROD-01</td>
+          <td><span class="os-icon">🪟</span>Server 2019</td>
+          <td>10.10.5.30</td>
+          <td class="status-critical">Not Installed</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-critical">CRITICAL</span> Production DB with no endpoint protection</td>
+        </tr>
+        <tr class="risk-row">
+          <td>ERP-APP-01</td>
+          <td><span class="os-icon">🪟</span>Server 2016</td>
+          <td>10.10.5.35</td>
+          <td class="status-critical">Not Installed</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-critical">CRITICAL</span> ERP server unprotected</td>
+        </tr>
+        <tr class="warn-row">
+          <td>DC-CORP-01</td>
+          <td><span class="os-icon">🪟</span>Server 2022</td>
+          <td>10.10.1.10</td>
+          <td class="status-protected">Active</td>
+          <td>Domain Controllers</td>
+          <td class="status-warning">Detect Only</td>
+          <td>03/10/2026</td>
+          <td>0</td>
+          <td><span class="badge badge-warn">WARNING</span> Prevention mode disabled — detect only</td>
+        </tr>
+        <tr>
+          <td>DC-CORP-02</td>
+          <td><span class="os-icon">🪟</span>Server 2022</td>
+          <td>10.10.1.11</td>
+          <td class="status-protected">Active</td>
+          <td>Domain Controllers</td>
+          <td class="status-protected">Enabled</td>
+          <td>03/10/2026</td>
+          <td>0</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="risk-row">
+          <td>TERM-SRV-01</td>
+          <td><span class="os-icon">🪟</span>Server 2019</td>
+          <td>10.10.5.50</td>
+          <td class="status-warning">Outdated</td>
+          <td>Servers - Standard</td>
+          <td class="status-protected">Enabled</td>
+          <td>03/10/2026</td>
+          <td style="color:#f85149; font-weight:bold;">14</td>
+          <td><span class="badge badge-critical">CRITICAL</span> 14 detections! Sensor 180 days outdated</td>
+        </tr>
+        <tr class="warn-row">
+          <td>FTP-SRV-01</td>
+          <td><span class="os-icon">🐧</span>CentOS 7</td>
+          <td>10.10.100.15</td>
+          <td class="status-warning">Outdated</td>
+          <td>Linux Servers</td>
+          <td class="status-protected">Enabled</td>
+          <td>03/09/2026</td>
+          <td>2</td>
+          <td><span class="badge badge-warn">WARNING</span> CentOS 7 EOL; sensor needs update</td>
+        </tr>
+        <tr class="risk-row">
+          <td>LEGACY-APP-01</td>
+          <td><span class="os-icon">🪟</span>Server 2012 R2</td>
+          <td>10.10.5.40</td>
+          <td class="status-critical">Not Installed</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-critical">CRITICAL</span> EOL OS, no sensor, runs legacy ERP</td>
+        </tr>
+        <tr>
+          <td>WEB-PROD-01</td>
+          <td><span class="os-icon">🐧</span>Ubuntu 22.04</td>
+          <td>10.10.100.10</td>
+          <td class="status-protected">Active</td>
+          <td>Linux Servers</td>
+          <td class="status-protected">Enabled</td>
+          <td>03/10/2026</td>
+          <td>0</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="warn-row">
+          <td>WS-FIN-012</td>
+          <td><span class="os-icon">🪟</span>Windows 10</td>
+          <td>10.30.2.112</td>
+          <td class="status-protected">Active</td>
+          <td>Workstations</td>
+          <td class="status-warning">Reduced</td>
+          <td>03/10/2026</td>
+          <td>3</td>
+          <td><span class="badge badge-warn">WARNING</span> Prevention exclusions added by user</td>
+        </tr>
+        <tr class="risk-row">
+          <td>WS-IT-042</td>
+          <td><span class="os-icon">🪟</span>Windows 11</td>
+          <td>10.20.1.42</td>
+          <td class="status-critical">Tampered</td>
+          <td>Workstations</td>
+          <td class="status-critical">Disabled</td>
+          <td>03/10/2026</td>
+          <td style="color:#f85149; font-weight:bold;">7</td>
+          <td><span class="badge badge-critical">CRITICAL</span> Sensor tampered; prevention disabled</td>
+        </tr>
+        <tr>
+          <td>WS-HR-005</td>
+          <td><span class="os-icon">🪟</span>Windows 11</td>
+          <td>10.30.3.5</td>
+          <td class="status-protected">Active</td>
+          <td>Workstations</td>
+          <td class="status-protected">Enabled</td>
+          <td>03/10/2026</td>
+          <td>0</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="warn-row">
+          <td>JUMP-SERVER-01</td>
+          <td><span class="os-icon">🪟</span>Server 2022</td>
+          <td>10.10.100.5</td>
+          <td class="status-protected">Active</td>
+          <td>Servers - High</td>
+          <td class="status-protected">Enabled</td>
+          <td>03/10/2026</td>
+          <td>5</td>
+          <td><span class="badge badge-warn">WARNING</span> 5 detections on jump server — investigate</td>
+        </tr>
+        <tr>
+          <td>MAIL-GW-01</td>
+          <td><span class="os-icon">🐧</span>Ubuntu 20.04</td>
+          <td>10.10.100.20</td>
+          <td class="status-protected">Active</td>
+          <td>Linux Servers</td>
+          <td class="status-protected">Enabled</td>
+          <td>03/10/2026</td>
+          <td>1</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>File Server - Share Permissions Audit</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f4f4; font-size: 12px; }
+  .window { background: #fff; border: 1px solid #999; margin: 10px; box-shadow: 2px 2px 8px rgba(0,0,0,.2); }
+  .title-bar { background: linear-gradient(180deg, #4a90d9 0%, #2d6db5 100%); color: #fff; padding: 4px 8px; display: flex; justify-content: space-between; font-size: 12px; }
+  .title-bar .controls span { display: inline-block; width: 14px; height: 14px; border: 1px solid rgba(255,255,255,.4); text-align: center; line-height: 12px; margin-left: 2px; font-size: 10px; }
+  .info-bar { background: #e8f0fe; padding: 6px 12px; border-bottom: 1px solid #ccc; font-size: 11px; }
+  .info-bar b { color: #1a73e8; }
+  .section { margin: 12px; }
+  .section-title { background: #2d6db5; color: #fff; padding: 6px 12px; font-size: 13px; font-weight: bold; border-radius: 3px 3px 0 0; }
+  table { width: 100%; border-collapse: collapse; border: 1px solid #ccc; }
+  th { background: #e8e8e8; padding: 6px 10px; text-align: left; font-size: 11px; border: 1px solid #ccc; }
+  td { padding: 5px 10px; border: 1px solid #eee; font-size: 12px; }
+  tr:nth-child(even) { background: #f9f9f9; }
+  tr:hover { background: #e8f0fe; }
+  .risk-high { background: #f8d7da !important; }
+  .risk-medium { background: #fff3cd !important; }
+  .perm-full { color: #d32f2f; font-weight: bold; }
+  .perm-modify { color: #e65100; }
+  .perm-read { color: #2e7d32; }
+  .perm-none { color: #999; }
+  .inherited { color: #888; font-style: italic; }
+  .badge { display: inline-block; padding: 1px 6px; border-radius: 10px; font-size: 10px; font-weight: bold; }
+  .badge-critical { background: #d32f2f; color: #fff; }
+  .badge-warning { background: #ff9800; color: #fff; }
+  .badge-ok { background: #4caf50; color: #fff; }
+  .summary { display: flex; gap: 20px; padding: 10px 12px; background: #f5f5f5; border-bottom: 1px solid #ccc; }
+  .summary-item { text-align: center; }
+  .summary-item .num { font-size: 24px; font-weight: bold; }
+  .summary-item .label { font-size: 10px; color: #666; }
+  .footer { padding: 6px 12px; background: #f0f0f0; border-top: 1px solid #ccc; font-size: 11px; color: #555; }
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="title-bar">
+    <span>Share & NTFS Permissions Audit Report — FS-CORP-01.corp.acmefinancial.com</span>
+    <div class="controls"><span>—</span><span>☐</span><span>✕</span></div>
+  </div>
+  <div class="info-bar">
+    Server: <b>FS-CORP-01</b> | IP: <b>10.10.5.20</b> | OS: <b>Windows Server 2022</b> | Scan Date: <b>03/10/2026 14:32 UTC</b> | Scanned by: <b>IT-AuditTool v3.2</b>
+  </div>
+  <div class="summary">
+    <div class="summary-item"><div class="num" style="color:#d32f2f">7</div><div class="label">CRITICAL FINDINGS</div></div>
+    <div class="summary-item"><div class="num" style="color:#ff9800">4</div><div class="label">WARNINGS</div></div>
+    <div class="summary-item"><div class="num">12</div><div class="label">SHARES SCANNED</div></div>
+    <div class="summary-item"><div class="num">847</div><div class="label">ACL ENTRIES</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📁 Network Share Permissions</div>
+    <table>
+      <thead>
+        <tr><th>Share Name</th><th>Path</th><th>Principal</th><th>Share Permission</th><th>NTFS Permission</th><th>Inheritance</th><th>Finding</th></tr>
+      </thead>
+      <tbody>
+        <tr class="risk-high">
+          <td>\\FS-CORP-01\Finance$</td>
+          <td>D:\Shares\Finance</td>
+          <td>Everyone</td>
+          <td class="perm-full">Full Control</td>
+          <td class="perm-full">Full Control</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-critical">CRITICAL</span> Everyone has Full Control to financial data</td>
+        </tr>
+        <tr>
+          <td>\\FS-CORP-01\Finance$</td>
+          <td>D:\Shares\Finance</td>
+          <td>CORP\Finance-RW</td>
+          <td class="perm-modify">Modify</td>
+          <td class="perm-modify">Modify</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr>
+          <td>\\FS-CORP-01\Finance$</td>
+          <td>D:\Shares\Finance</td>
+          <td>CORP\Finance-RO</td>
+          <td class="perm-read">Read</td>
+          <td class="perm-read">Read & Execute</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="risk-high">
+          <td>\\FS-CORP-01\HR-Data</td>
+          <td>D:\Shares\HR</td>
+          <td>CORP\Domain Users</td>
+          <td class="perm-read">Read</td>
+          <td class="perm-read">Read & Execute</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-critical">CRITICAL</span> All domain users can read HR/PII data</td>
+        </tr>
+        <tr>
+          <td>\\FS-CORP-01\HR-Data</td>
+          <td>D:\Shares\HR</td>
+          <td>CORP\HR-Team</td>
+          <td class="perm-modify">Modify</td>
+          <td class="perm-modify">Modify</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="risk-high">
+          <td>\\FS-CORP-01\IT-Tools</td>
+          <td>D:\Shares\IT-Tools</td>
+          <td>CORP\Authenticated Users</td>
+          <td class="perm-full">Full Control</td>
+          <td class="perm-modify">Modify</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-critical">CRITICAL</span> All authenticated users can modify IT tools</td>
+        </tr>
+        <tr class="risk-medium">
+          <td>\\FS-CORP-01\Exec-Reports</td>
+          <td>D:\Shares\ExecReports</td>
+          <td>CORP\IT-Admins</td>
+          <td class="perm-full">Full Control</td>
+          <td class="perm-full">Full Control</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-warning">WARNING</span> IT Admins have full access to exec reports</td>
+        </tr>
+        <tr>
+          <td>\\FS-CORP-01\Exec-Reports</td>
+          <td>D:\Shares\ExecReports</td>
+          <td>CORP\Executives</td>
+          <td class="perm-modify">Modify</td>
+          <td class="perm-modify">Modify</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="risk-high">
+          <td>\\FS-CORP-01\Public</td>
+          <td>D:\Shares\Public</td>
+          <td>Everyone</td>
+          <td class="perm-full">Full Control</td>
+          <td class="perm-full">Full Control</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-critical">CRITICAL</span> Public share with unrestricted access</td>
+        </tr>
+        <tr class="risk-medium">
+          <td>\\FS-CORP-01\Backups</td>
+          <td>E:\Backups</td>
+          <td>CORP\svc_backup</td>
+          <td class="perm-full">Full Control</td>
+          <td class="perm-full">Full Control</td>
+          <td>Disabled</td>
+          <td><span class="badge badge-warning">WARNING</span> Service account has full backup access</td>
+        </tr>
+        <tr class="risk-high">
+          <td>\\FS-CORP-01\Backups</td>
+          <td>E:\Backups</td>
+          <td>CORP\Domain Admins</td>
+          <td class="perm-full">Full Control</td>
+          <td class="perm-full">Full Control</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-critical">CRITICAL</span> Domain Admins should not have backup access (SoD)</td>
+        </tr>
+        <tr class="risk-medium">
+          <td>\\FS-CORP-01\Dev-Projects</td>
+          <td>D:\Shares\Dev</td>
+          <td>CORP\Contractors</td>
+          <td class="perm-modify">Modify</td>
+          <td class="perm-modify">Modify</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-warning">WARNING</span> Contractors have modify access to source code</td>
+        </tr>
+        <tr>
+          <td>\\FS-CORP-01\Dev-Projects</td>
+          <td>D:\Shares\Dev</td>
+          <td>CORP\Dev-Team</td>
+          <td class="perm-modify">Modify</td>
+          <td class="perm-modify">Modify</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="risk-high">
+          <td>\\FS-CORP-01\ADMIN$</td>
+          <td>C:\Windows</td>
+          <td>BUILTIN\Administrators</td>
+          <td class="perm-full">Full Control</td>
+          <td class="perm-full">Full Control</td>
+          <td>Enabled</td>
+          <td><span class="badge badge-critical">CRITICAL</span> Default admin share enabled</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer">
+    Report generated: 03/10/2026 14:32 UTC | Next scheduled scan: 04/10/2026 | Retention: 90 days
+  </div>
+</div>
+</body>
+</html>

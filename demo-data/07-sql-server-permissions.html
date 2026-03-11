@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SQL Server Management Studio - Security Audit</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e1e; color: #d4d4d4; font-size: 12px; }
+  .header { background: #007acc; padding: 4px 12px; color: #fff; font-size: 12px; display: flex; justify-content: space-between; }
+  .toolbar { background: #2d2d2d; padding: 4px 8px; border-bottom: 1px solid #444; display: flex; gap: 6px; }
+  .toolbar button { background: #3c3c3c; border: 1px solid #555; color: #ccc; padding: 3px 10px; font-size: 11px; border-radius: 2px; }
+  .layout { display: flex; min-height: 550px; }
+  .obj-explorer { width: 240px; background: #252526; border-right: 1px solid #444; padding: 6px; overflow-y: auto; }
+  .obj-explorer .title { font-size: 11px; color: #888; padding: 4px; border-bottom: 1px solid #333; margin-bottom: 4px; }
+  .tree-node { padding: 2px 4px; font-size: 11px; white-space: nowrap; cursor: pointer; }
+  .tree-node:hover { background: #2a2d2e; }
+  .tree-node.selected { background: #094771; }
+  .indent1 { padding-left: 16px; }
+  .indent2 { padding-left: 32px; }
+  .indent3 { padding-left: 48px; }
+  .results { flex: 1; display: flex; flex-direction: column; }
+  .query-pane { background: #1e1e1e; padding: 8px 12px; border-bottom: 2px solid #007acc; font-family: 'Consolas', monospace; font-size: 12px; color: #d4d4d4; min-height: 60px; }
+  .query-pane .keyword { color: #569cd6; }
+  .query-pane .string { color: #ce9178; }
+  .query-pane .comment { color: #6a9955; }
+  .tab-bar { background: #2d2d2d; display: flex; border-bottom: 1px solid #444; }
+  .tab { padding: 4px 12px; font-size: 11px; color: #888; cursor: pointer; border-right: 1px solid #444; }
+  .tab.active { background: #1e1e1e; color: #fff; border-bottom: 2px solid #007acc; }
+  .result-grid { flex: 1; overflow: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #2d2d2d; padding: 4px 8px; text-align: left; font-size: 11px; color: #aaa; border: 1px solid #444; position: sticky; top: 0; }
+  td { padding: 4px 8px; border: 1px solid #333; font-size: 11px; }
+  tr:hover { background: #2a2d2e; }
+  .risk-row { background: rgba(244,67,54,.12); }
+  .warn-row { background: rgba(255,193,7,.08); }
+  .perm-danger { color: #f44336; font-weight: bold; }
+  .perm-warn { color: #ff9800; }
+  .perm-ok { color: #4caf50; }
+  .sa { color: #f44336; font-weight: bold; }
+  .status-bar { background: #007acc; padding: 3px 12px; font-size: 11px; color: #fff; display: flex; justify-content: space-between; }
+  .messages { background: #1e1e1e; padding: 8px; font-family: 'Consolas', monospace; font-size: 11px; color: #4ec9b0; border-top: 1px solid #444; }
+</style>
+</head>
+<body>
+<div class="header">
+  <span>Microsoft SQL Server Management Studio — SQL-PROD-01\MSSQLSERVER (SQL Server 2019 - 15.0.4355.3)</span>
+  <span>Connected as: CORP\admin | SA: Enabled</span>
+</div>
+<div class="toolbar">
+  <button>▶ Execute</button>
+  <button>✓ Parse</button>
+  <button>📊 Results</button>
+  <button>💬 Messages</button>
+</div>
+<div class="layout">
+  <div class="obj-explorer">
+    <div class="title">Object Explorer</div>
+    <div class="tree-node">🖥 SQL-PROD-01 (SQL Server 15.0)</div>
+    <div class="tree-node indent1">📁 Databases</div>
+    <div class="tree-node indent2">📁 AcmeERP_Production</div>
+    <div class="tree-node indent2">📁 AcmeERP_Staging</div>
+    <div class="tree-node indent2">📁 FinanceDB</div>
+    <div class="tree-node indent2">📁 HRDB</div>
+    <div class="tree-node indent2">📁 ReportingDW</div>
+    <div class="tree-node indent1 selected">📁 Security</div>
+    <div class="tree-node indent2">👤 Logins</div>
+    <div class="tree-node indent2">🔑 Server Roles</div>
+    <div class="tree-node indent2">📜 Credentials</div>
+    <div class="tree-node indent1">📁 Server Objects</div>
+    <div class="tree-node indent1">📁 Management</div>
+  </div>
+  <div class="results">
+    <div class="query-pane">
+      <span class="comment">-- Security Audit Query: Server & Database Level Permissions</span><br>
+      <span class="keyword">SELECT</span> sp.name, sp.type_desc, sp.is_disabled, sl.sysadmin, sl.securityadmin,<br>
+      &nbsp;&nbsp;sl.dbcreator, sp.create_date, sp.modify_date, sl.default_database_name<br>
+      <span class="keyword">FROM</span> sys.server_principals sp <span class="keyword">JOIN</span> sys.syslogins sl <span class="keyword">ON</span> sp.sid = sl.sid<br>
+      <span class="keyword">ORDER BY</span> sl.sysadmin <span class="keyword">DESC</span>, sp.name
+    </div>
+    <div class="tab-bar">
+      <div class="tab active">Results</div>
+      <div class="tab">Messages</div>
+    </div>
+    <div class="result-grid">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Login Name</th><th>Type</th><th>Disabled</th><th>sysadmin</th><th>securityadmin</th><th>dbcreator</th><th>Created</th><th>Modified</th><th>Default DB</th><th>Audit Finding</th></tr>
+        </thead>
+        <tbody>
+          <tr class="risk-row">
+            <td>1</td>
+            <td>sa</td>
+            <td>SQL_LOGIN</td>
+            <td>No</td>
+            <td class="sa">1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2019-04-15</td>
+            <td>2023-01-10</td>
+            <td>master</td>
+            <td class="perm-danger">SA account enabled — should be disabled</td>
+          </tr>
+          <tr class="risk-row">
+            <td>2</td>
+            <td>CORP\admin</td>
+            <td>WINDOWS_LOGIN</td>
+            <td>No</td>
+            <td class="sa">1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2019-04-15</td>
+            <td>2024-06-20</td>
+            <td>master</td>
+            <td class="perm-danger">Named admin with sysadmin — use role-based access</td>
+          </tr>
+          <tr class="risk-row">
+            <td>3</td>
+            <td>CORP\svc_sqlprod</td>
+            <td>WINDOWS_LOGIN</td>
+            <td>No</td>
+            <td class="sa">1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2019-04-15</td>
+            <td>2022-09-22</td>
+            <td>AcmeERP_Production</td>
+            <td class="perm-danger">Service account with sysadmin — excessive privilege</td>
+          </tr>
+          <tr class="risk-row">
+            <td>4</td>
+            <td>CORP\svc_legacy_app</td>
+            <td>WINDOWS_LOGIN</td>
+            <td>No</td>
+            <td class="sa">1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2020-03-14</td>
+            <td>2021-03-14</td>
+            <td>AcmeERP_Production</td>
+            <td class="perm-danger">Legacy app svc with sysadmin + Domain Admin membership</td>
+          </tr>
+          <tr class="warn-row">
+            <td>5</td>
+            <td>CORP\r.garcia</td>
+            <td>WINDOWS_LOGIN</td>
+            <td>No</td>
+            <td class="sa">1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2023-08-01</td>
+            <td>2025-11-03</td>
+            <td>master</td>
+            <td class="perm-warn">Network engineer with SQL sysadmin — SoD concern</td>
+          </tr>
+          <tr class="risk-row">
+            <td>6</td>
+            <td>app_erp_user</td>
+            <td>SQL_LOGIN</td>
+            <td>No</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2019-06-10</td>
+            <td>2019-06-10</td>
+            <td>AcmeERP_Production</td>
+            <td class="perm-danger">SQL auth login — password last changed 2019 (never rotated)</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>CORP\Finance-RO</td>
+            <td>WINDOWS_GROUP</td>
+            <td>No</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2020-01-15</td>
+            <td>2024-03-10</td>
+            <td>FinanceDB</td>
+            <td class="perm-ok">Appropriate read-only access</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>CORP\HR-Team</td>
+            <td>WINDOWS_GROUP</td>
+            <td>No</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2020-01-15</td>
+            <td>2024-03-10</td>
+            <td>HRDB</td>
+            <td class="perm-ok">Appropriate role-based access</td>
+          </tr>
+          <tr class="warn-row">
+            <td>9</td>
+            <td>report_user</td>
+            <td>SQL_LOGIN</td>
+            <td>No</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2021-09-22</td>
+            <td>2021-09-22</td>
+            <td>ReportingDW</td>
+            <td class="perm-warn">SQL auth — has db_owner on ReportingDW (should be db_datareader)</td>
+          </tr>
+          <tr class="risk-row">
+            <td>10</td>
+            <td>test_dev</td>
+            <td>SQL_LOGIN</td>
+            <td>No</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2024-02-01</td>
+            <td>2024-02-01</td>
+            <td>master</td>
+            <td class="perm-danger">Test/dev account on production server — dbcreator role</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>CORP\Dev-Team</td>
+            <td>WINDOWS_GROUP</td>
+            <td>No</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2022-05-10</td>
+            <td>2024-08-15</td>
+            <td>AcmeERP_Staging</td>
+            <td class="perm-ok">Access limited to staging environment</td>
+          </tr>
+          <tr class="warn-row">
+            <td>12</td>
+            <td>BUILTIN\Administrators</td>
+            <td>WINDOWS_GROUP</td>
+            <td>No</td>
+            <td class="sa">1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2019-04-15</td>
+            <td>2019-04-15</td>
+            <td>master</td>
+            <td class="perm-warn">Local admins group has sysadmin — inherited access risk</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="messages">
+      (12 rows affected)<br>
+      Completion time: 2026-03-10T15:42:18.2340000
+    </div>
+  </div>
+</div>
+<div class="status-bar">
+  <span>Ready | Ln 1, Col 1</span>
+  <span>SQL-PROD-01 | CORP\admin | AcmeERP_Production | 00:00:00</span>
+</div>
+</body>
+</html>
