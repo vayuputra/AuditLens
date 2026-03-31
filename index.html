@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AuditLens - AI-Powered IT Audit Evidence Capture &amp; Analysis</title>
-  <meta name="description" content="Capture screenshots, get instant AI analysis for IT audit workpapers. Supports GPT-4o, Claude, and Gemini. Export to Word with risk summaries and SHA-256 evidence integrity.">
+  <title>AuditLens - AI-Powered IT Audit Evidence Capture, Redaction &amp; Intelligence</title>
+  <meta name="description" content="Capture screenshots, get instant AI analysis for IT audit workpapers. Automated PII redaction, audit intelligence dashboard, SharePoint integration. Supports GPT-4o, Claude, and Gemini.">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
   <script>
@@ -142,10 +142,10 @@
             <span class="text-brand-300 text-sm font-medium">Windows Desktop App</span>
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-            AI-Powered <span class="gradient-text">IT Audit</span> Evidence Capture
+            AI-Powered <span class="gradient-text">IT Audit</span> Evidence Platform
           </h1>
           <p class="text-lg text-slate-400 mb-8 leading-relaxed max-w-xl">
-            Capture screenshots with a single hotkey, get instant AI analysis for your workpapers. AuditLens turns hours of manual documentation into seconds of automated evidence gathering.
+            Capture screenshots, get instant AI analysis, auto-redact sensitive data, and export to SharePoint. AuditLens turns hours of manual documentation into seconds of automated evidence gathering with built-in intelligence.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
             <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button bg-brand-600 hover:bg-brand-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:shadow-lg hover:shadow-brand-600/25 text-center">
@@ -181,58 +181,74 @@
               <span class="text-xs text-slate-400 ml-2 font-medium">AuditLens</span>
             </div>
             <div class="p-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-              <!-- Mock Main Screen -->
+              <!-- Mock Dashboard -->
               <div class="bg-slate-800/90 rounded-xl border border-slate-700/50 overflow-hidden">
-                <div class="bg-gradient-to-r from-slate-700 to-slate-600 px-5 py-4 border-b border-slate-600">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="text-lg font-bold text-white">Audit Lens</h3>
-                      <p class="text-slate-300 text-xs">Capture and analyze screenshots with AI-powered insights</p>
-                    </div>
-                    <div class="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center border border-slate-500">
-                      <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                      </svg>
-                    </div>
+                <!-- Nav bar -->
+                <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-blue-400 font-bold text-[10px]">Audit Lens</span>
+                    <span class="px-2 py-0.5 bg-blue-600 rounded text-[7px] text-white">Dashboard</span>
+                    <span class="px-1.5 py-0.5 bg-slate-700 rounded text-[7px] text-slate-400">History</span>
+                    <span class="px-1.5 py-0.5 bg-slate-700 rounded text-[7px] text-slate-400">Projects</span>
+                    <span class="px-1.5 py-0.5 bg-slate-700 rounded text-[7px] text-slate-400">Summary</span>
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="text-[7px] text-purple-400 bg-purple-900/30 px-1.5 py-0.5 rounded">GPT-4o</span>
+                    <span class="text-[7px] text-green-400 bg-green-900/30 px-1.5 py-0.5 rounded">$0.03</span>
                   </div>
                 </div>
-                <div class="p-5">
-                  <div class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg text-center text-sm mb-4">
-                    Take Screenshot
+                <div class="p-4">
+                  <!-- Risk chart + stats row -->
+                  <div class="flex gap-3 mb-3">
+                    <!-- Donut chart mock -->
+                    <div class="flex-1 bg-slate-700/30 rounded-lg p-3 border border-slate-600/30">
+                      <p class="text-[8px] text-slate-400 mb-2">Risk Distribution</p>
+                      <div class="flex items-center justify-center gap-3">
+                        <div class="w-16 h-16 rounded-full border-4 border-red-500 border-t-amber-400 border-r-green-400 flex items-center justify-center">
+                          <span class="text-white text-[10px] font-bold">23</span>
+                        </div>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-red-500"></div><span class="text-[8px] text-slate-300">High: 4</span></div>
+                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-amber-400"></div><span class="text-[8px] text-slate-300">Med: 7</span></div>
+                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-400"></div><span class="text-[8px] text-slate-300">Low: 12</span></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Quick stats -->
+                    <div class="flex-1 space-y-2">
+                      <div class="bg-slate-700/30 rounded-lg p-2 border border-slate-600/30">
+                        <p class="text-[7px] text-slate-500">Screenshots</p>
+                        <p class="text-white text-sm font-bold">23</p>
+                      </div>
+                      <div class="bg-slate-700/30 rounded-lg p-2 border border-slate-600/30">
+                        <p class="text-[7px] text-slate-500">Avg Risk</p>
+                        <p class="text-amber-400 text-sm font-bold">52</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="grid grid-cols-4 gap-2 mb-4">
-                    <div class="bg-slate-700/50 rounded-lg p-2 border border-slate-600/50 text-center">
-                      <div class="w-6 h-6 bg-blue-600/20 rounded mx-auto mb-1"></div>
-                      <p class="text-white text-[10px] font-semibold">History</p>
-                    </div>
-                    <div class="bg-slate-700/50 rounded-lg p-2 border border-slate-600/50 text-center">
-                      <div class="w-6 h-6 bg-green-600/20 rounded mx-auto mb-1"></div>
-                      <p class="text-white text-[10px] font-semibold">Projects</p>
-                    </div>
-                    <div class="bg-slate-700/50 rounded-lg p-2 border border-slate-600/50 text-center">
-                      <div class="w-6 h-6 bg-purple-600/20 rounded mx-auto mb-1"></div>
-                      <p class="text-white text-[10px] font-semibold">Templates</p>
-                    </div>
-                    <div class="bg-slate-700/50 rounded-lg p-2 border border-slate-600/50 text-center">
-                      <div class="w-6 h-6 bg-yellow-600/20 rounded mx-auto mb-1"></div>
-                      <p class="text-white text-[10px] font-semibold">Batch</p>
-                    </div>
+                  <!-- Action buttons -->
+                  <div class="flex gap-2 mb-3">
+                    <div class="flex-1 py-2 bg-blue-600 rounded-lg text-[9px] text-white text-center font-medium">Capture</div>
+                    <div class="flex-1 py-2 bg-slate-700 rounded-lg text-[9px] text-slate-300 text-center">Import Batch</div>
+                    <div class="flex-1 py-2 bg-slate-700 rounded-lg text-[9px] text-slate-300 text-center">Report</div>
                   </div>
-                  <div class="grid grid-cols-3 gap-2">
-                    <div class="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
-                      <div class="w-7 h-7 bg-blue-600/20 rounded-lg mb-2"></div>
-                      <p class="text-white text-[10px] font-semibold">Multi-Model AI</p>
-                      <p class="text-slate-400 text-[8px]">GPT-4o, Claude, Gemini</p>
+                  <!-- Recent screenshots -->
+                  <div class="grid grid-cols-4 gap-1.5">
+                    <div class="bg-slate-700/50 rounded p-1.5 border border-slate-600/30">
+                      <div class="bg-slate-900 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-slate-600">AD Config</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-red-600/20 text-red-400 rounded text-[6px]">High</span><span class="text-[6px] text-slate-500">Fig 3.1</span></div>
                     </div>
-                    <div class="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
-                      <div class="w-7 h-7 bg-green-600/20 rounded-lg mb-2"></div>
-                      <p class="text-white text-[10px] font-semibold">Audit Reports</p>
-                      <p class="text-slate-400 text-[8px]">Word export</p>
+                    <div class="bg-slate-700/50 rounded p-1.5 border border-slate-600/30">
+                      <div class="bg-slate-900 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-slate-600">Firewall</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-amber-600/20 text-amber-400 rounded text-[6px]">Med</span><span class="text-[6px] text-slate-500">Fig 3.2</span></div>
                     </div>
-                    <div class="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
-                      <div class="w-7 h-7 bg-purple-600/20 rounded-lg mb-2"></div>
-                      <p class="text-white text-[10px] font-semibold">Evidence</p>
-                      <p class="text-slate-400 text-[8px]">SHA-256 hash</p>
+                    <div class="bg-slate-700/50 rounded p-1.5 border border-slate-600/30">
+                      <div class="bg-slate-900 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-slate-600">Backup</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-green-600/20 text-green-400 rounded text-[6px]">Low</span><span class="text-[6px] text-slate-500">Fig 3.3</span></div>
+                    </div>
+                    <div class="bg-slate-700/50 rounded p-1.5 border border-slate-600/30">
+                      <div class="bg-slate-900 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-slate-600">IAM</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-red-600/20 text-red-400 rounded text-[6px]">High</span><span class="text-[6px] text-slate-500">Fig 3.4</span></div>
                     </div>
                   </div>
                 </div>
@@ -267,7 +283,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">Everything you need for <span class="gradient-text">audit evidence</span></h2>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">From screenshot capture to Word-ready workpapers, AuditLens handles the entire evidence documentation workflow.</p>
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto">From screenshot capture to intelligence dashboards, PII redaction, and SharePoint export. AuditLens handles the entire evidence documentation workflow.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -289,25 +305,52 @@
           <p class="text-slate-400 text-sm leading-relaxed">Choose from OpenAI GPT-4o, Anthropic Claude, or Google Gemini. Your API key, your data stays yours.</p>
         </div>
 
-        <!-- Feature 3 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
-          <div class="feature-icon bg-green-600/15 mb-4">
-            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <!-- Feature 3: NEW - Automated PII Redaction -->
+        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+          <div class="feature-icon bg-red-600/15 mb-4">
+            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
           </div>
-          <h3 class="text-white font-semibold text-lg mb-2">Word Export &amp; Reports</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Export complete audit evidence reports to Word documents with risk summaries, figure numbers, and structured findings.</p>
+          <h3 class="text-white font-semibold text-lg mb-2">Automated PII Redaction</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Auto-detect SSNs, credit cards, emails, and more. Apply black, blur, or pixelate redaction with a compliance audit trail.</p>
         </div>
 
-        <!-- Feature 4 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <!-- Feature 4: NEW - Intelligence Dashboard -->
+        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
           <div class="feature-icon bg-amber-600/15 mb-4">
-            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Intelligence Dashboard</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Live risk distribution charts, tag heatmaps, system coverage tables, and finding timelines. See your entire audit at a glance.</p>
+        </div>
+
+        <!-- Feature 5: NEW - SharePoint Integration -->
+        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+          <div class="feature-icon bg-blue-600/15 mb-4">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">SharePoint Export</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Connect to SharePoint Online and bulk-export evidence with metadata. Auto-organize by system or date in your document library.</p>
+        </div>
+
+        <!-- Feature 6: NEW - Executive Summary -->
+        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+          <div class="feature-icon bg-indigo-600/15 mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2"/></svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">AI Executive Summary</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Generate comprehensive executive summaries from all your findings with one click. AI writes the report, you review and export to Word.</p>
+        </div>
+
+        <!-- Feature 7 -->
+        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+          <div class="feature-icon bg-green-600/15 mb-4">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
           <h3 class="text-white font-semibold text-lg mb-2">SHA-256 Evidence Integrity</h3>
           <p class="text-slate-400 text-sm leading-relaxed">Every screenshot is hashed with SHA-256 for tamper-proof evidence verification. Audit-grade integrity built in.</p>
         </div>
 
-        <!-- Feature 5 -->
+        <!-- Feature 8 -->
         <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
           <div class="feature-icon bg-rose-600/15 mb-4">
             <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
@@ -316,7 +359,7 @@
           <p class="text-slate-400 text-sm leading-relaxed">Organize evidence by audit engagement. Track clients, tags, risk scores, and figure numbers across projects.</p>
         </div>
 
-        <!-- Feature 6 -->
+        <!-- Feature 9 -->
         <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
           <div class="feature-icon bg-cyan-600/15 mb-4">
             <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -325,16 +368,16 @@
           <p class="text-slate-400 text-sm leading-relaxed">Drag &amp; drop multiple screenshots at once. Side-by-side comparison view with synced scrolling for evidence review.</p>
         </div>
 
-        <!-- Feature 7 -->
+        <!-- Feature 10 -->
         <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
-          <div class="feature-icon bg-indigo-600/15 mb-4">
-            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          <div class="feature-icon bg-teal-600/15 mb-4">
+            <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
           </div>
           <h3 class="text-white font-semibold text-lg mb-2">Annotations &amp; Templates</h3>
           <p class="text-slate-400 text-sm leading-relaxed">Annotate screenshots directly. Use custom AI prompt templates tailored to your audit methodology and standards.</p>
         </div>
 
-        <!-- Feature 8 -->
+        <!-- Feature 11 -->
         <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
           <div class="feature-icon bg-emerald-600/15 mb-4">
             <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -343,13 +386,13 @@
           <p class="text-slate-400 text-sm leading-relaxed">Real-time tracking of AI API costs per analysis. Know exactly what each screenshot costs. Approx $0.01 per 5-10 screenshots.</p>
         </div>
 
-        <!-- Feature 9 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
-          <div class="feature-icon bg-teal-600/15 mb-4">
-            <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+        <!-- Feature 12: NEW - Smart Deduplication -->
+        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+          <div class="feature-icon bg-yellow-600/15 mb-4">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
           </div>
-          <h3 class="text-white font-semibold text-lg mb-2">Clipboard Copy</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">One-click copy of both image and AI analysis as formatted HTML. Paste directly into Word, Outlook, or any workpaper.</p>
+          <h3 class="text-white font-semibold text-lg mb-2">Smart Deduplication</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Automatically detects duplicate and related findings across your project. Warns you before creating redundant evidence.</p>
         </div>
       </div>
     </div>
@@ -411,9 +454,11 @@
                     <strong class="text-green-300">Recommendation:</strong> Implement password rotation policy...
                   </p>
                 </div>
-                <div class="flex gap-2 mt-2">
-                  <div class="flex-1 py-1.5 bg-brand-600 rounded text-[9px] text-white text-center font-medium">Copy to Clipboard</div>
-                  <div class="py-1.5 px-3 bg-slate-700 rounded text-[9px] text-slate-300 text-center">Edit</div>
+                <div class="flex gap-1.5 mt-2">
+                  <div class="flex-1 py-1.5 bg-brand-600 rounded text-[8px] text-white text-center font-medium">Copy</div>
+                  <div class="py-1.5 px-2 bg-red-600/80 rounded text-[8px] text-white text-center">Redact</div>
+                  <div class="py-1.5 px-2 bg-slate-700 rounded text-[8px] text-slate-300 text-center">Word</div>
+                  <div class="py-1.5 px-2 bg-slate-700 rounded text-[8px] text-slate-300 text-center">Edit</div>
                 </div>
               </div>
             </div>
@@ -422,12 +467,12 @@
         <div>
           <h3 class="text-2xl font-bold text-white mb-4">Instant AI Evidence Analysis</h3>
           <p class="text-slate-400 mb-6 leading-relaxed">
-            Every screenshot is automatically analyzed by AI. Get structured findings, risk ratings, and recommendations in seconds. Choose between Quick, Detailed, or Custom analysis modes.
+            Every screenshot is automatically analyzed by AI with progress tracking. Get structured findings, risk ratings, duplicate detection, and PII warnings. Redact sensitive data before exporting.
           </p>
           <ul class="space-y-3">
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Auto-detects system name, risk level, and tags</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Editable analysis - modify AI output before saving</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">One-click copy to Word or Outlook as formatted HTML</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Auto-detects system name, risk level, tags, and related findings</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Duplicate warning, PII detection, and one-click redaction</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Export to Word, SharePoint, or clipboard as formatted HTML</span></li>
           </ul>
         </div>
       </div>
@@ -496,20 +541,115 @@
         </div>
       </div>
 
-      <!-- Screenshot 3: Summary Report -->
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Screenshot 3: PII Redaction -->
+      <div class="grid lg:grid-cols-2 gap-12 items-center mb-24">
         <div class="float-animation">
           <div class="screenshot-card glow">
             <div class="screenshot-titlebar">
               <div class="titlebar-dot bg-red-500"></div>
               <div class="titlebar-dot bg-yellow-500"></div>
               <div class="titlebar-dot bg-green-500"></div>
-              <span class="text-xs text-slate-400 ml-2 font-medium">AuditLens - Summary Report</span>
+              <span class="text-xs text-slate-400 ml-2 font-medium">AuditLens - PII Redaction</span>
             </div>
             <div class="p-5 bg-gradient-to-br from-slate-900 to-slate-800">
-              <!-- Mock Summary Report -->
+              <!-- Mock Redaction Panel -->
+              <div class="flex gap-4">
+                <div class="flex-1">
+                  <div class="bg-slate-700/50 rounded-lg p-2 border border-slate-600/50 mb-3">
+                    <div class="bg-slate-900 rounded h-32 relative flex items-center justify-center">
+                      <div class="text-center space-y-2 w-full px-4">
+                        <p class="text-[8px] text-slate-500">User: John Smith</p>
+                        <div class="bg-black rounded h-3 w-24 mx-auto"></div>
+                        <p class="text-[8px] text-slate-500">Email: john@corp.com</p>
+                        <div class="bg-black rounded h-3 w-28 mx-auto"></div>
+                        <p class="text-[8px] text-slate-500">SSN: ***-**-****</p>
+                        <div class="bg-red-500/20 border border-red-500/40 rounded h-3 w-20 mx-auto"></div>
+                      </div>
+                      <div class="absolute top-1 right-1 px-1.5 py-0.5 bg-red-600/80 rounded text-[7px] text-white">3 PII Found</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-1 space-y-2">
+                  <p class="text-[9px] text-slate-400 font-semibold mb-1">Detected PII</p>
+                  <div class="bg-red-900/20 border border-red-700/30 rounded-lg px-3 py-2 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" checked class="rounded w-3 h-3">
+                      <span class="text-[9px] text-red-300">SSN</span>
+                    </div>
+                    <span class="px-1.5 py-0.5 bg-red-600/30 text-red-300 rounded text-[7px]">Critical</span>
+                  </div>
+                  <div class="bg-orange-900/20 border border-orange-700/30 rounded-lg px-3 py-2 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" checked class="rounded w-3 h-3">
+                      <span class="text-[9px] text-orange-300">Credit Card</span>
+                    </div>
+                    <span class="px-1.5 py-0.5 bg-orange-600/30 text-orange-300 rounded text-[7px]">Critical</span>
+                  </div>
+                  <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-lg px-3 py-2 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" checked class="rounded w-3 h-3">
+                      <span class="text-[9px] text-yellow-300">Email</span>
+                    </div>
+                    <span class="px-1.5 py-0.5 bg-yellow-600/30 text-yellow-300 rounded text-[7px]">Moderate</span>
+                  </div>
+                  <div class="flex gap-2 mt-3">
+                    <select class="flex-1 bg-slate-800 border border-slate-600 rounded text-[9px] text-slate-300 px-2 py-1.5">
+                      <option>Black</option><option>Blur</option><option>Pixelate</option>
+                    </select>
+                    <div class="flex-1 py-1.5 bg-red-600 rounded text-[9px] text-white text-center font-medium">Apply Redaction</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="inline-flex items-center space-x-2 bg-red-600/10 border border-red-500/20 rounded-full px-4 py-1.5 mb-4">
+            <span class="text-red-300 text-sm font-medium">New Feature</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-4">Automated PII Redaction</h3>
+          <p class="text-slate-400 mb-6 leading-relaxed">
+            Automatically detect sensitive data in your screenshots before sharing. SSNs, credit card numbers, emails, API keys, and more are flagged instantly with Luhn-validated accuracy.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">8 PII types: SSN, credit card, email, phone, IP, API keys</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Three redaction styles: black overlay, blur, or pixelate</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Compliance audit trail for every redaction applied</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Screenshot 4: Summary Report & Executive Summary -->
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1">
+          <h3 class="text-2xl font-bold text-white mb-4">Executive Summary &amp; Reports</h3>
+          <p class="text-slate-400 mb-6 leading-relaxed">
+            Generate AI-powered executive summaries from all your findings. Get risk distributions, system coverage analysis, and structured recommendations exported as Word documents or pushed to SharePoint.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">One-click AI executive summary generation</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Interactive risk charts, tag heatmaps, and timeline views</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Export to Word or SharePoint document library</span></li>
+          </ul>
+        </div>
+        <div class="order-1 lg:order-2 float-animation-delay">
+          <div class="screenshot-card glow">
+            <div class="screenshot-titlebar">
+              <div class="titlebar-dot bg-red-500"></div>
+              <div class="titlebar-dot bg-yellow-500"></div>
+              <div class="titlebar-dot bg-green-500"></div>
+              <span class="text-xs text-slate-400 ml-2 font-medium">AuditLens - Executive Summary</span>
+            </div>
+            <div class="p-5 bg-gradient-to-br from-slate-900 to-slate-800">
+              <!-- Mock Executive Summary -->
               <div class="mb-3">
-                <h4 class="text-white text-sm font-bold mb-3">Q4 IT General Controls Audit</h4>
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="text-white text-sm font-bold">Q4 IT General Controls Audit</h4>
+                  <div class="flex gap-1">
+                    <span class="px-2 py-0.5 bg-blue-600 rounded text-[8px] text-white">Copy</span>
+                    <span class="px-2 py-0.5 bg-green-600 rounded text-[8px] text-white">Export</span>
+                  </div>
+                </div>
                 <div class="grid grid-cols-3 gap-2 mb-3">
                   <div class="bg-red-600/10 border border-red-500/20 rounded-lg p-2 text-center">
                     <p class="text-2xl font-bold text-red-400">4</p>
@@ -525,39 +665,19 @@
                   </div>
                 </div>
               </div>
-              <!-- Tags -->
-              <div class="flex flex-wrap gap-1 mb-3">
-                <span class="px-2 py-0.5 bg-slate-700 rounded text-[8px] text-slate-300">access-control</span>
-                <span class="px-2 py-0.5 bg-slate-700 rounded text-[8px] text-slate-300">firewall</span>
-                <span class="px-2 py-0.5 bg-slate-700 rounded text-[8px] text-slate-300">backup</span>
-                <span class="px-2 py-0.5 bg-slate-700 rounded text-[8px] text-slate-300">password-policy</span>
-                <span class="px-2 py-0.5 bg-slate-700 rounded text-[8px] text-slate-300">change-mgmt</span>
+              <!-- Executive summary text -->
+              <div class="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 mb-3 h-20 overflow-hidden">
+                <p class="text-[9px] text-slate-300 leading-relaxed">
+                  <strong class="text-white">Executive Summary</strong><br><br>
+                  This audit reviewed 23 evidence items across 8 IT systems. Four high-risk findings were identified in Active Directory and IAM configurations. Key concerns include service accounts with non-expiring passwords and overly permissive firewall rules...
+                </p>
               </div>
-              <!-- Stats -->
-              <div class="flex items-center justify-between bg-slate-800/80 rounded-lg px-3 py-2 border border-slate-700/50 mb-2">
-                <span class="text-[10px] text-slate-400">Total Evidence Items</span>
-                <span class="text-[10px] text-white font-bold">23</span>
-              </div>
-              <div class="flex items-center justify-between bg-slate-800/80 rounded-lg px-3 py-2 border border-slate-700/50 mb-3">
-                <span class="text-[10px] text-slate-400">Total AI Cost</span>
-                <span class="text-[10px] text-green-400 font-bold">$0.12</span>
-              </div>
-              <div class="w-full py-2 bg-green-600 rounded-lg text-[10px] text-white text-center font-medium">
-                Export to Word Document
+              <div class="flex gap-2">
+                <div class="flex-1 py-2 bg-brand-600 rounded-lg text-[10px] text-white text-center font-medium">Export to Word</div>
+                <div class="flex-1 py-2 bg-blue-800 rounded-lg text-[10px] text-blue-200 text-center font-medium">Push to SharePoint</div>
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <h3 class="text-2xl font-bold text-white mb-4">Summary Reports &amp; Word Export</h3>
-          <p class="text-slate-400 mb-6 leading-relaxed">
-            Get a bird's-eye view of your entire audit engagement. Risk distribution, tags, cost tracking, and one-click export to a professional Word document.
-          </p>
-          <ul class="space-y-3">
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Risk heatmap with High / Medium / Low breakdown</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Auto-generated figure numbers and evidence tags</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-slate-300 text-sm">Complete Word document with all evidence and findings</span></li>
-          </ul>
         </div>
       </div>
     </div>
@@ -726,23 +846,27 @@
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-slate-300 text-sm">Word document export with reports</span>
+                <span class="text-slate-300 text-sm">Automated PII redaction (SSN, credit cards, emails, API keys)</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-slate-300 text-sm">SHA-256 evidence integrity</span>
+                <span class="text-slate-300 text-sm">Intelligence dashboard with risk charts &amp; heatmaps</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-slate-300 text-sm">Project management &amp; batch import</span>
+                <span class="text-slate-300 text-sm">AI executive summary generation</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-slate-300 text-sm">Comparison view &amp; annotations</span>
+                <span class="text-slate-300 text-sm">SharePoint Online export integration</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-slate-300 text-sm">Custom prompt templates</span>
+                <span class="text-slate-300 text-sm">Word export, SHA-256 integrity, project management</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span class="text-slate-300 text-sm">Smart deduplication, batch import, annotations, templates</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -833,7 +957,27 @@
             <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-4 text-slate-400 text-sm leading-relaxed">
-            Yes! AuditLens can export complete audit evidence reports as Word documents (.docx). Reports include all screenshots, AI analysis, risk scores, figure numbers, and a summary dashboard. You can also copy individual evidence items directly to your clipboard for pasting into any document.
+            Yes! AuditLens can export complete audit evidence reports as Word documents (.docx). Reports include all screenshots, AI analysis, risk scores, figure numbers, and a summary dashboard. You can also export directly to SharePoint or copy individual evidence items to your clipboard.
+          </div>
+        </details>
+
+        <details class="glass rounded-xl overflow-hidden group">
+          <summary class="px-6 py-4 cursor-pointer text-white font-semibold flex items-center justify-between hover:bg-slate-800/50 transition-colors">
+            <span>How does the PII redaction work?</span>
+            <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-4 text-slate-400 text-sm leading-relaxed">
+            AuditLens automatically scans screenshot text for 8 types of PII including SSNs, credit card numbers (Luhn-validated), emails, phone numbers, IP addresses, and API keys. Detected items are highlighted for review, and you choose to redact with black overlay, blur, or pixelate. Every redaction is logged in a compliance audit trail. You can also draw manual redaction regions.
+          </div>
+        </details>
+
+        <details class="glass rounded-xl overflow-hidden group">
+          <summary class="px-6 py-4 cursor-pointer text-white font-semibold flex items-center justify-between hover:bg-slate-800/50 transition-colors">
+            <span>Does it integrate with SharePoint?</span>
+            <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-4 text-slate-400 text-sm leading-relaxed">
+            Yes. AuditLens connects to SharePoint Online via Microsoft Graph API using secure device code authentication. You can bulk-export evidence files or Word documents to any SharePoint site and document library, with automatic folder organization by system or date. Your Azure AD admin provides the client ID, and authentication is handled securely.
           </div>
         </details>
       </div>
@@ -844,7 +988,7 @@
   <section class="py-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to transform your <span class="gradient-text">audit workflow</span>?</h2>
-      <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">Stop spending hours documenting screenshots manually. Let AI do the heavy lifting while you focus on what matters - the audit.</p>
+      <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">Stop spending hours documenting screenshots manually. Capture, analyze, redact, and export with AI intelligence. Focus on what matters - the audit.</p>
       <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button inline-block bg-brand-600 hover:bg-brand-700 text-white px-10 py-4 rounded-xl text-lg font-bold transition-all hover:shadow-lg hover:shadow-brand-600/25">
         Get AuditLens Now
       </a>
@@ -862,7 +1006,7 @@
             <span class="text-lg font-bold text-white">AuditLens</span>
           </div>
           <p class="text-slate-400 text-sm leading-relaxed max-w-md">
-            AI-powered IT audit evidence capture and analysis tool. Built for auditors, by an auditor.
+            AI-powered IT audit evidence platform with automated PII redaction, intelligence dashboards, and SharePoint integration. Built for auditors, by an auditor.
           </p>
           <p class="text-slate-500 text-sm mt-3">
             Created by Akshat Ratanpal<br>
@@ -889,7 +1033,7 @@
         </div>
       </div>
       <div class="border-t border-slate-800 pt-8 text-center">
-        <p class="text-slate-500 text-sm">&copy; 2025 AuditLens. All rights reserved. Built in Mumbai, India.</p>
+        <p class="text-slate-500 text-sm">&copy; 2025-2026 AuditLens. All rights reserved. Built in Mumbai, India.</p>
       </div>
     </div>
   </footer>
