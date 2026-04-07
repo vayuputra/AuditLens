@@ -5,47 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Refund Policy - AuditLens</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            warm: { 50: '#f6f5f4', 100: '#efedeb', 200: '#e3e0dd', 300: '#a39e98', 500: '#615d59', 700: '#403d39', 900: '#31302e' },
+            accent: { DEFAULT: '#0075de', hover: '#005bab', light: '#f2f9ff', text: '#097fe8' },
+          }
+        }
+      }
+    }
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-300 antialiased">
+<body class="bg-warm-50 text-warm-500 antialiased">
 
   <!-- Navigation -->
-  <nav class="border-b border-slate-800 bg-slate-950/95 backdrop-blur sticky top-0 z-50">
+  <nav class="border-b border-white/10 sticky top-0 z-50" style="background: rgba(49,48,46,0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <a href="index.html" class="flex items-center space-x-3">
           <img src="icon.png" alt="AuditLens" class="w-8 h-8 rounded-lg">
           <span class="text-lg font-bold text-white">AuditLens</span>
         </a>
-        <a href="index.html" class="text-slate-400 hover:text-white text-sm transition-colors">&larr; Back to Home</a>
+        <a href="index.html" class="text-white/60 hover:text-white text-sm transition-colors">&larr; Back to Home</a>
       </div>
     </div>
   </nav>
 
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h1 class="text-3xl font-bold text-white mb-2">Refund Policy</h1>
-    <p class="text-slate-500 text-sm mb-12">Last updated: February 22, 2025</p>
+    <h1 class="text-3xl font-bold text-warm-900 mb-2">Refund Policy</h1>
+    <p class="text-warm-300 text-sm mb-12">Last updated: February 22, 2025</p>
 
-    <div class="prose prose-invert max-w-none space-y-8 text-slate-300 text-sm leading-relaxed">
+    <div class="prose max-w-none space-y-8 text-warm-500 text-sm leading-relaxed">
 
       <!-- Prominent No Refund Notice -->
-      <div class="bg-red-950/30 border border-red-500/20 rounded-xl p-6">
+      <div class="bg-red-50 border border-red-200 rounded-xl p-6">
         <div class="flex items-start space-x-3">
           <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
           <div>
-            <h3 class="text-red-300 font-bold text-lg mb-2">All Sales Are Final - No Refunds</h3>
-            <p class="text-red-200/80">Due to the digital nature of AuditLens, all purchases are final and non-refundable. Once the software has been purchased and the download link has been provided, no refunds will be issued under any circumstances. Please review all product information thoroughly before purchasing.</p>
+            <h3 class="text-red-600 font-bold text-lg mb-2">All Sales Are Final - No Refunds</h3>
+            <p class="text-red-600/80">Due to the digital nature of AuditLens, all purchases are final and non-refundable. Once the software has been purchased and the download link has been provided, no refunds will be issued under any circumstances. Please review all product information thoroughly before purchasing.</p>
           </div>
         </div>
       </div>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">1. No Refund Policy</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">1. No Refund Policy</h2>
         <p>AuditLens is a digital software product. Once a purchase is completed through Lemon Squeezy and access to the downloadable software (.exe installer) has been provided, the transaction is considered final.</p>
-        <p><strong class="text-white">We do not offer refunds, returns, exchanges, or credits for any reason, including but not limited to:</strong></p>
+        <p><strong class="text-warm-900">We do not offer refunds, returns, exchanges, or credits for any reason, including but not limited to:</strong></p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>Change of mind after purchase</li>
           <li>Failure to review product features before purchasing</li>
@@ -59,19 +71,19 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">2. Before You Purchase</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">2. Before You Purchase</h2>
         <p>We encourage you to review the following before making a purchase:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
-          <li><strong class="text-white">Features:</strong> Review the complete list of features on our <a href="index.html" class="text-blue-400 hover:text-blue-300">landing page</a></li>
-          <li><strong class="text-white">System Requirements:</strong> AuditLens requires Windows 10 or Windows 11 (64-bit)</li>
-          <li><strong class="text-white">AI API Key:</strong> The software requires a separate API key from OpenAI, Anthropic, or Google, which you must obtain yourself. API usage costs are separate from the AuditLens purchase price and are billed directly by the AI provider.</li>
-          <li><strong class="text-white">Screenshots &amp; Preview:</strong> Review the application previews on our website to understand the interface and workflow</li>
+          <li><strong class="text-warm-900">Features:</strong> Review the complete list of features on our <a href="index.html" class="text-accent-text hover:text-accent-hover">landing page</a></li>
+          <li><strong class="text-warm-900">System Requirements:</strong> AuditLens requires Windows 10 or Windows 11 (64-bit)</li>
+          <li><strong class="text-warm-900">AI API Key:</strong> The software requires a separate API key from OpenAI, Anthropic, or Google, which you must obtain yourself. API usage costs are separate from the AuditLens purchase price and are billed directly by the AI provider.</li>
+          <li><strong class="text-warm-900">Screenshots &amp; Preview:</strong> Review the application previews on our website to understand the interface and workflow</li>
         </ul>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">3. Technical Support</h2>
-        <p>If you experience technical issues with the Software, please contact us at <a href="mailto:akshat.ratanpal@gmail.com" class="text-blue-400 hover:text-blue-300">akshat.ratanpal@gmail.com</a> before considering your purchase unsatisfactory. We are committed to helping you resolve technical problems.</p>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">3. Technical Support</h2>
+        <p>If you experience technical issues with the Software, please contact us at <a href="mailto:akshat.ratanpal@gmail.com" class="text-accent-text hover:text-accent-hover">akshat.ratanpal@gmail.com</a> before considering your purchase unsatisfactory. We are committed to helping you resolve technical problems.</p>
         <p>Technical support includes assistance with:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>Installation issues</li>
@@ -84,59 +96,59 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">4. Chargebacks</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">4. Chargebacks</h2>
         <p>Filing a chargeback or payment dispute with your bank or credit card company instead of contacting us directly is a violation of these terms. If a chargeback is filed, your license will be immediately revoked. We reserve the right to pursue any legal remedies available to us.</p>
-        <p>If you have any issues, please contact us first at <a href="mailto:akshat.ratanpal@gmail.com" class="text-blue-400 hover:text-blue-300">akshat.ratanpal@gmail.com</a>.</p>
+        <p>If you have any issues, please contact us first at <a href="mailto:akshat.ratanpal@gmail.com" class="text-accent-text hover:text-accent-hover">akshat.ratanpal@gmail.com</a>.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">5. Exceptions</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">5. Exceptions</h2>
         <p>In rare and exceptional circumstances, we may, at our sole discretion, consider granting a partial or full refund. This is entirely at our discretion and is not guaranteed. Possible exceptions may include:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>You were charged multiple times for the same purchase due to a payment processing error</li>
           <li>The download link was not delivered and the issue cannot be resolved</li>
         </ul>
-        <p class="mt-2">Any exception request must be made within 48 hours of purchase by emailing <a href="mailto:akshat.ratanpal@gmail.com" class="text-blue-400 hover:text-blue-300">akshat.ratanpal@gmail.com</a>.</p>
+        <p class="mt-2">Any exception request must be made within 48 hours of purchase by emailing <a href="mailto:akshat.ratanpal@gmail.com" class="text-accent-text hover:text-accent-hover">akshat.ratanpal@gmail.com</a>.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">6. Governing Law</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">6. Governing Law</h2>
         <p>This Refund Policy is governed by the laws of India. Any disputes arising from this policy shall be subject to the exclusive jurisdiction of the courts located in Mumbai, Maharashtra, India.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">7. Changes to This Policy</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">7. Changes to This Policy</h2>
         <p>We reserve the right to modify this Refund Policy at any time. Changes will be posted on this page with an updated "Last updated" date.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">8. Contact Us</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">8. Contact Us</h2>
         <p>If you have any questions about this Refund Policy, please contact us:</p>
-        <div class="bg-slate-900 rounded-lg p-4 border border-slate-800 mt-3">
-          <p><strong class="text-white">Akshat Ratanpal</strong></p>
-          <p>Email: <a href="mailto:akshat.ratanpal@gmail.com" class="text-blue-400 hover:text-blue-300">akshat.ratanpal@gmail.com</a></p>
+        <div class="bg-white rounded-xl p-4 border border-[rgba(0,0,0,0.08)] mt-3" style="box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+          <p><strong class="text-warm-900">Akshat Ratanpal</strong></p>
+          <p>Email: <a href="mailto:akshat.ratanpal@gmail.com" class="text-accent-text hover:text-accent-hover">akshat.ratanpal@gmail.com</a></p>
           <p>Location: Mumbai, India</p>
         </div>
       </section>
 
       <!-- Final Reminder -->
-      <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 text-center">
-        <p class="text-white font-semibold mb-2">By purchasing AuditLens, you acknowledge that you have read, understood, and agree to this No Refund Policy.</p>
-        <p class="text-slate-400 text-sm">Please review all product features and system requirements before purchasing.</p>
+      <div class="bg-white border border-[rgba(0,0,0,0.08)] shadow-sm rounded-xl p-6 text-center">
+        <p class="text-warm-900 font-semibold mb-2">By purchasing AuditLens, you acknowledge that you have read, understood, and agree to this No Refund Policy.</p>
+        <p class="text-warm-300 text-sm">Please review all product features and system requirements before purchasing.</p>
       </div>
 
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-800 py-8 mt-16">
+  <footer class="border-t border-[rgba(0,0,0,0.08)] py-8 mt-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="flex justify-center space-x-6 mb-4 text-sm">
-        <a href="privacy.html" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-        <a href="terms.html" class="text-slate-400 hover:text-white transition-colors">Terms &amp; Conditions</a>
-        <a href="refund.html" class="text-slate-400 hover:text-white transition-colors">Refund Policy</a>
+        <a href="privacy.html" class="text-warm-300 hover:text-warm-900 transition-colors">Privacy Policy</a>
+        <a href="terms.html" class="text-warm-300 hover:text-warm-900 transition-colors">Terms &amp; Conditions</a>
+        <a href="refund.html" class="text-warm-300 hover:text-warm-900 transition-colors">Refund Policy</a>
       </div>
-      <p class="text-slate-500 text-sm">&copy; 2025 AuditLens. All rights reserved.</p>
+      <p class="text-warm-300 text-sm">&copy; 2025-2026 AuditLens. All rights reserved.</p>
     </div>
   </footer>
 

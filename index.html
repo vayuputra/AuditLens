@@ -12,19 +12,33 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              300: '#93c5fd',
-              400: '#60a5fa',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            }
-          }
+            warm: {
+              50: '#f6f5f4',
+              100: '#efedeb',
+              200: '#e3e0dd',
+              300: '#a39e98',
+              500: '#615d59',
+              700: '#403d39',
+              900: '#31302e',
+            },
+            accent: {
+              DEFAULT: '#0075de',
+              hover: '#005bab',
+              light: '#f2f9ff',
+              text: '#097fe8',
+            },
+          },
+          borderRadius: {
+            subtle: '4px',
+            card: '12px',
+            featured: '16px',
+            pill: '9999px',
+          },
+          letterSpacing: {
+            display: '-0.04em',
+            heading: '-0.03em',
+            section: '-0.02em',
+          },
         }
       }
     }
@@ -33,25 +47,26 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     body { font-family: 'Inter', sans-serif; }
     .gradient-text {
-      background: linear-gradient(135deg, #60a5fa, #a78bfa, #60a5fa);
+      background: linear-gradient(135deg, #0075de, #097fe8, #0075de);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     .glass {
       background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(209, 213, 219, 0.6);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
     }
     .screenshot-card {
-      background: linear-gradient(145deg, #ffffff, #f9fafb);
-      border: 1px solid rgba(209, 213, 219, 0.5);
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.02), 0 16px 32px rgba(0,0,0,0.01);
     }
     .screenshot-titlebar {
-      background: linear-gradient(to right, #e5e7eb, #d1d5db);
+      background: #31302e;
       padding: 8px 12px;
       display: flex;
       align-items: center;
@@ -63,7 +78,7 @@
       border-radius: 50%;
     }
     .glow {
-      box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.08), 0 0 60px rgba(59, 130, 246, 0.08);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.02), 0 0 60px rgba(0,117,222,0.06);
     }
     .feature-icon {
       width: 48px;
@@ -85,44 +100,49 @@
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #f3f4f6; }
-    ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+    ::-webkit-scrollbar-track { background: #efedeb; }
+    ::-webkit-scrollbar-thumb { background: #e3e0dd; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a39e98; }
+    .nav-dark {
+      background: rgba(49,48,46,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+    }
   </style>
 </head>
-<body class="bg-white text-gray-900 antialiased">
+<body class="bg-warm-50 text-warm-900 antialiased">
 
   <!-- Navigation -->
-  <nav class="fixed top-0 w-full z-50 glass">
+  <nav class="fixed top-0 w-full z-50 nav-dark border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center space-x-3">
           <img src="icon.png" alt="AuditLens" class="w-9 h-9 rounded-lg">
-          <span class="text-xl font-bold text-gray-900">AuditLens</span>
+          <span class="text-xl font-bold text-white">AuditLens</span>
         </div>
         <div class="hidden md:flex items-center space-x-8">
-          <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors text-sm">Features</a>
-          <a href="#screenshots" class="text-gray-600 hover:text-gray-900 transition-colors text-sm">Preview</a>
-          <a href="#how-it-works" class="text-gray-600 hover:text-gray-900 transition-colors text-sm">How It Works</a>
-          <a href="#pricing" class="text-gray-600 hover:text-gray-900 transition-colors text-sm">Pricing</a>
-          <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button bg-brand-600 hover:bg-brand-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors">
+          <a href="#features" class="text-white/60 hover:text-white transition-colors text-sm">Features</a>
+          <a href="#screenshots" class="text-white/60 hover:text-white transition-colors text-sm">Preview</a>
+          <a href="#how-it-works" class="text-white/60 hover:text-white transition-colors text-sm">How It Works</a>
+          <a href="#pricing" class="text-white/60 hover:text-white transition-colors text-sm">Pricing</a>
+          <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button bg-accent hover:bg-accent-hover text-white px-5 py-2 rounded-pill text-sm font-semibold transition-colors">
             Buy Now
           </a>
         </div>
         <!-- Mobile menu button -->
-        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-gray-600 hover:text-gray-900">
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-white/60 hover:text-white">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
     </div>
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden glass border-t border-gray-200">
+    <div id="mobile-menu" class="hidden md:hidden nav-dark border-t border-white/10">
       <div class="px-4 py-3 space-y-2">
-        <a href="#features" class="block text-gray-600 hover:text-gray-900 py-2 text-sm">Features</a>
-        <a href="#screenshots" class="block text-gray-600 hover:text-gray-900 py-2 text-sm">Preview</a>
-        <a href="#how-it-works" class="block text-gray-600 hover:text-gray-900 py-2 text-sm">How It Works</a>
-        <a href="#pricing" class="block text-gray-600 hover:text-gray-900 py-2 text-sm">Pricing</a>
-        <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button block bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold text-center">Buy Now</a>
+        <a href="#features" class="block text-white/60 hover:text-white py-2 text-sm">Features</a>
+        <a href="#screenshots" class="block text-white/60 hover:text-white py-2 text-sm">Preview</a>
+        <a href="#how-it-works" class="block text-white/60 hover:text-white py-2 text-sm">How It Works</a>
+        <a href="#pricing" class="block text-white/60 hover:text-white py-2 text-sm">Pricing</a>
+        <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button block bg-accent text-white px-4 py-2 rounded-pill text-sm font-semibold text-center">Buy Now</a>
       </div>
     </div>
   </nav>
@@ -130,32 +150,32 @@
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center pt-16 overflow-hidden">
     <!-- Background gradient orbs -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/[0.08] rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <!-- Left: Copy -->
         <div>
-          <div class="inline-flex items-center space-x-2 bg-brand-600/10 border border-brand-500/20 rounded-full px-4 py-1.5 mb-6">
+          <div class="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 rounded-pill px-4 py-1.5 mb-6">
             <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-            <span class="text-brand-600 text-sm font-medium">Windows Desktop App</span>
+            <span class="text-accent-text text-sm font-medium">Windows Desktop App</span>
           </div>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 tracking-display">
             AI-Powered <span class="gradient-text">IT Audit</span> Evidence Platform
           </h1>
-          <p class="text-lg text-gray-500 mb-8 leading-relaxed max-w-xl">
+          <p class="text-lg text-warm-500 mb-8 leading-relaxed max-w-xl">
             Capture screenshots, get instant AI analysis, auto-redact sensitive data, and export to SharePoint. AuditLens turns hours of manual documentation into seconds of automated evidence gathering with built-in intelligence.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
-            <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button bg-brand-600 hover:bg-brand-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:shadow-lg hover:shadow-brand-600/25 text-center">
+            <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-pill text-lg font-semibold transition-all hover:shadow-lg hover:shadow-accent/25 text-center">
               Download Now
             </a>
-            <a href="#screenshots" class="border border-gray-200 hover:border-gray-300 text-gray-600 hover:text-gray-900 px-8 py-4 rounded-xl text-lg font-medium transition-all text-center">
+            <a href="#screenshots" class="border border-[rgba(0,0,0,0.08)] hover:border-[rgba(0,0,0,0.12)] text-warm-500 hover:text-warm-900 px-8 py-4 rounded-card text-lg font-medium transition-all text-center">
               See It In Action
             </a>
           </div>
-          <div class="flex items-center space-x-6 text-sm text-gray-400">
+          <div class="flex items-center space-x-6 text-sm text-warm-300">
             <div class="flex items-center space-x-2">
               <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               <span>Windows 10/11</span>
@@ -178,77 +198,77 @@
               <div class="titlebar-dot bg-red-500"></div>
               <div class="titlebar-dot bg-yellow-500"></div>
               <div class="titlebar-dot bg-green-500"></div>
-              <span class="text-xs text-gray-500 ml-2 font-medium">AuditLens</span>
+              <span class="text-xs text-white/60 ml-2 font-medium">AuditLens</span>
             </div>
-            <div class="p-6 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+            <div class="p-6 bg-gradient-to-br from-warm-50 via-white to-warm-50">
               <!-- Mock Dashboard -->
-              <div class="bg-white/95 rounded-xl border border-gray-200 overflow-hidden">
+              <div class="bg-white/95 rounded-xl border border-[rgba(0,0,0,0.08)] overflow-hidden">
                 <!-- Nav bar -->
-                <div class="bg-gray-100 px-4 py-2 border-b border-gray-200 flex items-center justify-between">
+                <div class="bg-warm-900 px-4 py-2 border-b border-white/10 flex items-center justify-between">
                   <div class="flex items-center space-x-2">
-                    <span class="text-blue-600 font-bold text-[10px]">Audit Lens</span>
-                    <span class="px-2 py-0.5 bg-blue-600 rounded text-[7px] text-white">Dashboard</span>
-                    <span class="px-1.5 py-0.5 bg-gray-100 rounded text-[7px] text-gray-500">History</span>
-                    <span class="px-1.5 py-0.5 bg-gray-100 rounded text-[7px] text-gray-500">Projects</span>
-                    <span class="px-1.5 py-0.5 bg-gray-100 rounded text-[7px] text-gray-500">Summary</span>
+                    <span class="text-white font-bold text-[10px]">Audit Lens</span>
+                    <span class="px-2 py-0.5 bg-accent rounded text-[7px] text-white">Dashboard</span>
+                    <span class="px-1.5 py-0.5 bg-white/10 rounded text-[7px] text-white/60">History</span>
+                    <span class="px-1.5 py-0.5 bg-white/10 rounded text-[7px] text-white/60">Projects</span>
+                    <span class="px-1.5 py-0.5 bg-white/10 rounded text-[7px] text-white/60">Summary</span>
                   </div>
                   <div class="flex items-center space-x-1.5">
-                    <span class="text-[7px] text-purple-600 bg-purple-900/30 px-1.5 py-0.5 rounded">GPT-4o</span>
-                    <span class="text-[7px] text-green-600 bg-green-900/30 px-1.5 py-0.5 rounded">$0.03</span>
+                    <span class="text-[7px] text-purple-300 bg-purple-500/20 px-1.5 py-0.5 rounded">GPT-4o</span>
+                    <span class="text-[7px] text-green-300 bg-green-500/20 px-1.5 py-0.5 rounded">$0.03</span>
                   </div>
                 </div>
                 <div class="p-4">
                   <!-- Risk chart + stats row -->
                   <div class="flex gap-3 mb-3">
                     <!-- Donut chart mock -->
-                    <div class="flex-1 bg-gray-50 rounded-lg p-3 border border-gray-200/30">
-                      <p class="text-[8px] text-gray-500 mb-2">Risk Distribution</p>
+                    <div class="flex-1 bg-warm-50 rounded-lg p-3 border border-[rgba(0,0,0,0.08)]">
+                      <p class="text-[8px] text-warm-500 mb-2">Risk Distribution</p>
                       <div class="flex items-center justify-center gap-3">
                         <div class="w-16 h-16 rounded-full border-4 border-red-500 border-t-amber-400 border-r-green-400 flex items-center justify-center">
-                          <span class="text-gray-900 text-[10px] font-bold">23</span>
+                          <span class="text-warm-900 text-[10px] font-bold">23</span>
                         </div>
                         <div class="space-y-1">
-                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-red-500"></div><span class="text-[8px] text-gray-600">High: 4</span></div>
-                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-amber-400"></div><span class="text-[8px] text-gray-600">Med: 7</span></div>
-                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-400"></div><span class="text-[8px] text-gray-600">Low: 12</span></div>
+                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-red-500"></div><span class="text-[8px] text-warm-500">High: 4</span></div>
+                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-amber-400"></div><span class="text-[8px] text-warm-500">Med: 7</span></div>
+                          <div class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-400"></div><span class="text-[8px] text-warm-500">Low: 12</span></div>
                         </div>
                       </div>
                     </div>
                     <!-- Quick stats -->
                     <div class="flex-1 space-y-2">
-                      <div class="bg-gray-50 rounded-lg p-2 border border-gray-200/30">
-                        <p class="text-[7px] text-gray-400">Screenshots</p>
-                        <p class="text-gray-900 text-sm font-bold">23</p>
+                      <div class="bg-warm-50 rounded-lg p-2 border border-[rgba(0,0,0,0.08)]">
+                        <p class="text-[7px] text-warm-300">Screenshots</p>
+                        <p class="text-warm-900 text-sm font-bold">23</p>
                       </div>
-                      <div class="bg-gray-50 rounded-lg p-2 border border-gray-200/30">
-                        <p class="text-[7px] text-gray-400">Avg Risk</p>
+                      <div class="bg-warm-50 rounded-lg p-2 border border-[rgba(0,0,0,0.08)]">
+                        <p class="text-[7px] text-warm-300">Avg Risk</p>
                         <p class="text-amber-600 text-sm font-bold">52</p>
                       </div>
                     </div>
                   </div>
                   <!-- Action buttons -->
                   <div class="flex gap-2 mb-3">
-                    <div class="flex-1 py-2 bg-blue-600 rounded-lg text-[9px] text-white text-center font-medium">Capture</div>
-                    <div class="flex-1 py-2 bg-gray-100 rounded-lg text-[9px] text-gray-600 text-center">Import Batch</div>
-                    <div class="flex-1 py-2 bg-gray-100 rounded-lg text-[9px] text-gray-600 text-center">Report</div>
+                    <div class="flex-1 py-2 bg-accent rounded-lg text-[9px] text-white text-center font-medium">Capture</div>
+                    <div class="flex-1 py-2 bg-warm-100 rounded-lg text-[9px] text-warm-500 text-center">Import Batch</div>
+                    <div class="flex-1 py-2 bg-warm-100 rounded-lg text-[9px] text-warm-500 text-center">Report</div>
                   </div>
                   <!-- Recent screenshots -->
                   <div class="grid grid-cols-4 gap-1.5">
-                    <div class="bg-gray-50 rounded p-1.5 border border-gray-200/30">
-                      <div class="bg-gray-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-gray-400">AD Config</span></div>
-                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-red-50 text-red-600 rounded text-[6px]">High</span><span class="text-[6px] text-gray-400">Fig 3.1</span></div>
+                    <div class="bg-warm-50 rounded p-1.5 border border-[rgba(0,0,0,0.08)]">
+                      <div class="bg-warm-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-warm-300">AD Config</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-red-50 text-red-600 rounded text-[6px]">High</span><span class="text-[6px] text-warm-300">Fig 3.1</span></div>
                     </div>
-                    <div class="bg-gray-50 rounded p-1.5 border border-gray-200/30">
-                      <div class="bg-gray-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-gray-400">Firewall</span></div>
-                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-amber-50 text-amber-600 rounded text-[6px]">Med</span><span class="text-[6px] text-gray-400">Fig 3.2</span></div>
+                    <div class="bg-warm-50 rounded p-1.5 border border-[rgba(0,0,0,0.08)]">
+                      <div class="bg-warm-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-warm-300">Firewall</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-amber-50 text-amber-600 rounded text-[6px]">Med</span><span class="text-[6px] text-warm-300">Fig 3.2</span></div>
                     </div>
-                    <div class="bg-gray-50 rounded p-1.5 border border-gray-200/30">
-                      <div class="bg-gray-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-gray-400">Backup</span></div>
-                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-green-50 text-green-600 rounded text-[6px]">Low</span><span class="text-[6px] text-gray-400">Fig 3.3</span></div>
+                    <div class="bg-warm-50 rounded p-1.5 border border-[rgba(0,0,0,0.08)]">
+                      <div class="bg-warm-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-warm-300">Backup</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-green-50 text-green-600 rounded text-[6px]">Low</span><span class="text-[6px] text-warm-300">Fig 3.3</span></div>
                     </div>
-                    <div class="bg-gray-50 rounded p-1.5 border border-gray-200/30">
-                      <div class="bg-gray-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-gray-400">IAM</span></div>
-                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-red-50 text-red-600 rounded text-[6px]">High</span><span class="text-[6px] text-gray-400">Fig 3.4</span></div>
+                    <div class="bg-warm-50 rounded p-1.5 border border-[rgba(0,0,0,0.08)]">
+                      <div class="bg-warm-50 rounded h-8 mb-1 flex items-center justify-center"><span class="text-[7px] text-warm-300">IAM</span></div>
+                      <div class="flex items-center justify-between"><span class="px-1 py-0.5 bg-red-50 text-red-600 rounded text-[6px]">High</span><span class="text-[6px] text-warm-300">Fig 3.4</span></div>
                     </div>
                   </div>
                 </div>
@@ -261,18 +281,18 @@
   </section>
 
   <!-- Trusted By Bar -->
-  <section class="border-y border-gray-200 py-8">
+  <section class="border-y border-[rgba(0,0,0,0.08)] py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-center text-gray-400 text-sm mb-6">Built for professionals in</p>
-      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-gray-400 text-sm font-medium">
+      <p class="text-center text-warm-300 text-sm mb-6">Built for professionals in</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-warm-300 text-sm font-medium">
         <span>IT Audit</span>
-        <span class="text-gray-300">|</span>
+        <span class="text-warm-200">|</span>
         <span>Internal Audit</span>
-        <span class="text-gray-300">|</span>
+        <span class="text-warm-200">|</span>
         <span>SOX Compliance</span>
-        <span class="text-gray-300">|</span>
+        <span class="text-warm-200">|</span>
         <span>Risk Advisory</span>
-        <span class="text-gray-300">|</span>
+        <span class="text-warm-200">|</span>
         <span>Cybersecurity Audit</span>
       </div>
     </div>
@@ -282,128 +302,128 @@
   <section id="features" class="py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Everything you need for <span class="gradient-text">audit evidence</span></h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">From screenshot capture to intelligence dashboards, PII redaction, and SharePoint export. AuditLens handles the entire evidence documentation workflow.</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 tracking-heading">Everything you need for <span class="gradient-text">audit evidence</span></h2>
+        <p class="text-warm-500 text-lg max-w-2xl mx-auto">From screenshot capture to intelligence dashboards, PII redaction, and SharePoint export. AuditLens handles the entire evidence documentation workflow.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Feature 1 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group">
           <div class="feature-icon bg-blue-600/15 mb-4">
             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Global Hotkey Capture</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Press <kbd class="px-1.5 py-0.5 bg-gray-100 rounded text-xs font-mono text-gray-600">Ctrl+Shift+S</kbd> from anywhere. Select the area with a crosshair cursor. Done in seconds.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Global Hotkey Capture</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Press <kbd class="px-1.5 py-0.5 bg-warm-100 rounded-subtle text-xs font-mono text-warm-500">Ctrl+Shift+S</kbd> from anywhere. Select the area with a crosshair cursor. Done in seconds.</p>
         </div>
 
         <!-- Feature 2 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group">
           <div class="feature-icon bg-purple-600/15 mb-4">
             <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Multi-Model AI Analysis</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Choose from OpenAI GPT-4o, Anthropic Claude, or Google Gemini. Your API key, your data stays yours.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Multi-Model AI Analysis</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Choose from OpenAI GPT-4o, Anthropic Claude, or Google Gemini. Your API key, your data stays yours.</p>
         </div>
 
         <!-- Feature 3: NEW - Automated PII Redaction -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group border border-accent/10">
           <div class="feature-icon bg-red-600/15 mb-4">
             <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Automated PII Redaction</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Auto-detect SSNs, credit cards, emails, and more. Apply black, blur, or pixelate redaction with a compliance audit trail.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Automated PII Redaction</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Auto-detect SSNs, credit cards, emails, and more. Apply black, blur, or pixelate redaction with a compliance audit trail.</p>
         </div>
 
         <!-- Feature 4: NEW - Intelligence Dashboard -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group border border-accent/10">
           <div class="feature-icon bg-amber-600/15 mb-4">
             <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Intelligence Dashboard</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Live risk distribution charts, tag heatmaps, system coverage tables, and finding timelines. See your entire audit at a glance.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Intelligence Dashboard</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Live risk distribution charts, tag heatmaps, system coverage tables, and finding timelines. See your entire audit at a glance.</p>
         </div>
 
         <!-- Feature 5: NEW - SharePoint Integration -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group border border-accent/10">
           <div class="feature-icon bg-blue-600/15 mb-4">
             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">SharePoint Export</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Connect to SharePoint Online and bulk-export evidence with metadata. Auto-organize by system or date in your document library.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">SharePoint Export</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Connect to SharePoint Online and bulk-export evidence with metadata. Auto-organize by system or date in your document library.</p>
         </div>
 
         <!-- Feature 6: NEW - Executive Summary -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group border border-accent/10">
           <div class="feature-icon bg-indigo-600/15 mb-4">
             <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">AI Executive Summary</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Generate comprehensive executive summaries from all your findings with one click. AI writes the report, you review and export to Word.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">AI Executive Summary</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Generate comprehensive executive summaries from all your findings with one click. AI writes the report, you review and export to Word.</p>
         </div>
 
         <!-- Feature 7 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group">
           <div class="feature-icon bg-green-600/15 mb-4">
             <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">SHA-256 Evidence Integrity</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Every screenshot is hashed with SHA-256 for tamper-proof evidence verification. Audit-grade integrity built in.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">SHA-256 Evidence Integrity</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Every screenshot is hashed with SHA-256 for tamper-proof evidence verification. Audit-grade integrity built in.</p>
         </div>
 
         <!-- Feature 8 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group">
           <div class="feature-icon bg-rose-600/15 mb-4">
             <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Project Management</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Organize evidence by audit engagement. Track clients, tags, risk scores, and figure numbers across projects.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Project Management</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Organize evidence by audit engagement. Track clients, tags, risk scores, and figure numbers across projects.</p>
         </div>
 
         <!-- Feature 9 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group">
           <div class="feature-icon bg-cyan-600/15 mb-4">
             <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Batch Import &amp; Compare</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Drag &amp; drop multiple screenshots at once. Side-by-side comparison view with synced scrolling for evidence review.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Batch Import &amp; Compare</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Drag &amp; drop multiple screenshots at once. Side-by-side comparison view with synced scrolling for evidence review.</p>
         </div>
 
         <!-- Feature 10 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group">
           <div class="feature-icon bg-teal-600/15 mb-4">
             <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Annotations &amp; Templates</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Annotate screenshots directly. Use custom AI prompt templates tailored to your audit methodology and standards.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Annotations &amp; Templates</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Annotate screenshots directly. Use custom AI prompt templates tailored to your audit methodology and standards.</p>
         </div>
 
         <!-- Feature 11 -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group">
           <div class="feature-icon bg-emerald-600/15 mb-4">
             <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Cost Tracking</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Real-time tracking of AI API costs per analysis. Know exactly what each screenshot costs. Approx $0.01 per 5-10 screenshots.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Cost Tracking</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Real-time tracking of AI API costs per analysis. Know exactly what each screenshot costs. Approx $0.01 per 5-10 screenshots.</p>
         </div>
 
         <!-- Feature 12: NEW - Smart Deduplication -->
-        <div class="glass rounded-xl p-6 hover:border-brand-500/30 transition-all group border border-brand-500/10">
+        <div class="glass rounded-card p-6 hover:border-accent/30 transition-all group border border-accent/10">
           <div class="feature-icon bg-yellow-600/15 mb-4">
             <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
           </div>
-          <h3 class="text-gray-900 font-semibold text-lg mb-2">Smart Deduplication</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Automatically detects duplicate and related findings across your project. Warns you before creating redundant evidence.</p>
+          <h3 class="text-warm-900 font-semibold text-lg mb-2">Smart Deduplication</h3>
+          <p class="text-warm-500 text-sm leading-relaxed">Automatically detects duplicate and related findings across your project. Warns you before creating redundant evidence.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Screenshots / App Preview Section -->
-  <section id="screenshots" class="py-24 bg-gray-50">
+  <section id="screenshots" class="py-24 bg-warm-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">See AuditLens <span class="gradient-text">in action</span></h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">A clean, professional interface designed for focused audit work.</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 tracking-heading">See AuditLens <span class="gradient-text">in action</span></h2>
+        <p class="text-warm-500 text-lg max-w-2xl mx-auto">A clean, professional interface designed for focused audit work.</p>
       </div>
 
       <!-- Screenshot 1: Evidence Analysis View -->
@@ -413,18 +433,18 @@
             <div class="titlebar-dot bg-red-500"></div>
             <div class="titlebar-dot bg-yellow-500"></div>
             <div class="titlebar-dot bg-green-500"></div>
-            <span class="text-xs text-gray-500 ml-2 font-medium">AuditLens - Evidence Analysis</span>
+            <span class="text-xs text-white/60 ml-2 font-medium">AuditLens - Evidence Analysis</span>
           </div>
-          <div class="p-5 bg-gradient-to-br from-gray-50 to-white">
+          <div class="p-5 bg-gradient-to-br from-warm-50 to-white">
             <!-- Mock Evidence Modal -->
             <div class="flex gap-4">
               <!-- Left: Image -->
               <div class="flex-1">
-                <div class="bg-gray-50 rounded-lg p-2 border border-gray-200 mb-3">
-                  <div class="bg-gray-50 rounded h-32 flex items-center justify-center">
+                <div class="bg-warm-50 rounded-lg p-2 border border-[rgba(0,0,0,0.08)] mb-3">
+                  <div class="bg-warm-50 rounded h-32 flex items-center justify-center">
                     <div class="text-center">
-                      <svg class="w-8 h-8 text-gray-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                      <p class="text-gray-400 text-[9px]">Screenshot Preview</p>
+                      <svg class="w-8 h-8 text-warm-300 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                      <p class="text-warm-300 text-[9px]">Screenshot Preview</p>
                     </div>
                   </div>
                 </div>
@@ -432,7 +452,7 @@
                   <span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[8px]">access-control</span>
                   <span class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded text-[8px]">risk: high</span>
                 </div>
-                <div class="flex items-center gap-2 text-[8px] text-gray-400">
+                <div class="flex items-center gap-2 text-[8px] text-warm-300">
                   <span>Fig 3.1</span>
                   <span>|</span>
                   <span class="text-green-600">SHA-256 Verified</span>
@@ -441,13 +461,13 @@
               <!-- Right: Analysis -->
               <div class="flex-1">
                 <div class="flex items-center gap-2 mb-2">
-                  <span class="px-2 py-0.5 bg-blue-600 rounded text-[8px] text-white">Quick</span>
-                  <span class="px-2 py-0.5 bg-gray-100 rounded text-[8px] text-gray-600">Detailed</span>
-                  <span class="px-2 py-0.5 bg-gray-100 rounded text-[8px] text-gray-600">Custom</span>
+                  <span class="px-2 py-0.5 bg-accent rounded text-[8px] text-white">Quick</span>
+                  <span class="px-2 py-0.5 bg-warm-100 rounded text-[8px] text-warm-500">Detailed</span>
+                  <span class="px-2 py-0.5 bg-warm-100 rounded text-[8px] text-warm-500">Custom</span>
                 </div>
-                <div class="bg-white rounded-lg p-3 border border-gray-200 h-32 overflow-hidden">
-                  <p class="text-[9px] text-gray-600 leading-relaxed">
-                    <strong class="text-gray-900">Evidence Analysis:</strong><br>
+                <div class="bg-white rounded-lg p-3 border border-[rgba(0,0,0,0.08)] h-32 overflow-hidden">
+                  <p class="text-[9px] text-warm-500 leading-relaxed">
+                    <strong class="text-warm-900">Evidence Analysis:</strong><br>
                     The screenshot shows the Active Directory User Management console. Key observations:<br><br>
                     <strong class="text-amber-700">Finding:</strong> Multiple service accounts with "Password Never Expires" flag enabled...<br>
                     <strong class="text-blue-600">Risk Level:</strong> High<br>
@@ -455,24 +475,24 @@
                   </p>
                 </div>
                 <div class="flex gap-1.5 mt-2">
-                  <div class="flex-1 py-1.5 bg-brand-600 rounded text-[8px] text-white text-center font-medium">Copy</div>
+                  <div class="flex-1 py-1.5 bg-accent rounded text-[8px] text-white text-center font-medium">Copy</div>
                   <div class="py-1.5 px-2 bg-red-600/80 rounded text-[8px] text-white text-center">Redact</div>
-                  <div class="py-1.5 px-2 bg-gray-100 rounded text-[8px] text-gray-600 text-center">Word</div>
-                  <div class="py-1.5 px-2 bg-gray-100 rounded text-[8px] text-gray-600 text-center">Edit</div>
+                  <div class="py-1.5 px-2 bg-warm-100 rounded text-[8px] text-warm-500 text-center">Word</div>
+                  <div class="py-1.5 px-2 bg-warm-100 rounded text-[8px] text-warm-500 text-center">Edit</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Instant AI Evidence Analysis</h3>
-          <p class="text-gray-500 mb-6 leading-relaxed">
+          <h3 class="text-2xl font-bold text-warm-900 mb-4">Instant AI Evidence Analysis</h3>
+          <p class="text-warm-500 mb-6 leading-relaxed">
             Every screenshot is automatically analyzed by AI with progress tracking. Get structured findings, risk ratings, duplicate detection, and PII warnings. Redact sensitive data before exporting.
           </p>
           <ul class="space-y-3">
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Auto-detects system name, risk level, tags, and related findings</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Duplicate warning, PII detection, and one-click redaction</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Export to Word, SharePoint, or clipboard as formatted HTML</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Auto-detects system name, risk level, tags, and related findings</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Duplicate warning, PII detection, and one-click redaction</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Export to Word, SharePoint, or clipboard as formatted HTML</span></li>
           </ul>
         </div>
       </div>
@@ -480,14 +500,14 @@
       <!-- Screenshot 2: Project & Batch View -->
       <div class="grid lg:grid-cols-2 gap-12 items-center mb-24">
         <div class="order-2 lg:order-1">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Project Management &amp; Batch Import</h3>
-          <p class="text-gray-500 mb-6 leading-relaxed">
+          <h3 class="text-2xl font-bold text-warm-900 mb-4">Project Management &amp; Batch Import</h3>
+          <p class="text-warm-500 mb-6 leading-relaxed">
             Organize evidence by audit engagement. Batch import dozens of screenshots at once and let AI analyze them all automatically.
           </p>
           <ul class="space-y-3">
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Create projects with client info and audit period</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Drag-and-drop batch import with progress tracking</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Side-by-side comparison with synced scrolling</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Create projects with client info and audit period</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Drag-and-drop batch import with progress tracking</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Side-by-side comparison with synced scrolling</span></li>
           </ul>
         </div>
         <div class="order-1 lg:order-2 float-animation-delay">
@@ -496,44 +516,44 @@
               <div class="titlebar-dot bg-red-500"></div>
               <div class="titlebar-dot bg-yellow-500"></div>
               <div class="titlebar-dot bg-green-500"></div>
-              <span class="text-xs text-gray-500 ml-2 font-medium">AuditLens - Batch Import</span>
+              <span class="text-xs text-white/60 ml-2 font-medium">AuditLens - Batch Import</span>
             </div>
-            <div class="p-5 bg-gradient-to-br from-gray-50 to-white">
+            <div class="p-5 bg-gradient-to-br from-warm-50 to-white">
               <!-- Mock Batch Import -->
               <div class="mb-3">
-                <div class="border-2 border-dashed border-gray-200 rounded-lg p-6 text-center bg-white/80">
-                  <svg class="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                  <p class="text-gray-500 text-xs">Drop screenshots here or click to browse</p>
+                <div class="border-2 border-dashed border-[rgba(0,0,0,0.08)] rounded-lg p-6 text-center bg-white/80">
+                  <svg class="w-8 h-8 text-warm-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                  <p class="text-warm-500 text-xs">Drop screenshots here or click to browse</p>
                 </div>
               </div>
               <!-- File list -->
               <div class="space-y-1.5 mb-3">
-                <div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-gray-200">
+                <div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-[rgba(0,0,0,0.08)]">
                   <div class="flex items-center gap-2">
-                    <div class="w-8 h-6 bg-gray-100 rounded"></div>
-                    <span class="text-[10px] text-gray-900">AD_UserList_Q4.png</span>
+                    <div class="w-8 h-6 bg-warm-100 rounded"></div>
+                    <span class="text-[10px] text-warm-900">AD_UserList_Q4.png</span>
                   </div>
                   <span class="text-[9px] text-green-600">Analyzed</span>
                 </div>
-                <div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-gray-200">
+                <div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-[rgba(0,0,0,0.08)]">
                   <div class="flex items-center gap-2">
-                    <div class="w-8 h-6 bg-gray-100 rounded"></div>
-                    <span class="text-[10px] text-gray-900">Firewall_Rules_Jan.png</span>
+                    <div class="w-8 h-6 bg-warm-100 rounded"></div>
+                    <span class="text-[10px] text-warm-900">Firewall_Rules_Jan.png</span>
                   </div>
                   <span class="text-[9px] text-green-600">Analyzed</span>
                 </div>
-                <div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-gray-200">
+                <div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-[rgba(0,0,0,0.08)]">
                   <div class="flex items-center gap-2">
-                    <div class="w-8 h-6 bg-gray-100 rounded"></div>
-                    <span class="text-[10px] text-gray-900">Backup_Config.png</span>
+                    <div class="w-8 h-6 bg-warm-100 rounded"></div>
+                    <span class="text-[10px] text-warm-900">Backup_Config.png</span>
                   </div>
                   <div class="flex items-center gap-1">
-                    <div class="w-12 h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="w-3/4 h-full bg-blue-500 rounded-full"></div></div>
-                    <span class="text-[9px] text-blue-600">75%</span>
+                    <div class="w-12 h-1.5 bg-warm-100 rounded-full overflow-hidden"><div class="w-3/4 h-full bg-accent rounded-full"></div></div>
+                    <span class="text-[9px] text-accent-text">75%</span>
                   </div>
                 </div>
               </div>
-              <div class="w-full py-2 bg-brand-600 rounded-lg text-[10px] text-white text-center font-medium">
+              <div class="w-full py-2 bg-accent rounded-lg text-[10px] text-white text-center font-medium">
                 Analyze All (3 files)
               </div>
             </div>
@@ -549,20 +569,20 @@
               <div class="titlebar-dot bg-red-500"></div>
               <div class="titlebar-dot bg-yellow-500"></div>
               <div class="titlebar-dot bg-green-500"></div>
-              <span class="text-xs text-gray-500 ml-2 font-medium">AuditLens - PII Redaction</span>
+              <span class="text-xs text-white/60 ml-2 font-medium">AuditLens - PII Redaction</span>
             </div>
-            <div class="p-5 bg-gradient-to-br from-gray-50 to-white">
+            <div class="p-5 bg-gradient-to-br from-warm-50 to-white">
               <!-- Mock Redaction Panel -->
               <div class="flex gap-4">
                 <div class="flex-1">
-                  <div class="bg-gray-50 rounded-lg p-2 border border-gray-200 mb-3">
-                    <div class="bg-gray-50 rounded h-32 relative flex items-center justify-center">
+                  <div class="bg-warm-50 rounded-lg p-2 border border-[rgba(0,0,0,0.08)] mb-3">
+                    <div class="bg-warm-50 rounded h-32 relative flex items-center justify-center">
                       <div class="text-center space-y-2 w-full px-4">
-                        <p class="text-[8px] text-gray-400">User: John Smith</p>
+                        <p class="text-[8px] text-warm-300">User: John Smith</p>
                         <div class="bg-black rounded h-3 w-24 mx-auto"></div>
-                        <p class="text-[8px] text-gray-400">Email: john@corp.com</p>
+                        <p class="text-[8px] text-warm-300">Email: john@corp.com</p>
                         <div class="bg-black rounded h-3 w-28 mx-auto"></div>
-                        <p class="text-[8px] text-gray-400">SSN: ***-**-****</p>
+                        <p class="text-[8px] text-warm-300">SSN: ***-**-****</p>
                         <div class="bg-red-500/20 border border-red-500/40 rounded h-3 w-20 mx-auto"></div>
                       </div>
                       <div class="absolute top-1 right-1 px-1.5 py-0.5 bg-red-600/80 rounded text-[7px] text-white">3 PII Found</div>
@@ -570,7 +590,7 @@
                   </div>
                 </div>
                 <div class="flex-1 space-y-2">
-                  <p class="text-[9px] text-gray-500 font-semibold mb-1">Detected PII</p>
+                  <p class="text-[9px] text-warm-500 font-semibold mb-1">Detected PII</p>
                   <div class="bg-red-900/20 border border-red-700/30 rounded-lg px-3 py-2 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                       <input type="checkbox" checked class="rounded w-3 h-3">
@@ -593,7 +613,7 @@
                     <span class="px-1.5 py-0.5 bg-yellow-600/30 text-yellow-300 rounded text-[7px]">Moderate</span>
                   </div>
                   <div class="flex gap-2 mt-3">
-                    <select class="flex-1 bg-gray-100 border border-gray-200 rounded text-[9px] text-gray-600 px-2 py-1.5">
+                    <select class="flex-1 bg-warm-100 border border-[rgba(0,0,0,0.08)] rounded text-[9px] text-warm-500 px-2 py-1.5">
                       <option>Black</option><option>Blur</option><option>Pixelate</option>
                     </select>
                     <div class="flex-1 py-1.5 bg-red-600 rounded text-[9px] text-white text-center font-medium">Apply Redaction</div>
@@ -607,14 +627,14 @@
           <div class="inline-flex items-center space-x-2 bg-red-600/10 border border-red-500/20 rounded-full px-4 py-1.5 mb-4">
             <span class="text-red-600 text-sm font-medium">New Feature</span>
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Automated PII Redaction</h3>
-          <p class="text-gray-500 mb-6 leading-relaxed">
+          <h3 class="text-2xl font-bold text-warm-900 mb-4">Automated PII Redaction</h3>
+          <p class="text-warm-500 mb-6 leading-relaxed">
             Automatically detect sensitive data in your screenshots before sharing. SSNs, credit card numbers, emails, API keys, and more are flagged instantly with Luhn-validated accuracy.
           </p>
           <ul class="space-y-3">
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">8 PII types: SSN, credit card, email, phone, IP, API keys</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Three redaction styles: black overlay, blur, or pixelate</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Compliance audit trail for every redaction applied</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">8 PII types: SSN, credit card, email, phone, IP, API keys</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Three redaction styles: black overlay, blur, or pixelate</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Compliance audit trail for every redaction applied</span></li>
           </ul>
         </div>
       </div>
@@ -622,14 +642,14 @@
       <!-- Screenshot 4: Summary Report & Executive Summary -->
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="order-2 lg:order-1">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Executive Summary &amp; Reports</h3>
-          <p class="text-gray-500 mb-6 leading-relaxed">
+          <h3 class="text-2xl font-bold text-warm-900 mb-4">Executive Summary &amp; Reports</h3>
+          <p class="text-warm-500 mb-6 leading-relaxed">
             Generate AI-powered executive summaries from all your findings. Get risk distributions, system coverage analysis, and structured recommendations exported as Word documents or pushed to SharePoint.
           </p>
           <ul class="space-y-3">
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">One-click AI executive summary generation</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Interactive risk charts, tag heatmaps, and timeline views</span></li>
-            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-gray-600 text-sm">Export to Word or SharePoint document library</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">One-click AI executive summary generation</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Interactive risk charts, tag heatmaps, and timeline views</span></li>
+            <li class="flex items-start space-x-3"><svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-warm-500 text-sm">Export to Word or SharePoint document library</span></li>
           </ul>
         </div>
         <div class="order-1 lg:order-2 float-animation-delay">
@@ -638,15 +658,15 @@
               <div class="titlebar-dot bg-red-500"></div>
               <div class="titlebar-dot bg-yellow-500"></div>
               <div class="titlebar-dot bg-green-500"></div>
-              <span class="text-xs text-gray-500 ml-2 font-medium">AuditLens - Executive Summary</span>
+              <span class="text-xs text-white/60 ml-2 font-medium">AuditLens - Executive Summary</span>
             </div>
-            <div class="p-5 bg-gradient-to-br from-gray-50 to-white">
+            <div class="p-5 bg-gradient-to-br from-warm-50 to-white">
               <!-- Mock Executive Summary -->
               <div class="mb-3">
                 <div class="flex items-center justify-between mb-3">
-                  <h4 class="text-gray-900 text-sm font-bold">Q4 IT General Controls Audit</h4>
+                  <h4 class="text-warm-900 text-sm font-bold">Q4 IT General Controls Audit</h4>
                   <div class="flex gap-1">
-                    <span class="px-2 py-0.5 bg-blue-600 rounded text-[8px] text-white">Copy</span>
+                    <span class="px-2 py-0.5 bg-accent rounded text-[8px] text-white">Copy</span>
                     <span class="px-2 py-0.5 bg-green-600 rounded text-[8px] text-white">Export</span>
                   </div>
                 </div>
@@ -666,14 +686,14 @@
                 </div>
               </div>
               <!-- Executive summary text -->
-              <div class="bg-white rounded-lg p-3 border border-gray-200 mb-3 h-20 overflow-hidden">
-                <p class="text-[9px] text-gray-600 leading-relaxed">
-                  <strong class="text-gray-900">Executive Summary</strong><br><br>
+              <div class="bg-white rounded-lg p-3 border border-[rgba(0,0,0,0.08)] mb-3 h-20 overflow-hidden">
+                <p class="text-[9px] text-warm-500 leading-relaxed">
+                  <strong class="text-warm-900">Executive Summary</strong><br><br>
                   This audit reviewed 23 evidence items across 8 IT systems. Four high-risk findings were identified in Active Directory and IAM configurations. Key concerns include service accounts with non-expiring passwords and overly permissive firewall rules...
                 </p>
               </div>
               <div class="flex gap-2">
-                <div class="flex-1 py-2 bg-brand-600 rounded-lg text-[10px] text-white text-center font-medium">Export to Word</div>
+                <div class="flex-1 py-2 bg-accent rounded-lg text-[10px] text-white text-center font-medium">Export to Word</div>
                 <div class="flex-1 py-2 bg-blue-800 rounded-lg text-[10px] text-blue-200 text-center font-medium">Push to SharePoint</div>
               </div>
             </div>
@@ -687,54 +707,54 @@
   <section id="how-it-works" class="py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">How it <span class="gradient-text">works</span></h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">From purchase to your first workpaper in under 5 minutes.</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 tracking-heading">How it <span class="gradient-text">works</span></h2>
+        <p class="text-warm-500 text-lg max-w-2xl mx-auto">From purchase to your first workpaper in under 5 minutes.</p>
       </div>
 
       <div class="grid md:grid-cols-4 gap-8">
         <div class="text-center">
-          <div class="w-14 h-14 bg-brand-600/15 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-brand-500/20">
-            <span class="text-brand-600 font-bold text-xl">1</span>
+          <div class="w-14 h-14 bg-accent/[0.15] rounded-2xl flex items-center justify-center mx-auto mb-4 border border-accent/20">
+            <span class="text-accent-text font-bold text-xl">1</span>
           </div>
-          <h3 class="text-gray-900 font-semibold mb-2">Purchase &amp; Download</h3>
-          <p class="text-gray-500 text-sm">Buy AuditLens and instantly download the Windows installer (.exe).</p>
+          <h3 class="text-warm-900 font-semibold mb-2">Purchase &amp; Download</h3>
+          <p class="text-warm-500 text-sm">Buy AuditLens and instantly download the Windows installer (.exe).</p>
         </div>
         <div class="text-center">
-          <div class="w-14 h-14 bg-brand-600/15 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-brand-500/20">
-            <span class="text-brand-600 font-bold text-xl">2</span>
+          <div class="w-14 h-14 bg-accent/[0.15] rounded-2xl flex items-center justify-center mx-auto mb-4 border border-accent/20">
+            <span class="text-accent-text font-bold text-xl">2</span>
           </div>
-          <h3 class="text-gray-900 font-semibold mb-2">Add Your API Key</h3>
-          <p class="text-gray-500 text-sm">Enter your OpenAI, Anthropic, or Google AI API key in Settings. Your key, your data.</p>
+          <h3 class="text-warm-900 font-semibold mb-2">Add Your API Key</h3>
+          <p class="text-warm-500 text-sm">Enter your OpenAI, Anthropic, or Google AI API key in Settings. Your key, your data.</p>
         </div>
         <div class="text-center">
-          <div class="w-14 h-14 bg-brand-600/15 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-brand-500/20">
-            <span class="text-brand-600 font-bold text-xl">3</span>
+          <div class="w-14 h-14 bg-accent/[0.15] rounded-2xl flex items-center justify-center mx-auto mb-4 border border-accent/20">
+            <span class="text-accent-text font-bold text-xl">3</span>
           </div>
-          <h3 class="text-gray-900 font-semibold mb-2">Capture Evidence</h3>
-          <p class="text-gray-500 text-sm">Press <kbd class="px-1 py-0.5 bg-gray-100 rounded text-xs font-mono text-gray-600">Ctrl+Shift+S</kbd> and select any area on screen.</p>
+          <h3 class="text-warm-900 font-semibold mb-2">Capture Evidence</h3>
+          <p class="text-warm-500 text-sm">Press <kbd class="px-1 py-0.5 bg-warm-100 rounded-subtle text-xs font-mono text-warm-500">Ctrl+Shift+S</kbd> and select any area on screen.</p>
         </div>
         <div class="text-center">
-          <div class="w-14 h-14 bg-brand-600/15 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-brand-500/20">
-            <span class="text-brand-600 font-bold text-xl">4</span>
+          <div class="w-14 h-14 bg-accent/[0.15] rounded-2xl flex items-center justify-center mx-auto mb-4 border border-accent/20">
+            <span class="text-accent-text font-bold text-xl">4</span>
           </div>
-          <h3 class="text-gray-900 font-semibold mb-2">Get AI Analysis</h3>
-          <p class="text-gray-500 text-sm">AI analyzes your screenshot instantly. Copy findings or export to Word.</p>
+          <h3 class="text-warm-900 font-semibold mb-2">Get AI Analysis</h3>
+          <p class="text-warm-500 text-sm">AI analyzes your screenshot instantly. Copy findings or export to Word.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- BYOK Privacy Section -->
-  <section class="py-24 bg-gray-50">
+  <section class="py-24 bg-warm-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-flex items-center space-x-2 bg-green-600/10 border border-green-500/20 rounded-full px-4 py-1.5 mb-6">
+          <div class="inline-flex items-center space-x-2 bg-green-600/10 border border-green-500/20 rounded-pill px-4 py-1.5 mb-6">
             <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             <span class="text-green-700 text-sm font-medium">Auditor Independence Architecture</span>
           </div>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-6">Your data <span class="gradient-text">never touches our servers</span></h2>
-          <p class="text-gray-500 mb-6 leading-relaxed">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-6 tracking-heading">Your data <span class="gradient-text">never touches our servers</span></h2>
+          <p class="text-warm-500 mb-6 leading-relaxed">
             AuditLens uses a "Bring Your Own Key" model. Your screenshots go directly from your machine to the AI provider. No middleman. No cloud storage. Total control.
           </p>
           <div class="space-y-4">
@@ -743,8 +763,8 @@
                 <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               </div>
               <div>
-                <h4 class="text-gray-900 font-semibold text-sm">Zero Data Retention</h4>
-                <p class="text-gray-500 text-sm">Screenshots are not stored on any external server.</p>
+                <h4 class="text-warm-900 font-semibold text-sm">Zero Data Retention</h4>
+                <p class="text-warm-500 text-sm">Screenshots are not stored on any external server.</p>
               </div>
             </div>
             <div class="flex items-start space-x-3">
@@ -752,8 +772,8 @@
                 <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               </div>
               <div>
-                <h4 class="text-gray-900 font-semibold text-sm">Enterprise API Security</h4>
-                <p class="text-gray-500 text-sm">Uses enterprise-grade API standards, distinct from consumer data policies.</p>
+                <h4 class="text-warm-900 font-semibold text-sm">Enterprise API Security</h4>
+                <p class="text-warm-500 text-sm">Uses enterprise-grade API standards, distinct from consumer data policies.</p>
               </div>
             </div>
             <div class="flex items-start space-x-3">
@@ -761,49 +781,49 @@
                 <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               </div>
               <div>
-                <h4 class="text-gray-900 font-semibold text-sm">Cost Transparency</h4>
-                <p class="text-gray-500 text-sm">You pay AI providers directly. Approx $0.01 per 5-10 screenshots.</p>
+                <h4 class="text-warm-900 font-semibold text-sm">Cost Transparency</h4>
+                <p class="text-warm-500 text-sm">You pay AI providers directly. Approx $0.01 per 5-10 screenshots.</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="glass rounded-2xl p-8">
+        <div class="glass rounded-featured p-8">
           <div class="space-y-6">
             <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center border border-gray-200">
+              <div class="w-12 h-12 bg-warm-100 rounded-xl flex items-center justify-center border border-[rgba(0,0,0,0.08)]">
                 <span class="text-2xl">ðŸ–¥ï¸</span>
               </div>
               <div class="flex-1">
-                <div class="h-2 bg-brand-500 rounded-full mb-1"></div>
-                <p class="text-gray-500 text-xs">Your Computer</p>
+                <div class="h-2 bg-accent rounded-full mb-1"></div>
+                <p class="text-warm-500 text-xs">Your Computer</p>
               </div>
             </div>
             <div class="flex justify-center">
-              <svg class="w-6 h-6 text-brand-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+              <svg class="w-6 h-6 text-accent-text animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
             </div>
             <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center border border-green-500/30">
+              <div class="w-12 h-12 bg-warm-100 rounded-xl flex items-center justify-center border border-green-500/30">
                 <span class="text-2xl">ðŸ”’</span>
               </div>
               <div class="flex-1">
                 <div class="h-2 bg-green-500 rounded-full mb-1"></div>
-                <p class="text-gray-500 text-xs">Direct encrypted connection (your API key)</p>
+                <p class="text-warm-500 text-xs">Direct encrypted connection (your API key)</p>
               </div>
             </div>
             <div class="flex justify-center">
               <svg class="w-6 h-6 text-green-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
             </div>
             <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center border border-gray-200">
+              <div class="w-12 h-12 bg-warm-100 rounded-xl flex items-center justify-center border border-[rgba(0,0,0,0.08)]">
                 <span class="text-2xl">ðŸ¤–</span>
               </div>
               <div class="flex-1">
                 <div class="h-2 bg-purple-500 rounded-full mb-1"></div>
-                <p class="text-gray-500 text-xs">OpenAI / Anthropic / Google AI (Enterprise API)</p>
+                <p class="text-warm-500 text-xs">OpenAI / Anthropic / Google AI (Enterprise API)</p>
               </div>
             </div>
-            <div class="bg-white/80 rounded-lg p-3 border border-gray-200 mt-4">
-              <p class="text-center text-gray-400 text-xs">No AuditLens server in the middle. Ever.</p>
+            <div class="bg-white/80 rounded-lg p-3 border border-[rgba(0,0,0,0.08)] mt-4">
+              <p class="text-center text-warm-300 text-xs">No AuditLens server in the middle. Ever.</p>
             </div>
           </div>
         </div>
@@ -816,77 +836,77 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">Simple, <span class="gradient-text">one-time pricing</span></h2>
-        <p class="text-gray-500 text-lg max-w-2xl mx-auto">Buy once, own forever. No subscriptions required.</p>
+        <p class="text-warm-500 text-lg max-w-2xl mx-auto">Buy once, own forever. No subscriptions required.</p>
       </div>
 
       <div class="max-w-lg mx-auto">
         <div class="glass rounded-2xl overflow-hidden glow">
-          <div class="bg-gradient-to-r from-brand-600 to-brand-700 p-6 text-center">
+          <div class="bg-gradient-to-r from-accent to-accent-hover p-6 text-center">
             <h3 class="text-xl font-bold text-white mb-1">AuditLens</h3>
-            <p class="text-brand-100 text-sm">One-Time Purchase</p>
+            <p class="text-blue-100 text-sm">One-Time Purchase</p>
           </div>
           <div class="p-8">
             <div class="text-center mb-8">
               <div class="flex items-baseline justify-center gap-1">
-                <span class="text-5xl font-extrabold text-gray-900">$129</span>
-                <span class="text-gray-500 text-lg">/one-time</span>
+                <span class="text-5xl font-extrabold text-warm-900">$129</span>
+                <span class="text-warm-500 text-lg">/one-time</span>
               </div>
-              <p class="text-gray-500 text-sm mt-2">Core app + 12 months of framework updates included</p>
-              <p class="text-gray-400 text-sm mt-1">+ you pay AI providers directly (~$0.01/5-10 screenshots)</p>
+              <p class="text-warm-500 text-sm mt-2">Core app + 12 months of framework updates included</p>
+              <p class="text-warm-300 text-sm mt-1">+ you pay AI providers directly (~$0.01/5-10 screenshots)</p>
             </div>
 
             <ul class="space-y-3 mb-8">
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">Global hotkey screenshot capture</span>
+                <span class="text-warm-500 text-sm">Global hotkey screenshot capture</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">AI analysis (GPT-4o, Claude, Gemini)</span>
+                <span class="text-warm-500 text-sm">AI analysis (GPT-4o, Claude, Gemini)</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">Automated PII redaction (SSN, credit cards, emails, API keys)</span>
+                <span class="text-warm-500 text-sm">Automated PII redaction (SSN, credit cards, emails, API keys)</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">Intelligence dashboard with risk charts &amp; heatmaps</span>
+                <span class="text-warm-500 text-sm">Intelligence dashboard with risk charts &amp; heatmaps</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">AI executive summary generation</span>
+                <span class="text-warm-500 text-sm">AI executive summary generation</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">SharePoint Online export integration</span>
+                <span class="text-warm-500 text-sm">SharePoint Online export integration</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">Word export, SHA-256 integrity, project management</span>
+                <span class="text-warm-500 text-sm">Word export, SHA-256 integrity, project management</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">Smart deduplication, batch import, annotations, templates</span>
+                <span class="text-warm-500 text-sm">Smart deduplication, batch import, annotations, templates</span>
               </li>
               <li class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-600 text-sm">12 months of framework updates included</span>
+                <span class="text-warm-500 text-sm">12 months of framework updates included</span>
               </li>
             </ul>
 
             <!-- Renewal Option -->
-            <div class="glass rounded-xl p-4 mb-8 border border-gray-200">
+            <div class="glass rounded-xl p-4 mb-8 border border-[rgba(0,0,0,0.08)]">
               <div class="flex items-baseline justify-between mb-1">
-                <span class="text-gray-900 font-semibold text-sm">Continued Updates</span>
-                <span class="text-brand-600 font-bold text-sm">$59/year</span>
+                <span class="text-warm-900 font-semibold text-sm">Continued Updates</span>
+                <span class="text-accent-text font-bold text-sm">$59/year</span>
               </div>
-              <p class="text-gray-500 text-xs leading-relaxed">Optional renewal for continued framework updates after your first 12 months. Your app still works without it.</p>
+              <p class="text-warm-500 text-xs leading-relaxed">Optional renewal for continued framework updates after your first 12 months. Your app still works without it.</p>
             </div>
 
-            <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button block w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-center text-lg transition-all hover:shadow-lg hover:shadow-brand-600/25">
+            <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button block w-full py-4 bg-accent hover:bg-accent-hover text-white font-bold rounded-pill text-center text-lg transition-all hover:shadow-lg hover:shadow-accent/25">
               Buy Now - Download Instantly
             </a>
-            <p class="text-center text-gray-400 text-xs mt-4">Secure payment via Lemon Squeezy. Instant .exe download after purchase.</p>
+            <p class="text-center text-warm-300 text-xs mt-4">Secure payment via Lemon Squeezy. Instant .exe download after purchase.</p>
           </div>
         </div>
       </div>
@@ -894,7 +914,7 @@
   </section>
 
   <!-- FAQ Section -->
-  <section class="py-24 bg-gray-50">
+  <section class="py-24 bg-warm-100">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl sm:text-4xl font-bold mb-4">Frequently asked <span class="gradient-text">questions</span></h2>
@@ -902,81 +922,81 @@
 
       <div class="space-y-4">
         <details class="glass rounded-xl overflow-hidden group" open>
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>Do I need an AI API key?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
             Yes. AuditLens uses a "Bring Your Own Key" model for maximum privacy and cost control. You'll need an API key from OpenAI, Anthropic (Claude), or Google (Gemini). The app guides you through setup, and a $5 credit typically covers hundreds of screenshots.
           </div>
         </details>
 
         <details class="glass rounded-xl overflow-hidden group">
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>Is my audit data secure?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
             Absolutely. Your screenshots go directly from your machine to the AI provider's enterprise API. There is no AuditLens server in between. All data stays local on your computer, and you have full control over your API key and can revoke it at any time.
           </div>
         </details>
 
         <details class="glass rounded-xl overflow-hidden group">
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>What operating systems are supported?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
             AuditLens is currently available for Windows 10 and Windows 11 (64-bit). Mac and Linux versions may be available in the future.
           </div>
         </details>
 
         <details class="glass rounded-xl overflow-hidden group">
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>How much does AI analysis cost?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
             Very little. The AI analysis costs approximately $0.01 per 5-10 screenshots. A $5 prepaid balance with your AI provider will last hundreds of analyses. AuditLens includes built-in cost tracking so you always know what you're spending.
           </div>
         </details>
 
         <details class="glass rounded-xl overflow-hidden group">
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>What is the refund policy?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
-            Due to the digital nature of this product, all sales are final. No refunds are provided. Please review the features and screenshots on this page carefully before purchasing. Read our full <a href="refund.html" class="text-brand-600 hover:text-brand-700 underline">Refund Policy</a>.
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
+            Due to the digital nature of this product, all sales are final. No refunds are provided. Please review the features and screenshots on this page carefully before purchasing. Read our full <a href="refund.html" class="text-accent-text hover:text-accent-hover underline">Refund Policy</a>.
           </div>
         </details>
 
         <details class="glass rounded-xl overflow-hidden group">
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>Can I export evidence to Word?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
             Yes! AuditLens can export complete audit evidence reports as Word documents (.docx). Reports include all screenshots, AI analysis, risk scores, figure numbers, and a summary dashboard. You can also export directly to SharePoint or copy individual evidence items to your clipboard.
           </div>
         </details>
 
         <details class="glass rounded-xl overflow-hidden group">
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>How does the PII redaction work?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
             AuditLens automatically scans screenshot text for 8 types of PII including SSNs, credit card numbers (Luhn-validated), emails, phone numbers, IP addresses, and API keys. Detected items are highlighted for review, and you choose to redact with black overlay, blur, or pixelate. Every redaction is logged in a compliance audit trail. You can also draw manual redaction regions.
           </div>
         </details>
 
         <details class="glass rounded-xl overflow-hidden group">
-          <summary class="px-6 py-4 cursor-pointer text-gray-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
+          <summary class="px-6 py-4 cursor-pointer text-warm-900 font-semibold flex items-center justify-between hover:bg-white/80 transition-colors">
             <span>Does it integrate with SharePoint?</span>
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-warm-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-6 pb-4 text-gray-500 text-sm leading-relaxed">
+          <div class="px-6 pb-4 text-warm-500 text-sm leading-relaxed">
             Yes. AuditLens connects to SharePoint Online via Microsoft Graph API using secure device code authentication. You can bulk-export evidence files or Word documents to any SharePoint site and document library, with automatic folder organization by system or date. Your Azure AD admin provides the client ID, and authentication is handled securely.
           </div>
         </details>
@@ -988,52 +1008,52 @@
   <section class="py-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to transform your <span class="gradient-text">audit workflow</span>?</h2>
-      <p class="text-gray-500 text-lg mb-8 max-w-2xl mx-auto">Stop spending hours documenting screenshots manually. Capture, analyze, redact, and export with AI intelligence. Focus on what matters - the audit.</p>
-      <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button inline-block bg-brand-600 hover:bg-brand-700 text-white px-10 py-4 rounded-xl text-lg font-bold transition-all hover:shadow-lg hover:shadow-brand-600/25">
+      <p class="text-warm-500 text-lg mb-8 max-w-2xl mx-auto">Stop spending hours documenting screenshots manually. Capture, analyze, redact, and export with AI intelligence. Focus on what matters - the audit.</p>
+      <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button inline-block bg-accent hover:bg-accent-hover text-white px-10 py-4 rounded-pill text-lg font-bold transition-all hover:shadow-lg hover:shadow-accent/25">
         Get AuditLens Now
       </a>
-      <p class="text-gray-400 text-sm mt-4">One-time purchase. Instant download. Windows 10/11.</p>
+      <p class="text-warm-300 text-sm mt-4">One-time purchase. Instant download. Windows 10/11.</p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-200 py-12">
+  <footer class="border-t border-[rgba(0,0,0,0.08)] py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-4 gap-8 mb-8">
         <div class="md:col-span-2">
           <div class="flex items-center space-x-3 mb-4">
             <img src="icon.png" alt="AuditLens" class="w-8 h-8 rounded-lg">
-            <span class="text-lg font-bold text-gray-900">AuditLens</span>
+            <span class="text-lg font-bold text-warm-900">AuditLens</span>
           </div>
-          <p class="text-gray-500 text-sm leading-relaxed max-w-md">
+          <p class="text-warm-500 text-sm leading-relaxed max-w-md">
             AI-powered IT audit evidence platform with automated PII redaction, intelligence dashboards, and SharePoint integration. Built for auditors, by an auditor.
           </p>
-          <p class="text-gray-400 text-sm mt-3">
+          <p class="text-warm-300 text-sm mt-3">
             Created by Akshat Ratanpal<br>
             Mumbai, India
           </p>
         </div>
         <div>
-          <h4 class="text-gray-900 font-semibold mb-4">Product</h4>
+          <h4 class="text-warm-900 font-semibold mb-4">Product</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="#features" class="text-gray-500 hover:text-gray-900 transition-colors">Features</a></li>
-            <li><a href="#screenshots" class="text-gray-500 hover:text-gray-900 transition-colors">Preview</a></li>
-            <li><a href="#pricing" class="text-gray-500 hover:text-gray-900 transition-colors">Pricing</a></li>
-            <li><a href="#how-it-works" class="text-gray-500 hover:text-gray-900 transition-colors">How It Works</a></li>
+            <li><a href="#features" class="text-warm-500 hover:text-warm-900 transition-colors">Features</a></li>
+            <li><a href="#screenshots" class="text-warm-500 hover:text-warm-900 transition-colors">Preview</a></li>
+            <li><a href="#pricing" class="text-warm-500 hover:text-warm-900 transition-colors">Pricing</a></li>
+            <li><a href="#how-it-works" class="text-warm-500 hover:text-warm-900 transition-colors">How It Works</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-gray-900 font-semibold mb-4">Legal</h4>
+          <h4 class="text-warm-900 font-semibold mb-4">Legal</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="privacy.html" class="text-gray-500 hover:text-gray-900 transition-colors">Privacy Policy</a></li>
-            <li><a href="terms.html" class="text-gray-500 hover:text-gray-900 transition-colors">Terms &amp; Conditions</a></li>
-            <li><a href="refund.html" class="text-gray-500 hover:text-gray-900 transition-colors">Refund Policy</a></li>
-            <li><a href="mailto:akshat.ratanpal@gmail.com" class="text-gray-500 hover:text-gray-900 transition-colors">Contact</a></li>
+            <li><a href="privacy.html" class="text-warm-500 hover:text-warm-900 transition-colors">Privacy Policy</a></li>
+            <li><a href="terms.html" class="text-warm-500 hover:text-warm-900 transition-colors">Terms &amp; Conditions</a></li>
+            <li><a href="refund.html" class="text-warm-500 hover:text-warm-900 transition-colors">Refund Policy</a></li>
+            <li><a href="mailto:akshat.ratanpal@gmail.com" class="text-warm-500 hover:text-warm-900 transition-colors">Contact</a></li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-gray-200 pt-8 text-center">
-        <p class="text-gray-400 text-sm">&copy; 2025-2026 AuditLens. All rights reserved. Built in Mumbai, India.</p>
+      <div class="border-t border-[rgba(0,0,0,0.08)] pt-8 text-center">
+        <p class="text-warm-300 text-sm">&copy; 2025-2026 AuditLens. All rights reserved. Built in Mumbai, India.</p>
       </div>
     </div>
   </footer>
@@ -1047,7 +1067,7 @@
     <!-- Modal -->
     <div class="relative w-full max-w-md glass rounded-2xl p-8 shadow-2xl" style="border: 1px solid rgba(96,165,250,0.2);">
       <!-- Close button -->
-      <button id="subscribe-close" aria-label="Close" class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors">
+      <button id="subscribe-close" aria-label="Close" class="absolute top-4 right-4 text-warm-500 hover:text-warm-900 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
@@ -1061,8 +1081,8 @@
       </div>
 
       <!-- Heading -->
-      <h2 id="subscribe-title" class="text-xl font-bold text-gray-900 mb-2">Stay in the loop</h2>
-      <p class="text-gray-500 text-sm mb-6 leading-relaxed">Get notified about new features, updates, and exclusive early-bird pricing for AuditLens.</p>
+      <h2 id="subscribe-title" class="text-xl font-bold text-warm-900 mb-2">Stay in the loop</h2>
+      <p class="text-warm-500 text-sm mb-6 leading-relaxed">Get notified about new features, updates, and exclusive early-bird pricing for AuditLens.</p>
 
       <!-- Form -->
       <form id="subscribe-form" novalidate>
@@ -1072,7 +1092,7 @@
             type="text"
             placeholder="Your name (optional)"
             autocomplete="name"
-            class="w-full bg-gray-100/60 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+            class="w-full bg-warm-100/60 border border-[rgba(0,0,0,0.08)] text-warm-900 placeholder-warm-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
           />
           <input
             id="sub-email"
@@ -1080,7 +1100,7 @@
             placeholder="your@email.com"
             autocomplete="email"
             required
-            class="w-full bg-gray-100/60 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+            class="w-full bg-warm-100/60 border border-[rgba(0,0,0,0.08)] text-warm-900 placeholder-warm-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
           />
         </div>
         <p id="sub-error" class="text-red-600 text-xs mb-3" style="display:none"></p>
@@ -1101,11 +1121,11 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <p class="text-gray-900 font-semibold mb-1">You're on the list!</p>
-        <p class="text-gray-500 text-sm">We'll reach out when there's news worth sharing.</p>
+        <p class="text-warm-900 font-semibold mb-1">You're on the list!</p>
+        <p class="text-warm-500 text-sm">We'll reach out when there's news worth sharing.</p>
       </div>
 
-      <p class="text-gray-400 text-xs text-center mt-4">No spam, ever. Unsubscribe anytime.</p>
+      <p class="text-warm-300 text-xs text-center mt-4">No spam, ever. Unsubscribe anytime.</p>
     </div>
   </div>
 

@@ -5,40 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms and Conditions - AuditLens</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            warm: { 50: '#f6f5f4', 100: '#efedeb', 200: '#e3e0dd', 300: '#a39e98', 500: '#615d59', 700: '#403d39', 900: '#31302e' },
+            accent: { DEFAULT: '#0075de', hover: '#005bab', light: '#f2f9ff', text: '#097fe8' },
+          }
+        }
+      }
+    }
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-300 antialiased">
+<body class="bg-warm-50 text-warm-500 antialiased">
 
   <!-- Navigation -->
-  <nav class="border-b border-slate-800 bg-slate-950/95 backdrop-blur sticky top-0 z-50">
+  <nav class="border-b border-white/10 sticky top-0 z-50" style="background: rgba(49,48,46,0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <a href="index.html" class="flex items-center space-x-3">
           <img src="icon.png" alt="AuditLens" class="w-8 h-8 rounded-lg">
           <span class="text-lg font-bold text-white">AuditLens</span>
         </a>
-        <a href="index.html" class="text-slate-400 hover:text-white text-sm transition-colors">&larr; Back to Home</a>
+        <a href="index.html" class="text-white/60 hover:text-white text-sm transition-colors">&larr; Back to Home</a>
       </div>
     </div>
   </nav>
 
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h1 class="text-3xl font-bold text-white mb-2">Terms and Conditions</h1>
-    <p class="text-slate-500 text-sm mb-12">Last updated: February 22, 2025</p>
+    <h1 class="text-3xl font-bold text-warm-900 mb-2">Terms and Conditions</h1>
+    <p class="text-warm-300 text-sm mb-12">Last updated: February 22, 2025</p>
 
-    <div class="prose prose-invert max-w-none space-y-8 text-slate-300 text-sm leading-relaxed">
+    <div class="prose max-w-none space-y-8 text-warm-500 text-sm leading-relaxed">
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">1. Acceptance of Terms</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">1. Acceptance of Terms</h2>
         <p>By purchasing, downloading, installing, or using AuditLens ("the Software"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, do not purchase or use the Software.</p>
         <p>AuditLens is operated by Akshat Ratanpal, located in Mumbai, India ("we," "us," or "our").</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">2. License Grant</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">2. License Grant</h2>
         <p>Upon valid purchase, we grant you a non-exclusive, non-transferable, revocable license to use AuditLens on your personal or business computers, subject to these Terms.</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>The license is for a single user.</li>
@@ -48,7 +60,7 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">3. Restrictions</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">3. Restrictions</h2>
         <p>You agree not to:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>Copy, modify, distribute, sell, sublicense, or transfer the Software to any third party</li>
@@ -61,7 +73,7 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">4. Payment and Pricing</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">4. Payment and Pricing</h2>
         <p>Payment for AuditLens is processed through Lemon Squeezy, our authorized payment processor. By making a purchase, you also agree to Lemon Squeezy's terms of service.</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>All prices are listed on our website and are subject to change without notice.</li>
@@ -72,15 +84,15 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">5. Refund Policy</h2>
-        <p>Due to the digital nature of the Software, <strong class="text-white">all sales are final and no refunds will be provided</strong>. By purchasing AuditLens, you acknowledge and agree that you are not entitled to a refund for any reason. Please review all product features and information on our website carefully before making a purchase.</p>
-        <p>For full details, please see our <a href="refund.html" class="text-blue-400 hover:text-blue-300">Refund Policy</a>.</p>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">5. Refund Policy</h2>
+        <p>Due to the digital nature of the Software, <strong class="text-warm-900">all sales are final and no refunds will be provided</strong>. By purchasing AuditLens, you acknowledge and agree that you are not entitled to a refund for any reason. Please review all product features and information on our website carefully before making a purchase.</p>
+        <p>For full details, please see our <a href="refund.html" class="text-accent-text hover:text-accent-hover">Refund Policy</a>.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">6. Third-Party Services</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">6. Third-Party Services</h2>
 
-        <h3 class="text-lg font-medium text-white mb-2">6.1 AI API Providers</h3>
+        <h3 class="text-lg font-medium text-warm-900 mb-2">6.1 AI API Providers</h3>
         <p>AuditLens integrates with third-party AI services including OpenAI, Anthropic, and Google. Use of these services is governed by their respective terms of service and privacy policies. You are responsible for:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>Obtaining and maintaining your own API keys from these providers</li>
@@ -89,13 +101,13 @@
           <li>Ensuring your use of AI services complies with applicable laws and your organization's policies</li>
         </ul>
 
-        <h3 class="text-lg font-medium text-white mb-2 mt-4">6.2 No Warranty for Third-Party Services</h3>
+        <h3 class="text-lg font-medium text-warm-900 mb-2 mt-4">6.2 No Warranty for Third-Party Services</h3>
         <p>We are not responsible for the availability, accuracy, reliability, or performance of any third-party AI service. Changes to third-party APIs, pricing, or terms of service are outside our control.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">7. Data and Privacy</h2>
-        <p>AuditLens is designed with a "Bring Your Own Key" architecture. Your screenshots, audit evidence, analysis results, and API keys are stored locally on your machine. We do not collect, store, or have access to your audit data. For more information, see our <a href="privacy.html" class="text-blue-400 hover:text-blue-300">Privacy Policy</a>.</p>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">7. Data and Privacy</h2>
+        <p>AuditLens is designed with a "Bring Your Own Key" architecture. Your screenshots, audit evidence, analysis results, and API keys are stored locally on your machine. We do not collect, store, or have access to your audit data. For more information, see our <a href="privacy.html" class="text-accent-text hover:text-accent-hover">Privacy Policy</a>.</p>
         <p>You are solely responsible for:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>The security of your locally stored data</li>
@@ -105,13 +117,13 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">8. Intellectual Property</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">8. Intellectual Property</h2>
         <p>AuditLens, including its code, design, graphics, logo, and documentation, is the intellectual property of Akshat Ratanpal. All rights not expressly granted in these Terms are reserved.</p>
         <p>You retain full ownership of all screenshots, audit evidence, analysis results, and workpapers created using the Software.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">9. Disclaimer of Warranties</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">9. Disclaimer of Warranties</h2>
         <p>THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
         <p>We do not warrant that:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
@@ -120,11 +132,11 @@
           <li>AI-generated analysis will be accurate, complete, or suitable for professional audit purposes without human review</li>
           <li>The Software will be compatible with all systems or configurations</li>
         </ul>
-        <p class="mt-2"><strong class="text-white">Important:</strong> AI-generated analysis provided by the Software is intended as a tool to assist auditors. All AI analysis should be reviewed, validated, and approved by a qualified professional before being included in any official audit workpaper or report.</p>
+        <p class="mt-2"><strong class="text-warm-900">Important:</strong> AI-generated analysis provided by the Software is intended as a tool to assist auditors. All AI analysis should be reviewed, validated, and approved by a qualified professional before being included in any official audit workpaper or report.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">10. Limitation of Liability</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">10. Limitation of Liability</h2>
         <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL AKSHAT RATANPAL, AUDITLENS, OR ITS AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>Your use of or inability to use the Software</li>
@@ -137,12 +149,12 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">11. Indemnification</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">11. Indemnification</h2>
         <p>You agree to indemnify, defend, and hold harmless Akshat Ratanpal and AuditLens from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the Software, violation of these Terms, or infringement of any third-party rights.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">12. Termination</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">12. Termination</h2>
         <p>We reserve the right to terminate or suspend your license at any time if you violate these Terms. Upon termination:</p>
         <ul class="list-disc list-inside space-y-1 ml-4">
           <li>Your right to use the Software ceases immediately</li>
@@ -152,31 +164,31 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">13. Updates</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">13. Updates</h2>
         <p>We may release updates, patches, or new versions of the Software. Updates may be provided at our discretion and are not guaranteed. When provided, updates may modify features, functionality, or system requirements.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">14. Governing Law</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">14. Governing Law</h2>
         <p>These Terms shall be governed by and construed in accordance with the laws of India. Any disputes arising from or relating to these Terms or the Software shall be subject to the exclusive jurisdiction of the courts located in Mumbai, Maharashtra, India.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">15. Severability</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">15. Severability</h2>
         <p>If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">16. Changes to Terms</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">16. Changes to Terms</h2>
         <p>We reserve the right to modify these Terms at any time. Changes will be posted on this page with an updated "Last updated" date. Your continued use of the Software after changes constitutes acceptance of the modified Terms.</p>
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold text-white mb-4">17. Contact Us</h2>
+        <h2 class="text-xl font-semibold text-warm-900 mb-4">17. Contact Us</h2>
         <p>If you have any questions about these Terms, please contact us:</p>
-        <div class="bg-slate-900 rounded-lg p-4 border border-slate-800 mt-3">
-          <p><strong class="text-white">Akshat Ratanpal</strong></p>
-          <p>Email: <a href="mailto:akshat.ratanpal@gmail.com" class="text-blue-400 hover:text-blue-300">akshat.ratanpal@gmail.com</a></p>
+        <div class="bg-white rounded-xl p-4 border border-[rgba(0,0,0,0.08)] mt-3" style="box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+          <p><strong class="text-warm-900">Akshat Ratanpal</strong></p>
+          <p>Email: <a href="mailto:akshat.ratanpal@gmail.com" class="text-accent-text hover:text-accent-hover">akshat.ratanpal@gmail.com</a></p>
           <p>Location: Mumbai, India</p>
         </div>
       </section>
@@ -185,14 +197,14 @@
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-800 py-8 mt-16">
+  <footer class="border-t border-[rgba(0,0,0,0.08)] py-8 mt-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="flex justify-center space-x-6 mb-4 text-sm">
-        <a href="privacy.html" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-        <a href="terms.html" class="text-slate-400 hover:text-white transition-colors">Terms &amp; Conditions</a>
-        <a href="refund.html" class="text-slate-400 hover:text-white transition-colors">Refund Policy</a>
+        <a href="privacy.html" class="text-warm-300 hover:text-warm-900 transition-colors">Privacy Policy</a>
+        <a href="terms.html" class="text-warm-300 hover:text-warm-900 transition-colors">Terms &amp; Conditions</a>
+        <a href="refund.html" class="text-warm-300 hover:text-warm-900 transition-colors">Refund Policy</a>
       </div>
-      <p class="text-slate-500 text-sm">&copy; 2025 AuditLens. All rights reserved.</p>
+      <p class="text-warm-300 text-sm">&copy; 2025-2026 AuditLens. All rights reserved.</p>
     </div>
   </footer>
 
