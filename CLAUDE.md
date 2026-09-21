@@ -33,15 +33,24 @@ landing/
     ├── privacy.html · terms.html · refund.html
     ├── icon.png
     ├── media/              # Product screenshots (PNG, real app captures)
-    └── video/              # Product tour + the four autoplay section clips
+    └── video/              # Product tour + the section clips
+        ├── auditlens-product-tour.{mp4,jpg}   # 86s tour, click-to-play in the film block
+        ├── evidence-workpapers.{mp4,webm,jpg}
+        ├── population-testing.{mp4,webm,jpg}
+        ├── agent-fieldwork.{mp4,webm,jpg}
+        ├── tool-studio.{mp4,webm,jpg}
+        └── overview.{mp4,webm,jpg}            # 14s montage, currently unused by the page
 ```
 
-Media comes from the desktop-app repo and is copied in, never hand-drawn:
-`deliverables/auditlens-product-demo-v2/captures/*.png` → `public/media/`,
-`deliverables/landing/auditlens-{evidence,agent,population,toolstudio}.{mp4,webm,jpg}` →
-`public/video/`, and `AuditLens-86s-Widescreen.mp4` transcoded to 720p as
-`public/video/auditlens-product-tour.mp4`. See `deliverables/landing/README.md` there for how the
-clips are re-recorded.
+`README.md` covers the same ground for anyone landing on the repo from GitHub; keep the two in step.
+
+Media is real product footage from the desktop-app repo, never hand-drawn or mocked up:
+`deliverables/auditlens-product-demo-v2/captures/*.png` → `public/media/`, the four clips in
+`deliverables/landing/` (recorded by `test-harness/landing-clips.js` — see its README for a
+re-record) → `public/video/`, and `AuditLens-86s-Widescreen.mp4` transcoded to 720p as
+`auditlens-product-tour.mp4`. Every clip ships **WebM (VP9) first, MP4 (H.264) fallback**, with a
+JPG poster, no audio track, scaled to 1120px wide. Keep them at that size: the 1280x720 originals
+are ~2.5× the bytes for no visible gain.
 
 ## Design System
 
@@ -129,10 +138,11 @@ to autoplay; `.webm` is listed first (≈30% smaller) with `.mp4` as the fallbac
 
 ## Pricing Model
 
-- **$129** one-time purchase (was $49 in earlier version)
+- **$499** one-time purchase (was $129, and $49 in the earliest version)
 - **$59/year** optional renewal for continued framework updates
 - App works indefinitely even without renewal
-- AI costs separate (~$0.01 per 5-10 screenshots, user pays AI provider directly)
+- AI costs separate and billed by the user's own provider — the recorded ITGC engagement
+  cost **$0.22** end to end; quote that figure rather than the old per-screenshot estimate
 - All sales final (no refunds, see refund.html)
 
 ## Key Product Features (for marketing copy reference)
@@ -160,3 +170,11 @@ tooling as an automatic scrubber; it is a pre-flight scan and an editor the audi
 - Third-party dependencies are CDN-loaded; product media is local under `public/media` and `public/video`
 - The site targets Windows users specifically (desktop app is .exe)
 - Legal pages (privacy, terms, refund) reference Indian jurisdiction (Mumbai)
+- Claims on the page are sourced from the product recordings in `media/`. Keep marketing
+  copy traceable to something visible in the app — the numbers quoted (186 rows, 15
+  exceptions, 0.3s, $0.22) all come from those clips
+- **Verifying rendering locally:** the Tailwind CDN cannot be relied on in every sandbox.
+  To screenshot the page, build a stylesheet instead — `npm i --no-save tailwindcss@3`,
+  mirror the inline `tailwind.config` into a config file, run
+  `npx tailwindcss -c cfg.js -i in.css -o tw.built.css`, and swap the CDN `<script>` for a
+  `<link>` in a throwaway copy. Do not commit that copy or the built CSS.
