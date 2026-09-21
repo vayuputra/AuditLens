@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuditLens — The audit workstation, engineered for AI</title>
+  <meta name="description" content="A Windows desktop workstation for internal audit. Turn any export into a tested population, test 100% of it, let an agent run the fieldwork, and keep every judgment call yours. Bring your own OpenAI, Anthropic or Gemini key.">
+  <link rel="icon" href="icon.png">
+  <meta property="og:title" content="AuditLens — The audit workstation, engineered for AI">
+  <meta property="og:description" content="Test the whole population. Draft the workpaper. Keep the judgment. A Windows desktop app for internal audit.">
+  <meta property="og:image" content="video/auditlens-product-tour.jpg">
+  <meta property="og:type" content="website">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f4f4f2;
+      --panel: #ececea;
+      --card:  #ffffff;
+      --ink:   #0d0d0c;
+      --mute:  rgba(13,13,12,0.58);
+      --faint: rgba(13,13,12,0.38);
+      --line:  rgba(13,13,12,0.10);
+      --hair:  rgba(13,13,12,0.07);
+    }
+    * { -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.55;
+      letter-spacing: -0.011em;
+    }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .mono {
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+      font-weight: 500;
+    }
+    h1, h2, h3 { font-weight: 400; letter-spacing: -0.035em; line-height: 1.08; }
+    .display  { font-size: clamp(33px, 3.5vw, 46px); }
+    .headline { font-size: clamp(26px, 2.9vw, 38px); letter-spacing: -0.032em; }
+    .subhead  { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.35; }
+    .lede { color: var(--mute); font-size: 16px; line-height: 1.55; }
+    .muted { color: var(--mute); }
+    .faint { color: var(--faint); }
+
+    /* Buttons — small, quiet, near-black */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 36px; padding: 0 14px; border-radius: 7px;
+      font-size: 13px; font-weight: 500; letter-spacing: -0.01em;
+      transition: background .15s ease, border-color .15s ease, color .15s ease;
+      white-space: nowrap;
+    }
+    .btn-dark  { background: var(--ink); color: #fff; }
+    .btn-dark:hover { background: #2a2a28; }
+    .btn-ghost { border: 1px solid var(--line); color: var(--ink); background: transparent; }
+    .btn-ghost:hover { border-color: rgba(13,13,12,0.22); background: rgba(255,255,255,0.6); }
+    .btn-lg { height: 42px; padding: 0 18px; font-size: 14px; }
+    .btn-invert { background: #fff; color: var(--ink); }
+    .btn-invert:hover { background: rgba(255,255,255,0.86); }
+
+    /* Nav */
+    .navpill {
+      background: rgba(244,244,242,0.82);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border: 1px solid var(--line);
+      border-radius: 11px;
+    }
+    .navlink { font-size: 13px; color: var(--mute); transition: color .15s ease; }
+    .navlink:hover { color: var(--ink); }
+
+    /* Surfaces */
+    .shot {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.05);
+    }
+    .panel { background: var(--panel); border: 1px solid var(--hair); border-radius: 16px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.7); border: 1px solid var(--line);
+      border-radius: 999px; padding: 5px 11px 5px 9px; font-size: 12px; color: var(--mute);
+    }
+    .sec { padding: 96px 0; }
+    @media (max-width: 767px) { .sec { padding: 64px 0; } }
+
+    /* Below lg the hero screenshot is unreadable if it fits; let it bleed off the right edge
+       at a legible size instead, the way it already does on desktop. */
+    @media (max-width: 1023px) {
+      .hero-shot { min-width: 760px; }
+    }
+
+    /* Section header row: title left, eyebrow + index right, hairline under */
+    .sechead {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line);
+    }
+
+    details.faq { border-bottom: 1px solid var(--line); }
+    details.faq summary {
+      list-style: none; cursor: pointer; padding: 20px 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.02em;
+    }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::after {
+      content: "+"; color: var(--faint); font-weight: 400; font-size: 18px; line-height: 1;
+    }
+    details.faq[open] summary::after { content: "–"; }
+    details.faq p { color: var(--mute); padding-bottom: 20px; max-width: 70ch; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="fixed top-3 inset-x-0 z-50 px-4">
+    <div class="navpill max-w-3xl mx-auto flex items-center justify-between h-11 pl-3 pr-2">
+      <a href="#top" class="flex items-center gap-2">
+        <img src="icon.png" alt="" class="w-5 h-5 rounded">
+        <span class="text-[14px] font-medium tracking-[-0.03em]">AuditLens</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#product" class="navlink">Product</a>
+        <a href="#platform" class="navlink">Platform</a>
+        <a href="#pricing" class="navlink">Pricing</a>
+        <a href="#faq" class="navlink">FAQ</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="#film" class="navlink hidden sm:inline mr-1">Watch</a>
+        <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button btn btn-dark h-8 text-[12px]">Buy — $499</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="top" class="pt-32 pb-14 md:pt-40 md:pb-20 overflow-hidden">
+    <div class="wrap grid lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] gap-12 lg:gap-14 items-center">
+      <div>
+        <h1 class="display mb-5">The audit workstation,<br class="hidden sm:block"> engineered for AI</h1>
+        <p class="lede mb-7 max-w-[400px]">
+          AuditLens turns any export into a tested population, runs the fieldwork, and drafts the
+          workpaper &mdash; then stops at every judgment call, because that one is yours.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 mb-7">
+          <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button btn btn-dark btn-lg">Download for Windows</a>
+          <a href="#film" class="btn btn-ghost btn-lg">
+            <svg width="11" height="12" viewBox="0 0 11 12" fill="currentColor" aria-hidden="true"><path d="M10.5 6 0 12V0z"/></svg>
+            Watch the demo
+          </a>
+        </div>
+        <p class="mono">One-time $499 &middot; Windows 10/11 &middot; Your own AI key</p>
+      </div>
+
+      <div class="relative lg:-mr-[24vw] overflow-hidden">
+        <div class="shot hero-shot">
+          <img src="media/hero-agent-runs.png" alt="AuditLens agent runs — a control test executed end to end against 100,000 rows, with the conclusion left to the auditor" class="w-full block" width="1903" height="943">
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap mt-12 md:mt-16">
+      <div class="chip">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <span>Every screen and clip on this page is the real app, recorded live.</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Built for -->
+  <section class="pb-16 md:pb-24">
+    <div class="wrap">
+      <p class="mono text-center mb-6">Built for</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-[13px] muted">
+        <span>Internal Audit</span><span class="faint">/</span>
+        <span>SOX &amp; ICFR</span><span class="faint">/</span>
+        <span>IT &amp; Cyber Audit</span><span class="faint">/</span>
+        <span>Risk Advisory</span><span class="faint">/</span>
+        <span>Assurance &amp; Attestation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="sec pt-0">
+    <div class="wrap grid lg:grid-cols-[minmax(0,1fr)_minmax(0,620px)] gap-10">
+      <div></div>
+      <div class="space-y-5 text-[17px] leading-[1.5] tracking-[-0.02em]">
+        <p>An audit is a judgment supported by evidence. Almost none of the week goes into the judgment.</p>
+        <p class="muted">
+          It goes into pulling the export, cleaning the export, tying it back to something independent,
+          sampling because testing all of it was never realistic, chasing the screenshot, retyping what
+          the screenshot showed, and writing the same paragraph you wrote last quarter.
+        </p>
+        <p class="muted">
+          AuditLens does that part. It reads the messy file, reconciles it, tests every row rather than
+          forty of them, keeps a hash-chained record of where each piece of evidence came from, and
+          drafts the narrative in the language your methodology already uses.
+        </p>
+        <p>
+          It never rates a risk, never clears an exception and never signs anything. Every conclusion is
+          drafted for you to accept, rewrite or throw away &mdash; and the file records which one you did.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Film -->
+  <section id="film" class="pb-24 md:pb-32 scroll-mt-24">
+    <div class="wrap">
+      <div class="relative rounded-[16px] overflow-hidden border border-[color:var(--line)] bg-black">
+        <video id="film-video" class="w-full block aspect-video" preload="none"
+               poster="video/auditlens-product-tour.jpg" playsinline>
+          <source src="video/auditlens-product-tour.mp4" type="video/mp4">
+          Your browser cannot play this video.
+        </video>
+        <button id="film-play" type="button" class="absolute bottom-4 left-4 btn btn-invert shadow-sm">
+          <svg width="10" height="11" viewBox="0 0 11 12" fill="currentColor" aria-hidden="true"><path d="M10.5 6 0 12V0z"/></svg>
+          Watch <span class="faint font-normal">&middot; 100,000 payments, one audit</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product / solutions -->
+  <section id="product" class="pb-12 scroll-mt-24">
+    <div class="wrap">
+      <div class="sechead">
+        <h2 class="headline">What you do with AuditLens</h2>
+        <div class="flex items-baseline gap-10">
+          <span class="mono hidden sm:inline">Product</span>
+          <span class="mono">1.0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Row 1 -->
+  <section class="pb-16 md:pb-24">
+    <div class="wrap grid lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-8 lg:gap-14">
+      <div class="lg:py-8">
+        <p class="mono mb-4">1.1</p>
+        <h3 class="subhead mb-3">Capture the evidence, keep the narrative</h3>
+        <p class="muted text-[14px] mb-6">
+          Hit Ctrl+Shift+S anywhere on screen. AuditLens hashes the capture, reads what is in it, and
+          drafts the observation, the risk framing and the workpaper paragraph around it. Export the
+          RCM to Excel or the workpaper to Word with tracked changes you can accept line by line.
+        </p>
+        <p class="faint text-[12px] leading-[1.5] border-l border-[color:var(--line)] pl-3">
+          Captured evidence &rarr; drafted workpaper &rarr; exported RCM, in one unbroken take.
+        </p>
+      </div>
+      <div class="panel p-3 sm:p-5">
+        <div class="shot">
+          <video class="lazyclip w-full block" muted loop playsinline preload="none"
+                 poster="video/evidence-workpapers.jpg"
+                 aria-label="Captured evidence becomes a drafted workpaper and an exported Excel RCM">
+            <source data-src="video/evidence-workpapers.webm" type="video/webm">
+            <source data-src="video/evidence-workpapers.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Row 2 -->
+  <section class="pb-16 md:pb-24">
+    <div class="wrap grid lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-8 lg:gap-14">
+      <div class="lg:py-8">
+        <p class="mono mb-4">1.2</p>
+        <h3 class="subhead mb-3">Test the whole population, not forty rows</h3>
+        <p class="muted text-[14px] mb-6">
+          Import Studio takes the messy export &mdash; Excel, CSV, a PDF report, a photo of a register &mdash;
+          maps the columns, reconciles the row count against an independent figure and hands you a
+          population. Then every row gets tested, with the evidence for each exception attached to it.
+        </p>
+        <p class="faint text-[12px] leading-[1.5] border-l border-[color:var(--line)] pl-3">
+          A 186-row privileged-access listing, 100% tested, 15 exceptions with row-level provenance.
+          Sampling is still there when the population will not come.
+        </p>
+      </div>
+      <div class="panel p-3 sm:p-5">
+        <div class="shot">
+          <video class="lazyclip w-full block" muted loop playsinline preload="none"
+                 poster="video/population-testing.jpg"
+                 aria-label="A 186-row privileged access listing tested in full, with 15 exceptions and row-level provenance">
+            <source data-src="video/population-testing.webm" type="video/webm">
+            <source data-src="video/population-testing.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Row 3 -->
+  <section class="pb-16 md:pb-24">
+    <div class="wrap grid lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-8 lg:gap-14">
+      <div class="lg:py-8">
+        <p class="mono mb-4">1.3</p>
+        <h3 class="subhead mb-3">The agent runs the fieldwork. You make the call.</h3>
+        <p class="muted text-[14px] mb-6">
+          Point it at a control and it executes the test, logs the exceptions, drafts the narrative and
+          drafts three conclusions to choose between. Every judgment call and every outward action
+          &mdash; an email to the client, a sign-off, a severity &mdash; stops and waits for you.
+        </p>
+        <p class="faint text-[12px] leading-[1.5] border-l border-[color:var(--line)] pl-3">
+          Run it overnight under a spend cap and wake up to a queue of decisions, not a queue of work.
+        </p>
+      </div>
+      <div class="panel p-3 sm:p-5">
+        <div class="shot">
+          <video class="lazyclip w-full block" muted loop playsinline preload="none"
+                 poster="video/agent-fieldwork.jpg"
+                 aria-label="An agent runs treasury fieldwork and stops at a human judgment checkpoint">
+            <source data-src="video/agent-fieldwork.webm" type="video/webm">
+            <source data-src="video/agent-fieldwork.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Row 4 -->
+  <section class="pb-16 md:pb-24">
+    <div class="wrap grid lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-8 lg:gap-14">
+      <div class="lg:py-8">
+        <p class="mono mb-4">1.4</p>
+        <h3 class="subhead mb-3">Describe a test in English, get a tool that runs it</h3>
+        <p class="muted text-[14px] mb-6">
+          Tool Studio compiles a plain-English test into a sandboxed tool with a methodology sheet a
+          reviewer can read and sign off. The sign-off is bound to the tool&rsquo;s hash, so a changed tool
+          is an unsigned tool &mdash; and next quarter it replays on the new data.
+        </p>
+        <p class="faint text-[12px] leading-[1.5] border-l border-[color:var(--line)] pl-3">
+          Three-way match, duplicate vendor bank details, weekend postings &mdash; written once, reused every cycle.
+        </p>
+      </div>
+      <div class="panel p-3 sm:p-5">
+        <div class="shot">
+          <video class="lazyclip w-full block" muted loop playsinline preload="none"
+                 poster="video/tool-studio.jpg"
+                 aria-label="A test described in English becomes a runnable tool with a methodology sheet for reviewer sign-off">
+            <source data-src="video/tool-studio.webm" type="video/webm">
+            <source data-src="video/tool-studio.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform -->
+  <section id="platform" class="sec pt-0 scroll-mt-24">
+    <div class="wrap">
+      <div class="sechead mb-14">
+        <h2 class="headline">How AuditLens works</h2>
+        <div class="flex items-baseline gap-10">
+          <span class="mono hidden sm:inline">Platform</span>
+          <span class="mono">2.0</span>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div class="panel p-3 sm:p-5">
+          <div class="shot">
+            <img src="media/import-studio.png" alt="Import Studio detecting the structure of a 100,000-row payment export before it becomes a tested population" class="w-full block" width="1903" height="943" loading="lazy">
+          </div>
+          <div class="shot mt-4 hidden sm:block">
+            <img src="media/night-shift.png" alt="The overnight run queue — drafts ready, and the items waiting on the auditor's judgment" class="w-full block" width="1903" height="943" loading="lazy">
+          </div>
+        </div>
+
+        <div class="space-y-10">
+          <div>
+            <p class="mono mb-2">Your keys, your data</p>
+            <h3 class="subhead mb-2">Bring your own model</h3>
+            <p class="muted text-[14px]">
+              OpenAI, Anthropic, Gemini, Azure OpenAI, Bedrock, or a local model through Ollama. Evidence
+              lives on your machine; what you submit for analysis goes straight from your machine to the
+              provider you configured. There is no AuditLens server in the middle.
+            </p>
+          </div>
+          <div>
+            <p class="mono mb-2">Evidence you can defend</p>
+            <h3 class="subhead mb-2">A record that cannot be quietly rewritten</h3>
+            <p class="muted text-[14px]">
+              Every capture is hashed. Every event &mdash; who ran what, which exception moved, who signed
+              off &mdash; lands in an append-only, hash-chained ledger, and human judgments are signed with
+              a key that belongs to the person who made them. The chain is verified at every launch.
+            </p>
+          </div>
+          <div>
+            <p class="mono mb-2">Frameworks</p>
+            <h3 class="subhead mb-2">Mapped, not retyped</h3>
+            <p class="muted text-[14px]">
+              SOX, SOC 2, ISO 27001, PCI DSS, NIST and more ship as versioned packs: requirements,
+              suggested controls, procedures and evidence specs. Your scope, exclusions and local edits
+              are snapshotted into the engagement, so a pack update never moves the ground under a
+              finished test.
+            </p>
+          </div>
+          <div>
+            <p class="mono mb-2">Review</p>
+            <h3 class="subhead mb-2">Sign-off that means something</h3>
+            <p class="muted text-[14px]">
+              Reviewer and preparer are separate people with separate keys, and the app refuses to let
+              anyone sign their own work. Working alone is supported &mdash; as an explicit, disclosed
+              sole-practitioner basis that shows up on the workpaper cover, never as a silent exception.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section class="sec pt-0">
+    <div class="wrap">
+      <div class="panel p-8 sm:p-12 grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="mono mb-4">Auditor independence</p>
+          <h2 class="headline mb-4">Your evidence never passes through us</h2>
+          <p class="muted text-[15px] mb-6">
+            AuditLens is a desktop application with no account and no backend. Projects, evidence and
+            workpapers are files on your disk (or a folder your team shares). Analysis calls go directly
+            from your machine to the provider whose key you entered, on their enterprise API terms. We
+            never see the engagement, and we could not produce it if someone asked us to.
+          </p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2 text-[13px] muted">
+            <span>&middot; No cloud storage</span>
+            <span>&middot; No telemetry on evidence</span>
+            <span>&middot; You pay the AI provider directly</span>
+          </div>
+        </div>
+        <div class="bg-white rounded-[12px] border border-[color:var(--line)] p-6 sm:p-8">
+          <div class="text-center">
+            <div class="border border-[color:var(--line)] rounded-[10px] py-4 text-[13px] font-medium">Your computer</div>
+            <div class="mono py-3">Direct, encrypted, your API key</div>
+            <div class="border border-[color:var(--line)] rounded-[10px] py-4 text-[13px] font-medium">OpenAI &middot; Anthropic &middot; Gemini &middot; Azure &middot; Bedrock &middot; Ollama</div>
+            <p class="mono pt-5">No AuditLens server in the middle</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="sec pt-0 scroll-mt-24">
+    <div class="wrap">
+      <div class="sechead mb-14">
+        <h2 class="headline">Pricing</h2>
+        <div class="flex items-baseline gap-10">
+          <span class="mono hidden sm:inline">One-time</span>
+          <span class="mono">3.0</span>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] gap-10 lg:gap-16">
+        <div>
+          <div class="flex items-baseline gap-2 mb-3">
+            <span class="text-[56px] leading-none tracking-[-0.04em]">$499</span>
+            <span class="muted text-[14px]">once</span>
+          </div>
+          <p class="muted text-[14px] mb-6">
+            The full application, yours to keep, with twelve months of framework and pack updates
+            included. After that, $59/year keeps the updates coming &mdash; and if you skip it, the app
+            you bought carries on working.
+          </p>
+          <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button btn btn-dark btn-lg mb-4">Buy and download now</a>
+          <p class="mono">Lemon Squeezy &middot; instant .exe download &middot; all sales final</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-x-10 gap-y-3 text-[14px] muted self-center">
+          <p>Global hotkey capture with markup before you confirm</p>
+          <p>Import Studio: Excel, CSV, PDF, Word and screenshots</p>
+          <p>100% population testing, plus random, stratified and MUS sampling</p>
+          <p>Agent runs, overnight scheduling and spend caps</p>
+          <p>Tool Studio with hash-bound reviewer sign-off</p>
+          <p>Workpapers to Word with AI edits as tracked changes</p>
+          <p>Excel RCM, PowerPoint and SharePoint export</p>
+          <p>Framework and assessment packs (SOX, SOC 2, ISO 27001, PCI DSS, NIST…)</p>
+          <p>PII pre-flight scan and redaction before anything leaves</p>
+          <p>Hash-chained ledger, SHA-256 evidence integrity, signed sign-offs</p>
+          <p>Multi-engagement staffing, review queues and portfolio view</p>
+          <p>Your own AI key &mdash; the full ITGC engagement recorded on this page cost $0.22 of AI</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="sec pt-0 scroll-mt-24">
+    <div class="wrap">
+      <div class="sechead mb-6">
+        <h2 class="headline">Questions</h2>
+        <div class="flex items-baseline gap-10">
+          <span class="mono hidden sm:inline">FAQ</span>
+          <span class="mono">4.0</span>
+        </div>
+      </div>
+
+      <div class="max-w-[820px]">
+        <details class="faq"><summary>Do I need an AI API key?</summary>
+          <p>Yes. AuditLens uses a bring-your-own-key model for privacy and cost control. Bring a key from OpenAI, Anthropic, Google, Azure OpenAI or Bedrock — or point it at a local model through Ollama. The app walks you through setup, and a $5 credit goes a very long way &mdash; see the next answer.</p>
+        </details>
+        <details class="faq"><summary>Is my audit data secure?</summary>
+          <p>Evidence, projects and workpapers stay on your machine or on a folder your team shares. Content you submit for analysis goes directly from your machine to the provider whose key you configured, on their enterprise API terms — there is no AuditLens server in between, and you can revoke the key at any time.</p>
+        </details>
+        <details class="faq"><summary>Which operating systems are supported?</summary>
+          <p>Windows 10 and Windows 11 (64-bit). Mac and Linux builds may follow.</p>
+        </details>
+        <details class="faq"><summary>How much does the AI cost to run?</summary>
+          <p>Very little, because most of the work is not AI. The full ITGC engagement recorded for this page — evidence captured, analysed, drafted into workpapers and exported — cost $0.22 in total, billed by your provider rather than by us. Building a tool in Tool Studio is a single AI call and every later run of it is free, because it executes on your machine. Your provider and running spend sit in the title bar, and agent runs can be capped so an overnight run cannot spend more than you allowed.</p>
+        </details>
+        <details class="faq"><summary>What can I import besides screenshots?</summary>
+          <p>Excel (.xlsx/.xls), CSV, PDF and Word files, plus photos and screenshots of a register. Import Studio detects the real header row, cleans out subtotals and repeated headers, drafts the column mapping for you to confirm, and reconciles the row count against an independent figure before anything becomes a population.</p>
+        </details>
+        <details class="faq"><summary>Does the AI decide the risk rating or the conclusion?</summary>
+          <p>No. It drafts — observations, narratives, conclusion options, remediation wording — and it flags things you would want to see. Severity, disposition and the conclusion are yours, and the ledger records which wording you accepted, edited or rejected.</p>
+        </details>
+        <details class="faq"><summary>Can I export to Word and Excel?</summary>
+          <p>Yes. Workpapers export to Word (.docx) with AI edits landing as tracked changes authored “AuditLens AI”, so a reviewer accepts or rejects them one at a time. Control matrices export as an Excel RCM, findings as PowerPoint, and evidence can be pushed to SharePoint Online with its metadata.</p>
+        </details>
+        <details class="faq"><summary>What about a sample when I can get the full population?</summary>
+          <p>Test all of it. The sampling engine is still there — random, stratified and monetary-unit, with sample sizes computed from confidence, tolerable error and expected error — for the populations nobody can hand you in full.</p>
+        </details>
+        <details class="faq"><summary>How does PII redaction work?</summary>
+          <p>A pre-flight scan flags SSNs, Luhn-validated card numbers, emails, phone numbers, IP addresses and API-key-shaped strings before you send anything, and the redaction editor blacks out, blurs or pixelates what you select, with the redaction logged. It is a tool you drive, not a silent filter — you decide what leaves your machine.</p>
+        </details>
+        <details class="faq"><summary>Does it work for a one-person audit function?</summary>
+          <p>Yes. Self-review is refused by default, which would otherwise leave a sole practitioner unable to close an engagement — so there is an explicit sole-practitioner basis you acknowledge, and it is disclosed on the sign-off record, in the ledger and on the workpaper cover. It is never applied quietly.</p>
+        </details>
+        <details class="faq"><summary>What is the refund policy?</summary>
+          <p>Because the product is a digital download, all sales are final. Watch the demo and read this page before buying — the full <a href="refund.html" class="underline">Refund Policy</a> is here.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get started -->
+  <section class="sec pt-0">
+    <div class="wrap">
+      <h2 class="headline mb-10">Get started</h2>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="panel p-8 flex flex-col justify-between min-h-[260px]">
+          <div>
+            <h3 class="subhead mb-2">Buy AuditLens</h3>
+            <p class="muted text-[14px] max-w-[42ch]">$499 once. Installer downloads immediately, add your own AI key, and the built-in sample engagement gives you something real to try it on.</p>
+          </div>
+          <a href="https://auditlens.lemonsqueezy.com/checkout/buy/45efba62-1223-47ea-925d-93cfd681f134" class="lemonsqueezy-button btn btn-dark self-start mt-8">Download &rarr;</a>
+        </div>
+        <div class="p-8 flex flex-col justify-between min-h-[260px] rounded-[16px] bg-[#111110] text-white">
+          <div>
+            <h3 class="subhead mb-2">Talk to the person who built it</h3>
+            <p class="text-[14px] text-white/60 max-w-[42ch]">Built by a working internal auditor. Questions about your methodology, a framework you need mapped, or whether it fits your team — ask directly.</p>
+          </div>
+          <a href="mailto:akshat.ratanpal@gmail.com" class="btn btn-invert self-start mt-8">Email us &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pt-16 pb-10 border-t border-[color:var(--line)]">
+    <div class="wrap grid md:grid-cols-[minmax(0,1fr)_repeat(3,minmax(0,160px))] gap-10 mb-16">
+      <div class="flex items-center gap-2">
+        <img src="icon.png" alt="" class="w-5 h-5 rounded">
+        <span class="text-[14px] font-medium tracking-[-0.03em]">AuditLens</span>
+      </div>
+      <div>
+        <p class="mono mb-4">Product</p>
+        <ul class="space-y-2 text-[13px] muted">
+          <li><a href="#product" class="hover:text-[color:var(--ink)]">Features</a></li>
+          <li><a href="#platform" class="hover:text-[color:var(--ink)]">Platform</a></li>
+          <li><a href="#pricing" class="hover:text-[color:var(--ink)]">Pricing</a></li>
+          <li><a href="#film" class="hover:text-[color:var(--ink)]">Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono mb-4">Legal</p>
+        <ul class="space-y-2 text-[13px] muted">
+          <li><a href="privacy.html" class="hover:text-[color:var(--ink)]">Privacy</a></li>
+          <li><a href="terms.html" class="hover:text-[color:var(--ink)]">Terms</a></li>
+          <li><a href="refund.html" class="hover:text-[color:var(--ink)]">Refunds</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono mb-4">Contact</p>
+        <ul class="space-y-2 text-[13px] muted">
+          <li><a href="mailto:akshat.ratanpal@gmail.com" class="hover:text-[color:var(--ink)]">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <p class="mono">&copy; 2025&ndash;2026 AuditLens</p>
+      <p class="mono">Built in Mumbai by an auditor</p>
+    </div>
+  </footer>
+
+  <!-- Email subscription popup -->
+  <div id="subscribe-overlay" style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="subscribe-title">
+    <div id="subscribe-backdrop" class="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+
+    <div class="relative w-full max-w-sm bg-[color:var(--paper)] border border-[color:var(--line)] rounded-[14px] p-7 shadow-xl">
+      <button id="subscribe-close" aria-label="Close" class="absolute top-4 right-4 faint hover:text-[color:var(--ink)]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+
+      <p class="mono mb-3">Stay in the loop</p>
+      <h2 id="subscribe-title" class="subhead mb-2">New features, before everyone else</h2>
+      <p class="muted text-[13px] mb-6">Occasional notes on what shipped, plus early pricing. Nothing else.</p>
+
+      <form id="subscribe-form" novalidate>
+        <div class="space-y-2 mb-3">
+          <input id="sub-name" type="text" placeholder="Your name (optional)" autocomplete="name"
+            class="w-full bg-white border border-[color:var(--line)] rounded-[7px] px-3 py-2.5 text-[13px] focus:outline-none focus:border-[rgba(13,13,12,0.3)]" />
+          <input id="sub-email" type="email" placeholder="your@email.com" autocomplete="email" required
+            class="w-full bg-white border border-[color:var(--line)] rounded-[7px] px-3 py-2.5 text-[13px] focus:outline-none focus:border-[rgba(13,13,12,0.3)]" />
+        </div>
+        <p id="sub-error" class="text-red-600 text-[12px] mb-3" style="display:none"></p>
+        <button type="submit" id="sub-btn" class="btn btn-dark w-full justify-center">Notify me</button>
+      </form>
+
+      <div id="sub-success" style="display:none" class="py-4 text-center">
+        <p class="subhead mb-1">You&rsquo;re on the list.</p>
+        <p class="muted text-[13px]">We&rsquo;ll write when there is something worth reading.</p>
+      </div>
+
+      <p class="mono text-center mt-5">No spam &middot; unsubscribe anytime</p>
+    </div>
+  </div>
+
+  <script>
+    // Section clips: nothing downloads until a clip is on screen, and only ONE ever plays at a
+    // time. Decoding four 720p clips at once will crash the tab, so the most-visible clip wins
+    // and every other clip is paused.
+    (function () {
+      var clips = [].slice.call(document.querySelectorAll('.lazyclip'));
+      if (!clips.length || !('IntersectionObserver' in window)) return;
+
+      var ratios = new WeakMap();
+
+      function update() {
+        var best = null;
+        clips.forEach(function (v) {
+          if ((ratios.get(v) || 0) > (ratios.get(best) || 0)) best = v;
+        });
+        clips.forEach(function (v) {
+          if (v === best) return;
+          if (!v.paused) v.pause();
+        });
+        if (!best || (ratios.get(best) || 0) < 0.3) return;
+        if (!best.dataset.loaded) {
+          [].forEach.call(best.querySelectorAll('source[data-src]'), function (s) { s.src = s.dataset.src; });
+          best.load();
+          best.dataset.loaded = '1';
+        }
+        if (best.paused) {
+          var p = best.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { ratios.set(e.target, e.isIntersecting ? e.intersectionRatio : 0); });
+        update();
+      }, { threshold: [0, 0.3, 0.6, 0.9] });
+
+      clips.forEach(function (v) { io.observe(v); });
+    })();
+
+    // The "Watch" pill starts the film and gets out of the way.
+    (function () {
+      var video = document.getElementById('film-video');
+      var button = document.getElementById('film-play');
+      if (!video || !button) return;
+      button.addEventListener('click', function () {
+        button.style.display = 'none';
+        video.controls = true;
+        video.play();
+      });
+      video.addEventListener('pause', function () {
+        if (video.currentTime === 0) button.style.display = '';
+      });
+    })();
+
+    // Email capture popup.
+    (function () {
+      var STORAGE_KEY = 'al_subscribed';
+      var overlay = document.getElementById('subscribe-overlay');
+      if (localStorage.getItem(STORAGE_KEY)) return;
+
+      var shown = false;
+      function showPopup() {
+        if (shown) return;
+        shown = true;
+        overlay.style.display = 'flex';
+      }
+      function hidePopup() {
+        overlay.style.display = 'none';
+        clearTimeout(timer);
+      }
+
+      var timer = setTimeout(showPopup, 20000);
+
+      window.addEventListener('scroll', function () {
+        var scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        if (scrolled > 0.5) showPopup();
+      }, { passive: true });
+
+      document.getElementById('subscribe-backdrop').addEventListener('click', hidePopup);
+      document.getElementById('subscribe-close').addEventListener('click', hidePopup);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') hidePopup();
+      });
+
+      document.getElementById('subscribe-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = document.getElementById('sub-email').value.trim();
+        var name  = document.getElementById('sub-name').value.trim();
+        var errEl = document.getElementById('sub-error');
+        var btn   = document.getElementById('sub-btn');
+
+        if (!email || !email.includes('@')) {
+          errEl.textContent = 'Please enter a valid email address.';
+          errEl.style.display = 'block';
+          return;
+        }
+        errEl.style.display = 'none';
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+
+        function succeed() {
+          localStorage.setItem(STORAGE_KEY, '1');
+          document.getElementById('subscribe-form').style.display = 'none';
+          document.getElementById('sub-success').style.display = 'block';
+          setTimeout(function () { overlay.style.display = 'none'; }, 3000);
+        }
+
+        fetch('/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, email: email })
+        })
+        .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, data: d }; }); })
+        .then(function (r) {
+          if (r.ok || r.data.error === 'Already subscribed.') { succeed(); return; }
+          errEl.textContent = r.data.error || 'Something went wrong. Please try again.';
+          errEl.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Notify me';
+        })
+        .catch(function () {
+          errEl.textContent = 'Network error. Please try again.';
+          errEl.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Notify me';
+        });
+      });
+    })();
+  </script>
+
+
+</body>
+</html>

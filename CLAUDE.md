@@ -13,133 +13,128 @@ Marketing/landing website for **AuditLens**, a Windows desktop application that 
 - **HTML5** — Static pages, no framework, no build step
 - **Tailwind CSS** — Via CDN (`https://cdn.tailwindcss.com`), utility-first styling
 - **Vanilla JavaScript** — Minimal, inline `<script>` blocks
-- **Google Fonts** — Inter (weights 300–900)
+- **Google Fonts** — Inter (400/500/600) + DM Mono (400/500, micro-labels only)
+- **Express** — `server.js`, the only dependency, for static serving + the `/subscribe` endpoint
 - **Lemon Squeezy** — Payment processing, license delivery, checkout widget (`https://app.lemonsqueezy.com/js/lemon.js`)
 
-No package manager, no bundler, no transpiler. Deploy as-is to any static host.
+No bundler, no transpiler, no build step. `npm start` runs it locally; `public/` can also be dropped
+on any static host, minus the subscribe form.
 
 ## Project Structure
 
+`server.js` serves **only `public/`** — nothing outside it is reachable, which is what keeps
+`server.js`, `package.json` and the subscriber CSV (in `data/`, gitignored) out of the static root.
+
 ```
-AuditLens/
-├── index.html              # Main landing page (~93KB, all sections)
-├── media/                  # Product recordings + poster frames
-│   ├── overview.{mp4,webm,jpg}             # 14s hero montage of all four surfaces
-│   ├── tool-studio.{mp4,webm,jpg}
-│   ├── population-testing.{mp4,webm,jpg}
-│   ├── agent-fieldwork.{mp4,webm,jpg}
-│   └── evidence-workpapers.{mp4,webm,jpg}
-├── privacy.html            # Privacy policy
-├── terms.html              # Terms and conditions
-├── refund.html             # Refund policy
-├── server.js               # Express static host + /subscribe lead capture
-└── icon.png                # App icon
+landing/
+├── server.js               # Express static server + POST /subscribe (writes data/subscribers.csv)
+└── public/                 # The entire public site — the only directory served
+    ├── index.html          # Landing page, all sections, no build step
+    ├── privacy.html · terms.html · refund.html
+    ├── icon.png
+    ├── media/              # Product screenshots (PNG, real app captures)
+    └── video/              # Product tour + the section clips
+        ├── auditlens-product-tour.{mp4,jpg}   # 86s tour, click-to-play in the film block
+        ├── evidence-workpapers.{mp4,webm,jpg}
+        ├── population-testing.{mp4,webm,jpg}
+        ├── agent-fieldwork.{mp4,webm,jpg}
+        ├── tool-studio.{mp4,webm,jpg}
+        └── overview.{mp4,webm,jpg}            # 14s montage, currently unused by the page
 ```
 
-Media notes: every clip ships as **WebM (VP9) first, MP4 (H.264) fallback**, with a JPG
-poster. Clips are muted, looping and lazy (`preload="none"`); an IntersectionObserver
-plays them on screen and pauses them off screen. Source recordings are 1280x720; the web
-copies are scaled to 1120px wide with no audio track.
+`README.md` covers the same ground for anyone landing on the repo from GitHub; keep the two in step.
+
+Media is real product footage from the desktop-app repo, never hand-drawn or mocked up:
+`deliverables/auditlens-product-demo-v2/captures/*.png` → `public/media/`, the four clips in
+`deliverables/landing/` (recorded by `test-harness/landing-clips.js` — see its README for a
+re-record) → `public/video/`, and `AuditLens-86s-Widescreen.mp4` transcoded to 720p as
+`auditlens-product-tour.mp4`. Every clip ships **WebM (VP9) first, MP4 (H.264) fallback**, with a
+JPG poster, no audio track, scaled to 1120px wide. Keep them at that size: the 1280x720 originals
+are ~2.5× the bytes for no visible gain.
 
 ## Design System
 
-### Theme: Light Mode
+Quiet, monochrome, editorial — modelled on lightfield.app. **No blue, no gradients, no glass, no
+float animations.** The only colour on the page comes from the product screenshots and clips, which
+is the point: the chrome stays out of their way.
 
-- **Background:** `#ffffff` (white)
-- **Surface:** `#f9fafb` → `#f3f4f6` (gray-50 to gray-100)
-- **Text:** `#111827` (gray-900) primary, `#6b7280` (gray-500) secondary
-- **Primary gradient:** `#0075de` → `#097fe8` (for accent text)
-- **Body font:** Inter
-- **Display font:** Playfair Display — the app titles every surface with a serif, and the
-  site mirrors that. Pair it with a lighter sans qualifier, exactly as the app does
-  ("Tool Studio *Gallery*", "Population Testing").
-
-### Palette — sampled from the application
-
-These values were read pixel-by-pixel off the product recordings; keep them in sync with
-the app rather than re-inventing them.
+Tokens live in one `:root` block in `public/index.html`:
 
 ```
-warm-50   #f6f4f3   app page ground
-warm-900  #30302e   app ink / dark buttons
-accent    #0075de   app primary button (Capture, Build tool, Implement)
-stage-amber  #f19e0c   active stage chip
-stage-green  #15803d   deliverable/export actions
+--paper #f4f4f2   page background        --ink   #0d0d0c  text and buttons
+--panel #ececea   feature-row containers --mute  rgba(13,13,12,.58)  body copy
+--card  #ffffff   screenshot surfaces    --faint rgba(13,13,12,.38)  micro-labels
+--line  rgba(13,13,12,.10)  hairlines    --hair  rgba(13,13,12,.07)
 ```
 
-### Visual Patterns
-
-- **Card:** `background:#fff; border:1px solid rgba(0,0,0,0.09); border-radius:10px` — the
-  app's standard surface. `.elevated` adds the layered shadow.
-- **Glass:** `rgba(255,255,255,0.86)` + `backdrop-filter: saturate(180%) blur(20px)` — nav only.
-- **Micro-label:** 11px uppercase amber (`#b45309`) eyebrow above a heading, lifted from the
-  app's in-product callouts ("HASHED ON CAPTURE", "ROW-LEVEL PROVENANCE").
-- **Stat tile:** bordered box, big number + small-caps key, tinted green/red/amber — matches
-  how the app renders population results.
-- **Stage rail:** the app's six-stage pill stepper. Fits on one row at ≥1280px; scrolls
-  horizontally below that (scrollbar hidden), as it does in the app.
+- **Type:** Inter for everything, DM Mono for the tiny uppercase micro-labels. Headings are
+  weight **400** (never bold) with tight tracking (`-0.032em`/`-0.035em`); body is 14–15px.
+- **Buttons:** 36px tall, 7px radius, 13px label. `.btn-dark` (near-black) is the only CTA style;
+  `.btn-ghost` is the secondary. No pill-shaped CTAs.
+- **Micro-label (`.mono`):** 10px DM Mono, uppercase, `.14em` tracking — the "PRODUCT / 1.0" style
+  markers above every heading and in each section header.
+- **Section header (`.sechead`):** title left, eyebrow + index number right, hairline underneath.
 
 ## Component Patterns
 
-### Feature Card
+### Section header
 ```html
-<div class="card lift p-6 reveal">
-  <div class="w-11 h-11 rounded-card bg-accent/10 flex items-center justify-center mb-4"><!-- SVG --></div>
-  <h3 class="text-warm-900 font-semibold mb-2">Title</h3>
-  <p class="text-warm-500 text-sm leading-relaxed">Description</p>
-</div>
-```
-
-### Product Film
-Real footage only — do **not** build fake app mock-ups. The recordings already carry the
-app's own chrome, so the frame around them stays plain (no macOS traffic lights; the app
-is Windows and has no such titlebar).
-```html
-<div class="film-wrap relative reveal">
-  <div class="film">
-    <video class="al-video" poster="media/x.jpg" muted loop playsinline preload="none" aria-label="…">
-      <source src="media/x.webm" type="video/webm">
-      <source src="media/x.mp4" type="video/mp4">
-    </video>
+<div class="sechead">
+  <h2 class="headline">How AuditLens works</h2>
+  <div class="flex items-baseline gap-10">
+    <span class="mono hidden sm:inline">Platform</span><span class="mono">2.0</span>
   </div>
-  <button type="button" class="film-replay al-replay" aria-label="Replay">…</button>
 </div>
 ```
 
-### Section Heading
+### Feature row (narrow copy column, large visual)
 ```html
-<p class="micro-label mb-3">Eyebrow</p>
-<h2 class="display text-3xl sm:text-4xl lg:text-[2.75rem] leading-tight mb-4 text-warm-900">
-  Serif headline <span class="display-qualifier">sans qualifier</span>
-</h2>
+<div class="wrap grid lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-8 lg:gap-14">
+  <div class="lg:py-8">
+    <p class="mono mb-4">1.1</p>
+    <h3 class="subhead mb-3">Heading</h3>
+    <p class="muted text-[14px] mb-6">Body</p>
+    <p class="faint text-[12px] border-l border-[color:var(--line)] pl-3">Factual footnote</p>
+  </div>
+  <div class="panel p-3 sm:p-5"><div class="shot"><!-- img or video --></div></div>
+</div>
 ```
+
+### Section clip
+Autoplay clips carry **`data-src` on their `<source>` elements, not `src`** — an IntersectionObserver
+sets the real src and calls `play()` the first time the clip scrolls into view, and pauses it on the
+way out. Nothing downloads until it is needed. `muted` + `playsinline` are required or iOS refuses
+to autoplay; `.webm` is listed first (≈30% smaller) with `.mp4` as the fallback.
 
 ## Conventions
 
-- **Styling:** Tailwind utilities first, custom CSS only for animations/gradients/glass effects
+- **Styling:** custom CSS for the type scale, colours and components; Tailwind utilities for layout,
+  spacing and breakpoints. Tailwind is still CDN-loaded with no config block.
 - **Responsive breakpoints:** base (mobile) → `sm:` → `md:` → `lg:`
-- **Layout:** Grid-based responsive (`md:grid-cols-2`, `lg:grid-cols-3`), max-width containers (`max-w-7xl`)
-- **Interactivity:** Vanilla JS only, no frameworks — `classList.toggle()`, simple onclick handlers
-- **Navigation:** Anchor-based hash links (`#features`, `#pricing`, `#how-it-works`)
-- **FAQ:** Native `<details>/<summary>` elements
+- **Interactivity:** Vanilla JS only — three small IIFEs at the bottom of the page
+- **Navigation:** Anchor-based hash links (`#product`, `#platform`, `#pricing`, `#faq`, `#film`)
+- **FAQ:** Native `<details>/<summary>` with a `+`/`–` marker via CSS
 - **Icons:** Inline SVGs, no icon library
-- **Accessibility:** Semantic HTML, proper heading hierarchy, alt text on images
+- **Accessibility:** Semantic HTML, proper heading hierarchy, alt text on every image and clip
+- **Claims:** every number and behaviour on the page must be true of the shipped app. No invented
+  customer quotes and no logo wall — where lightfield puts a testimonial, this page puts a factual
+  note about what the clip beside it is showing.
 
-## Landing Page Sections (index.html)
+## Landing Page Sections (public/index.html)
 
-1. Navigation — Light glass header mirroring the app's own top bar (`#top`)
-2. Hero — Headline, value prop, CTAs + the 14s overview montage
-3. Stage rail — the app's six-stage spine, animated
-4. Receipts strip — four stat tiles quoting real numbers from the recordings
-5. See it work (`#see-it`) — the four product films, alternating left/right
-6. Lifecycle (`#lifecycle`) — the six stages as cards
-7. Features (`#features`) — 9 cards + 4 compact cards
-8. Your data (`#privacy`) — local-first architecture + data-path diagram
-9. Pricing (`#pricing`) — single tier ($499 one-time + optional $59/year renewal)
-10. FAQ — 10 questions using `<details>` elements
-11. CTA — Dark band, final call to action
-12. Footer — Policy links + contact
-13. Subscribe modal — fires at 20s or 50% scroll, posts to `/subscribe`
+1. Nav — floating centred pill, links + "Buy — $129"
+2. Hero — headline, sub, two CTAs, product screenshot bleeding off the right edge
+3. Built for — industry row under a "BUILT FOR" micro-label
+4. Manifesto — right-offset text column, the "AI drafts, you judge" boundary
+5. Film — full-width product tour video, click-to-play from a "Watch" pill
+6. Product (1.0) — four feature rows, each with one of the four autoplay clips
+7. Platform (2.0) — screenshots left, four labelled capability blocks right
+8. Privacy/BYOK — panel with the "no server in the middle" diagram
+9. Pricing (3.0) — $129 one-time, feature list, $59/year optional renewal
+10. Questions (4.0) — 11 `<details>` items
+11. Get started — two cards (buy / email)
+12. Footer — link columns + bottom bar
+13. Email capture modal — after 20s or 50% scroll, `POST /subscribe`
 
 ## Pricing Model
 
@@ -152,49 +147,28 @@ is Windows and has no such titlebar).
 
 ## Key Product Features (for marketing copy reference)
 
-The app is now a **full audit workstation**, not a screenshot tool. Everything sits on a
-six-stage rail: Plan & scope → Capture evidence → Test & reperform → Analyze & investigate
-→ Conclude & report → Defend & sign off.
+- Global hotkey capture (Ctrl+Shift+S) with markup before you confirm the shot
+- Import Studio — messy Excel/CSV/PDF/screenshot exports become a reconciled, tested population
+- 100% population testing, with random / stratified / monetary-unit sampling still available
+- Agent runs that execute fieldwork and stop at every judgment call; overnight runs under a spend cap
+- Tool Studio — a plain-English test compiled into a sandboxed tool with hash-bound reviewer sign-off
+- AI workpaper drafting; edits land in Word as tracked changes authored "AuditLens AI"
+- Excel RCM, PowerPoint and SharePoint export; standalone ZIP audit file
+- Framework and assessment packs (SOX, SOC 2, ISO 27001, PCI DSS, NIST…)
+- BYOK — OpenAI, Anthropic, Gemini, Azure, Bedrock, Ollama; no AuditLens server in the path
+- SHA-256 evidence integrity, hash-chained engagement ledger, cryptographically signed sign-offs
+- Multi-engagement staffing, review queues, and a disclosed sole-practitioner sign-off basis
+- Real-time AI cost tracking; PII pre-flight scan and redaction the auditor drives
 
-- **Population Testing** — 100% of a listing, no sampling. Deterministic rules decide most
-  rows; AI drafts a call only on the ambiguous residue, flagged for confirmation. Row-level
-  provenance: each exception names the row, rule and field values, and whether a rule or the
-  model decided. Push to the Exception Tracker or export CSV.
-- **Tool Studio** — describe an analysis in plain English, one AI call builds a tool, and it
-  runs locally (Node, on the user's machine) at zero marginal cost. Data never goes to the
-  model. Auto-drafted methodology sheet (purpose, population, logic, exception definition,
-  limitations) is what a reviewer reads; the code is the appendix. Sign-off binds to the
-  exact code version. Blueprints: IT General Controls, Financial & Journal Entries, Fraud &
-  Forensics, Security Operations, Methodology & Sampling.
-- **Framework library + agent fieldwork** — implement a control pack (e.g. Treasury & Cash)
-  and each control becomes a live test. The agent runs the steps but **never rates severity
-  and never decides risk**; it logs every exception at the lowest severity and pauses for the
-  auditor's judgment. This human-gate framing is central — do not describe the agent as
-  autonomous.
-- **Evidence** — hotkey capture, hashed/timestamped/figure-numbered/control-tagged on
-  capture, with risk severity and tags.
-- **Workpaper Studio** — Excel Risk-Control Matrix, AI-drafted workpaper from selected
-  figures, Word editor, and a **standalone audit file** (ZIP with browser-readable index
-  that needs no AuditLens or licence to open).
-- **Living workpapers** — roll forward a period as tracked changes with no AI involved;
-  AI pre-review raises issues as Word comments without ever editing the text.
-- **Evidence Connectors** — SAP, Dynamics, Oracle, NetSuite, REST, CSV/XLSX.
-- **MCP** — read-only remote evidence chase (every fetch approved first); optional external
-  access letting Claude Desktop or another agent drive AuditLens over localhost, off by
-  default, with judgment still pausing locally.
-- BYOK architecture — user's API keys, no AuditLens server in the path
-- Multi-model (OpenAI, Claude, Gemini) with live cost metering in the title bar
-- Command palette (Ctrl+K), PII redaction, SHA-256 hash chains
-- Project/client/engagement management
+**Copy boundary:** the AI *drafts* and *catches* — it never decides risk severity, clears an
+exception or signs anything. Do not write copy that implies otherwise, and do not describe the PII
+tooling as an automatic scrubber; it is a pre-flight scan and an editor the auditor applies.
 
 ## Important Notes
 
 - Lemon Squeezy checkout links are live — be careful editing payment URLs
-  (`45efba62-1223-47ea-925d-93cfd681f134`, referenced 5x in index.html)
-- External dependencies are CDN-loaded (Tailwind, Google Fonts, Lemon Squeezy); the only
-  local assets are `icon.png` and `media/`
-- The site targets Windows users specifically (desktop app is .exe) — never show a macOS
-  window frame or traffic-light dots in mock-ups
+- Third-party dependencies are CDN-loaded; product media is local under `public/media` and `public/video`
+- The site targets Windows users specifically (desktop app is .exe)
 - Legal pages (privacy, terms, refund) reference Indian jurisdiction (Mumbai)
 - Claims on the page are sourced from the product recordings in `media/`. Keep marketing
   copy traceable to something visible in the app — the numbers quoted (186 rows, 15

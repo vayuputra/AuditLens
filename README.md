@@ -15,13 +15,19 @@ Marketing site for **AuditLens**, a Windows desktop application that helps IT au
 ```
 AuditLens/
 ├── server.js          # Express server + /subscribe endpoint
-├── index.html         # Main landing page
-├── privacy.html       # Privacy policy
-├── terms.html         # Terms and conditions
-├── refund.html        # Refund policy
-├── icon.png           # App icon
-└── package.json
+├── package.json
+└── public/            # The entire public site — the only directory served
+    ├── index.html     # Main landing page
+    ├── privacy.html   # Privacy policy
+    ├── terms.html     # Terms and conditions
+    ├── refund.html    # Refund policy
+    ├── icon.png       # App icon
+    ├── media/         # Product screenshots
+    └── video/         # Product tour + section clips
 ```
+
+Only `public/` is served, which is what keeps `server.js`, `package.json` and the subscriber CSV
+out of the static root.
 
 ## Running Locally
 
@@ -30,11 +36,11 @@ npm install
 npm start
 ```
 
-The server listens on `http://localhost:3000` (or `PORT` env var) and writes captured emails to `subscribers.csv`.
+The server listens on `http://localhost:3000` (or `PORT` env var) and writes captured emails to `data/subscribers.csv`, outside the served directory.
 
 ## Deployment
 
-The static files can be deployed as-is to any static host. To use the email capture endpoint, deploy `server.js` to a Node host (Railway, Render, Fly, etc.).
+`public/` can be deployed as-is to any static host. To use the email capture endpoint, deploy `server.js` to a Node host (Railway, Render, Fly, etc.).
 
 ## License
 
